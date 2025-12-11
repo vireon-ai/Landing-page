@@ -1,0 +1,212 @@
+.quiz-section {
+    padding: 5vh 0;
+    background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-container {
+    max-width: 800px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 3vh;
+}
+
+.quiz-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 4vh 4vw;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.progress-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.5rem;
+    background: var(--bg-tertiary);
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: width 0.5s ease;
+}
+
+.question-counter {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.quiz-question {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    margin-bottom: 3vh;
+    line-height: 1.3;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.quiz-option {
+    padding: 1rem 1.5rem;
+    background: var(--bg-secondary);
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.quiz-option:hover {
+    background: white;
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-md);
+}
+
+.quiz-option.selected {
+    background: rgba(72, 169, 166, 0.05);
+    border-color: var(--primary);
+    color: var(--primary-dark);
+}
+
+.quiz-actions {
+    margin-top: 4vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Results Page */
+.results-content {
+    text-align: center;
+    animation: fade-in 0.5s ease-out;
+}
+
+.score-display {
+    margin-bottom: 3vh;
+}
+
+.score-circle {
+    width: clamp(150px, 30vw, 200px);
+    height: clamp(150px, 30vw, 200px);
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2vh;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.score-number {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 800;
+    color: var(--primary);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1;
+}
+
+.score-total {
+    font-size: 1rem;
+    color: var(--text-tertiary);
+}
+
+.result-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    margin-bottom: 1rem;
+}
+
+.badge-green {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-yellow {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.badge-orange {
+    background: #ffedd5;
+    color: #9a3412;
+}
+
+.badge-red {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.result-message {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    margin-bottom: 3vh;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comparison-box {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    margin-bottom: 3vh;
+    text-align: left;
+}
+
+.comparison-box h4 {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: clamp(1rem, 3vw, 1.1rem);
+}
+
+.comparison-list {
+    list-style: none;
+}
+
+.comparison-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+}
+
+@media (max-width: 768px) {
+    .quiz-card {
+        padding: 2rem 1rem;
+    }
+
+    .quiz-actions {
+        flex-direction: row;
+        /* Keep buttons side-by-side on mobile if possible, or stack if text is long */
+    }
+}

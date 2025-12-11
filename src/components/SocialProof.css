@@ -1,0 +1,57 @@
+.social-proof {
+    padding: var(--spacing-xl) 0;
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.impact-item h3 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.impact-item p {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.tech-statement {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.logos-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2xl);
+    flex-wrap: wrap;
+    opacity: 0.7;
+    filter: grayscale(100%);
+    transition: all var(--transition-normal);
+}
+
+.logos-track:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.tech-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

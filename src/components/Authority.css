@@ -1,0 +1,53 @@
+.authority {
+    background: var(--bg-secondary);
+}
+
+.authority-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+.authority-card {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+}
+
+.authority-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.authority-icon {
+    width: 4rem;
+    height: 4rem;
+    background: var(--bg-tertiary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    color: var(--primary);
+    transition: all var(--transition-normal);
+}
+
+.authority-card:hover .authority-icon {
+    background: var(--primary);
+    color: white;
+}
+
+.authority-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.authority-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}

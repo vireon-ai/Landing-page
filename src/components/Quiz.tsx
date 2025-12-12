@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, ArrowLeft, CheckCircle2, RefreshCw, Share2 } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle2, RefreshCw, Download } from 'lucide-react';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import vireonLogo from '../assets/Vireon texto.png';
 import './Quiz.css';
 
 interface Question {
@@ -199,6 +202,57 @@ const Quiz = () => {
         };
     };
 
+    const handleDownloadPDF = async () => {
+        const input = document.getElementById('quiz-results-card');
+        if (!input) return;
+
+        try {
+            const canvas = await html2canvas(input, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff',
+                ignoreElements: (element) => {
+                    return element.classList.contains('quiz-actions') ||
+                        element.tagName.toLowerCase() === 'button';
+                }
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+
+            // Add Logo (Centered Top)
+            // Assuming logo is roughly rectangular, using 50mm width
+            const logoWidth = 110;
+            const logoHeight = 27;
+            const logoX = (pdfWidth - logoWidth) / 2;
+            pdf.addImage(vireonLogo, 'PNG', logoX, 10, logoWidth, logoHeight);
+
+            // Add Captured Content
+            const imgProps = pdf.getImageProperties(imgData);
+            const contentWidth = pdfWidth - 40; // 20mm margin each side
+            const contentHeight = (imgProps.height * contentWidth) / imgProps.width;
+
+            const startY = 50;
+            pdf.addImage(imgData, 'PNG', 20, startY, contentWidth, contentHeight);
+
+            // Add Contact Info (Bottom)
+            const contactY = startY + contentHeight + 20;
+
+            pdf.setFontSize(12);
+            pdf.setTextColor(100, 100, 100);
+            pdf.text('Contacto:', pdfWidth / 2, contactY, { align: 'center' });
+
+            pdf.setFontSize(12);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Juanmanuel.glez@vireonai.com.mx', pdfWidth / 2, contactY + 7, { align: 'center' });
+
+            pdf.save('VireonAI-Diagnostico.pdf');
+        } catch (error) {
+            console.error("Error generating PDF:", error);
+        }
+    };
+
     const result = getResultContent();
     const progress = ((step) / questions.length) * 100;
 
@@ -350,7 +404,7 @@ const Quiz = () => {
                     </>
                 ) : (
                     <div className="results-content">
-                        <div className="quiz-card">
+                        <div className="quiz-card" id="quiz-results-card">
                             <div className={`result-badge ${result.color}`}>{result.badge}</div>
 
                             <div className="score-display">
@@ -379,8 +433,8 @@ const Quiz = () => {
                                     <button className="btn btn-secondary" onClick={() => window.location.reload()}>
                                         <RefreshCw size={18} style={{ marginRight: '0.5rem' }} /> Reintentar
                                     </button>
-                                    <button className="btn btn-secondary">
-                                        <Share2 size={18} style={{ marginRight: '0.5rem' }} /> Compartir
+                                    <button className="btn btn-secondary" onClick={handleDownloadPDF}>
+                                        <Download size={18} style={{ marginRight: '0.5rem' }} /> Descargar PDF
                                     </button>
                                 </div>
                             </div>

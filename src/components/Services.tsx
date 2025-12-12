@@ -41,7 +41,7 @@ const Services = () => {
                 <div className="text-center">
                     <h2 className="section-title">Soluciones que Escalan Contigo</h2>
                     <p className="section-subtitle">
-                        Tecnología enterprise adaptada a la agilidad de tu PyME.
+                        Tecnología inteligente adaptada a la agilidad de tu PyME.
                     </p>
                 </div>
 

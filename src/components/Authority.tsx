@@ -16,7 +16,7 @@ const Authority = () => {
                     <div className="authority-card">
                         <div className="authority-icon"><Users size={32} /></div>
                         <h3>Expertise Comprobado</h3>
-                        <p>Equipo senior con experiencia en implementación de soluciones enterprise.</p>
+                        <p>Equipo senior con experiencia en implementación de soluciones empresariales.</p>
                     </div>
                     <div className="authority-card">
                         <div className="authority-icon"><Zap size={32} /></div>
@@ -30,7 +30,7 @@ const Authority = () => {
                     </div>
                     <div className="authority-card">
                         <div className="authority-icon"><ShieldCheck size={32} /></div>
-                        <h3>colaboración en conjunto</h3>
+                        <h3>Colaboración en Conjunto</h3>
                         <p>Trabajamos de la mano del cliente en todo momento, creando productos incrementales que garantizan resultados.</p>
                     </div>
                 </div>

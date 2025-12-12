@@ -39,7 +39,7 @@ const ROICalculator = () => {
                             <strong>Dato Curioso</strong>
                         </div>
                         <p style={{ fontSize: '0.95rem', margin: 0 }}>
-                            Una empresa promedio pierde el 30% de sus ingresos anuales en ineficiencias operativas. (Fuente: IDC)
+                            Una empresa promedio pierde el 30% de sus ingresos anuales en ineficiencias operativas.
                         </p>
                     </div>
                 </div>

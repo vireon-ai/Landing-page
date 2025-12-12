@@ -10,7 +10,7 @@ import Authority from './components/Authority';
 import ROICalculator from './components/ROICalculator';
 //import ProofOfConcept from './components/ProofOfConcept';
 import FAQ from './components/FAQ';
-import Resources from './components/Resources';
+//import Resources from './components/Resources';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 
@@ -52,7 +52,7 @@ function App() {
         <ROICalculator />
 
         <FAQ />
-        <Resources />
+
         <FinalCTA />
       </main>
       <Footer />

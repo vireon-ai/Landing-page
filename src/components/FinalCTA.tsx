@@ -23,7 +23,7 @@ const FinalCTA = () => {
         setStatus('submitting');
 
         try {
-            const response = await fetch('https://n8n.srv946409.hstgr.cloud/webhook-test/a118b68a-92f9-463a-8609-b9f48e9d5b04', {
+            const response = await fetch('https://n8n.srv946409.hstgr.cloud/webhook/a118b68a-92f9-463a-8609-b9f48e9d5b04', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -16,99 +16,99 @@ const questions: Question[] = [
         id: 1,
         text: "¿Cuántas horas semanales dedica tu equipo a tareas repetitivas manuales?",
         options: [
-            { text: "0-5 horas", points: 10 },
-            { text: "5-15 horas", points: 25 },
-            { text: "15-30 horas", points: 50 },
-            { text: "+30 horas", points: 100 }
+            { text: "0-5 horas", points: 100 },
+            { text: "5-15 horas", points: 50 },
+            { text: "15-30 horas", points: 25 },
+            { text: "+30 horas", points: 10 }
         ]
     },
     {
         id: 2,
         text: "¿Tus reportes y dashboards se generan...?",
         options: [
-            { text: "Automáticamente en tiempo real", points: 10 },
-            { text: "Semanalmente manual", points: 40 },
-            { text: "Mensual manual", points: 70 },
-            { text: "No tenemos", points: 100 }
+            { text: "Automáticamente en tiempo real", points: 100 },
+            { text: "Semanalmente manual", points: 70 },
+            { text: "Mensual manual", points: 40 },
+            { text: "No tenemos", points: 10 }
         ]
     },
     {
         id: 3,
         text: "¿Cómo manejan actualmente los datos de clientes?",
         options: [
-            { text: "CRM automatizado integrado", points: 10 },
-            { text: "Excel/hojas de cálculo", points: 60 },
-            { text: "Papel/correos", points: 100 }
+            { text: "CRM automatizado integrado", points: 100 },
+            { text: "Excel/hojas de cálculo", points: 50 },
+            { text: "Papel/correos", points: 10 }
         ]
     },
     {
         id: 4,
         text: "¿Cuántos procesos manuales tienen que podrían automatizarse?",
         options: [
-            { text: "0-2", points: 10 },
-            { text: "3-5", points: 40 },
-            { text: "6-10", points: 70 },
-            { text: "+10", points: 100 }
+            { text: "0-2", points: 100 },
+            { text: "3-5", points: 70 },
+            { text: "6-10", points: 50 },
+            { text: "+10", points: 10 }
         ]
     },
     {
         id: 5,
         text: "¿Qué porcentaje de decisiones se basan en datos vs intuición?",
         options: [
-            { text: "+80% datos", points: 10 },
-            { text: "50-80% datos", points: 40 },
-            { text: "20-50% datos", points: 70 },
-            { text: "Casi pura intuición", points: 100 }
+            { text: "+80% datos", points: 100 },
+            { text: "50-80% datos", points: 70 },
+            { text: "20-50% datos", points: 50 },
+            { text: "Casi pura intuición", points: 10 }
         ]
     },
     {
         id: 6,
         text: "¿Tu equipo puede acceder a información crítica del negocio en tiempo real?",
         options: [
-            { text: "Sí, desde cualquier lugar", points: 10 },
+            { text: "Sí, desde cualquier lugar", points: 100 },
             { text: "Solo en oficina", points: 50 },
-            { text: "Tienen que pedirla", points: 80 },
-            { text: "No disponible", points: 100 }
+            { text: "Tienen que pedirla", points: 30 },
+            { text: "No disponible", points: 10 }
         ]
     },
     {
         id: 7,
         text: "¿Cuánto tiempo toma generar un reporte mensual completo?",
         options: [
-            { text: "Menos de 1 hora", points: 10 },
-            { text: "2-5 horas", points: 40 },
-            { text: "1-2 días", points: 70 },
-            { text: "+2 días", points: 100 }
+            { text: "Menos de 1 hora", points: 100 },
+            { text: "2-5 horas", points: 70 },
+            { text: "1-2 días", points: 40 },
+            { text: "+2 días", points: 10 }
         ]
     },
     {
         id: 8,
         text: "¿Usan alguna herramienta de IA actualmente?",
         options: [
-            { text: "Múltiples integradas", points: 10 },
-            { text: "1-2 básicas", points: 50 },
-            { text: "Solo ChatGPT casual", points: 80 },
-            { text: "Ninguna", points: 100 }
+            { text: "Múltiples integradas", points: 100 },
+            { text: "1-2 básicas", points: 70 },
+            { text: "Solo ChatGPT", points: 30 },
+            { text: "Ninguna", points: 10 }
         ]
     },
     {
         id: 9,
         text: "¿Cómo es su proceso de seguimiento a clientes/leads?",
         options: [
-            { text: "Automatizado con triggers", points: 10 },
-            { text: "Semi-manual con recordatorios", points: 50 },
-            { text: "100% manual", points: 80 },
-            { text: "No hay seguimiento sistemático", points: 100 }
+            { text: "Automatizado con triggers", points: 100 },
+            { text: "Semi-manual con recordatorios", points: 60 },
+            { text: "100% manual", points: 30 },
+            { text: "No hay seguimiento sistemático", points: 10 }
         ]
     },
     {
         id: 10,
         text: "Si un empleado clave se va, ¿qué tan fácil es transferir su conocimiento?",
         options: [
-            { text: "Todo documentado/automatizado", points: 10 },
+            { text: "Todo documentado/automatizado", points: 100 },
             { text: "Parcialmente documentado", points: 50 },
-            { text: "Está en su cabeza", points: 80 },
-            { text: "Se pierde conocimiento crítico", points: 100 }
+            { text: "Está en su cabeza", points: 20 },
+            { text: "Se pierde conocimiento crítico", points: 10 }
         ]
     }
 ];
@@ -177,28 +177,28 @@ const Quiz = () => {
 
     const getResultContent = () => {
         if (score <= 250) return {
-            badge: "Líder Digital",
-            color: "badge-green",
-            message: "¡Felicidades! Tu empresa está por encima del promedio. Podemos ayudarte a optimizar aún más con automatizaciones avanzadas.",
-            cta: "Optimiza tu ventaja competitiva"
+            badge: "Urgente: Tu competencia te está rebasando",
+            color: "badge-red",
+            message: "🚨 CRÍTICO: Tu competencia ya te está rebasando. El 73% de empresas similares pierden tiempo en tareas que la IA automatiza. Actúa YA.",
+            cta: "Habla con un especialista HOY"
         };
         if (score <= 500) return {
-            badge: "En Proceso de Transformación",
-            color: "badge-yellow",
-            message: "Vas bien, pero hay oportunidades significativas. Estás dejando dinero sobre la mesa en eficiencia.",
-            cta: "Agenda tu diagnóstico gratuito"
-        };
-        if (score <= 750) return {
             badge: "Necesitas Automatización Ya",
             color: "badge-orange",
             message: "⚠️ Tu empresa necesita automatización ahora. Estás perdiendo competitividad cada día que pasa.",
             cta: "Recupera el tiempo perdido"
         };
+        if (score <= 750) return {
+            badge: "En Proceso de Transformación",
+            color: "badge-yellow",
+            message: "Vas bien, pero hay oportunidades significativas. Estás dejando dinero sobre la mesa en eficiencia.",
+            cta: "Agenda tu diagnóstico gratuito"
+        };
         return {
-            badge: "Urgente: Tu competencia te está rebasando",
-            color: "badge-red",
-            message: "🚨 CRÍTICO: Tu competencia ya te está rebasando. El 73% de empresas similares pierden tiempo en tareas que la IA automatiza. Actúa YA.",
-            cta: "Habla con un especialista HOY"
+            badge: "Líder Digital",
+            color: "badge-green",
+            message: "¡Felicidades! Tu empresa está por encima del promedio. Podemos ayudarte a optimizar aún más con automatizaciones avanzadas.",
+            cta: "Optimiza tu ventaja competitiva"
         };
     };
 
@@ -288,7 +288,7 @@ const Quiz = () => {
                         }}>
                             <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', fontSize: '1.1rem' }}>
                                 <CheckCircle2 size={24} color="var(--primary)" />
-                                Score de eficiencia operativa (0-1000)
+                                Score de eficiencia operativa (0-100)
                             </li>
                             <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', fontSize: '1.1rem' }}>
                                 <CheckCircle2 size={24} color="var(--primary)" />

@@ -179,24 +179,28 @@ const Quiz = () => {
         if (score <= 250) return {
             badge: "Urgente: Tu competencia te está rebasando",
             color: "badge-red",
+            textColor: "#991b1b",
             message: "🚨 CRÍTICO: Tu competencia ya te está rebasando. El 73% de empresas similares pierden tiempo en tareas que la IA automatiza. Actúa YA.",
             cta: "Habla con un especialista HOY"
         };
         if (score <= 500) return {
             badge: "Necesitas Automatización Ya",
             color: "badge-orange",
+            textColor: "#9a3412",
             message: "⚠️ Tu empresa necesita automatización ahora. Estás perdiendo competitividad cada día que pasa.",
             cta: "Recupera el tiempo perdido"
         };
         if (score <= 750) return {
             badge: "En Proceso de Transformación",
             color: "badge-yellow",
+            textColor: "#854d0e",
             message: "Vas bien, pero hay oportunidades significativas. Estás dejando dinero sobre la mesa en eficiencia.",
             cta: "Agenda tu diagnóstico gratuito"
         };
         return {
             badge: "Líder Digital",
             color: "badge-green",
+            textColor: "#166534",
             message: "¡Felicidades! Tu empresa está por encima del promedio. Podemos ayudarte a optimizar aún más con automatizaciones avanzadas.",
             cta: "Optimiza tu ventaja competitiva"
         };
@@ -409,8 +413,8 @@ const Quiz = () => {
 
                             <div className="score-display">
                                 <div className="score-circle">
-                                    <span className="score-number">{score}</span>
-                                    <span className="score-total">/ 1000</span>
+                                    <span className="score-number" style={{ color: result.textColor }}>{Math.round(score / 10)}</span>
+                                    <span className="score-total">/ 100</span>
                                 </div>
                             </div>
 
@@ -442,7 +446,7 @@ const Quiz = () => {
                     </div>
                 )}
             </div>
-        </section>
+        </section >
     );
 };
 

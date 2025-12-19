@@ -12,12 +12,16 @@
     margin-bottom: var(--spacing-xl);
 }
 
-.footer-brand h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--spacing-sm);
+.footer-brand .brand-logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-brand h3 {
+    font-size: 1.5rem;
+    margin: 0;
 }
 
 .footer-brand p {

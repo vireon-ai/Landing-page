@@ -1,4 +1,4 @@
-import { Zap, Twitter, Linkedin, Github } from 'lucide-react';
+import vireonLogo from '../assets/vireon-logo.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -7,10 +7,10 @@ const Footer = () => {
             <div className="container">
                 <div className="footer-grid">
                     <div className="footer-brand">
-                        <h3>
-                            <Zap size={24} fill="currentColor" className="logo-icon" />
-                            Vireon
-                        </h3>
+                        <div className="brand-logo">
+                            <img src={vireonLogo} alt="Vireon Logo" className="logo-img" style={{ height: '30px', width: 'auto' }} />
+                            <h3>Vireon</h3>
+                        </div>
                         <p>
                             Empowering businesses with intelligent automation and data-driven strategies for the AI era.
                         </p>
@@ -30,20 +30,14 @@ const Footer = () => {
                         <h4>Resources</h4>
                         <ul className="footer-links">
                             <li><a href="#roi">ROI Calculator</a></li>
-                            <li><a href="#">Case Studies</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#quiz">Quiz</a></li>
+
                         </ul>
                     </div>
                 </div>
 
                 <div className="footer-bottom">
                     <p>&copy; {new Date().getFullYear()} Vireon. All rights reserved.</p>
-                    <div className="social-links">
-                        <a href="#" aria-label="Twitter"><Twitter size={20} /></a>
-                        <a href="#" aria-label="LinkedIn"><Linkedin size={20} /></a>
-                        <a href="#" aria-label="GitHub"><Github size={20} /></a>
-                    </div>
                 </div>
             </div>
         </footer>

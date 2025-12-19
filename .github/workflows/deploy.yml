@@ -35,4 +35,4 @@ jobs:
           # Esta es la carpeta REMOTA en Hostinger
           # IMPORTANTE: Asegúrate de que esta ruta sea correcta.
           # A veces es ./public_html/ o solo ./
-          server-dir: ./public_html/
+          server-dir: ./

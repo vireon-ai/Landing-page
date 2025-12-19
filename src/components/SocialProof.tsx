@@ -6,17 +6,27 @@ const SocialProof = () => {
         <section className="social-proof">
             <div className="container">
                 <div className="impact-grid">
+
                     <div className="impact-item">
-                        <h3>5+</h3>
-                        <p>Industrias Atendidas</p>
+                        <div className="impact-icon-wrapper">
+                            <h3>70%</h3>
+                        </div>
+                        <h4>Mayor eficiencia operacional</h4>
+                        <p>Las empresas reportan que la IA ha incrementado su eficiencia operativa.</p>
                     </div>
                     <div className="impact-item">
-                        <h3>100+</h3>
-                        <p>Procesos Automatizables</p>
+                        <div className="impact-icon-wrapper">
+                            <h3>65%</h3>
+                        </div>
+                        <h4>Mejores decisiones de negocio</h4>
+                        <p>Los líderes afirman que la IA mejora la toma de decisiones mediante análisis de datos.</p>
                     </div>
                     <div className="impact-item">
-                        <h3>80%</h3>
-                        <p>Ahorro de Tiempo</p>
+                        <div className="impact-icon-wrapper">
+                            <h3>3.7x</h3>
+                        </div>
+                        <h4>Retorno sobre inversión</h4>
+                        <p>Por cada dólar invertido en IA generativa, las empresas logran un retorno promedio de $3.70.</p>
                     </div>
                 </div>
 

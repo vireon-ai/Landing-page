@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, ArrowLeft, CheckCircle2, RefreshCw, Download } from 'lucide-react';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
-import vireonLogo from '../assets/Vireon texto.png';
+import { ArrowRight, ArrowLeft, CheckCircle2, RefreshCw, Mail, Check, Loader2 } from 'lucide-react';
 import './Quiz.css';
 
 interface Question {
@@ -119,6 +116,7 @@ const Quiz = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [email, setEmail] = useState('');
     const [score, setScore] = useState(0);
+    const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
     const [hasStarted, setHasStarted] = useState(false);
 
@@ -175,6 +173,41 @@ const Quiz = () => {
         localStorage.removeItem('quizAnswers');
     };
 
+    const handleSendResults = async () => {
+        if (emailStatus === 'sending' || emailStatus === 'success') return;
+
+        setEmailStatus('sending');
+        const finalScore = score;
+        const resultData = getResultContent();
+
+        try {
+            const queryParams = new URLSearchParams({
+                email,
+                score: finalScore.toString(),
+                scoreNormalized: Math.round(finalScore / 10).toString(),
+                answers: JSON.stringify(answers),
+                submittedAt: new Date().toISOString(),
+                badge: resultData.badge,
+                message: resultData.message,
+                cta: resultData.cta
+            });
+
+            await fetch(`https://n8n.srv946409.hstgr.cloud/webhook/e1a1bbba-2b28-4a2a-8942-cb434cd6d280?${queryParams.toString()}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            setEmailStatus('success');
+            setTimeout(() => setEmailStatus('idle'), 5000); // Reset after 5 seconds
+        } catch (error) {
+            console.error('Error sending results:', error);
+            setEmailStatus('error');
+            setTimeout(() => setEmailStatus('idle'), 3000); // Reset error easier
+        }
+    };
+
     const getResultContent = () => {
         if (score <= 250) return {
             badge: "Urgente: Tu competencia te está rebasando",
@@ -206,56 +239,7 @@ const Quiz = () => {
         };
     };
 
-    const handleDownloadPDF = async () => {
-        const input = document.getElementById('quiz-results-card');
-        if (!input) return;
 
-        try {
-            const canvas = await html2canvas(input, {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: '#ffffff',
-                ignoreElements: (element) => {
-                    return element.classList.contains('quiz-actions') ||
-                        element.tagName.toLowerCase() === 'button';
-                }
-            });
-
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-
-            // Add Logo (Centered Top)
-            // Assuming logo is roughly rectangular, using 50mm width
-            const logoWidth = 110;
-            const logoHeight = 27;
-            const logoX = (pdfWidth - logoWidth) / 2;
-            pdf.addImage(vireonLogo, 'PNG', logoX, 10, logoWidth, logoHeight);
-
-            // Add Captured Content
-            const imgProps = pdf.getImageProperties(imgData);
-            const contentWidth = pdfWidth - 40; // 20mm margin each side
-            const contentHeight = (imgProps.height * contentWidth) / imgProps.width;
-
-            const startY = 50;
-            pdf.addImage(imgData, 'PNG', 20, startY, contentWidth, contentHeight);
-
-            // Add Contact Info (Bottom)
-            const contactY = startY + contentHeight + 20;
-
-            pdf.setFontSize(12);
-            pdf.setTextColor(100, 100, 100);
-            pdf.text('Contacto:', pdfWidth / 2, contactY, { align: 'center' });
-
-            pdf.setFontSize(12);
-            pdf.setTextColor(0, 0, 0);
-            pdf.text('Juanmanuel.glez@vireonai.com.mx', pdfWidth / 2, contactY + 7, { align: 'center' });
-
-            pdf.save('VireonAI-Diagnostico.pdf');
-        } catch (error) {
-            console.error("Error generating PDF:", error);
-        }
-    };
 
     const result = getResultContent();
     const progress = ((step) / questions.length) * 100;
@@ -437,8 +421,39 @@ const Quiz = () => {
                                     <button className="btn btn-secondary" onClick={() => window.location.reload()}>
                                         <RefreshCw size={18} style={{ marginRight: '0.5rem' }} /> Reintentar
                                     </button>
-                                    <button className="btn btn-secondary" onClick={handleDownloadPDF}>
-                                        <Download size={18} style={{ marginRight: '0.5rem' }} /> Descargar PDF
+                                    <button
+                                        className="btn btn-secondary"
+                                        onClick={handleSendResults}
+                                        disabled={emailStatus === 'sending' || emailStatus === 'success'}
+                                        style={{
+                                            minWidth: '200px',
+                                            transition: 'all 0.3s ease',
+                                            backgroundColor: emailStatus === 'success' ? '#dcfce7' : '',
+                                            color: emailStatus === 'success' ? '#166534' : '',
+                                            borderColor: emailStatus === 'success' ? '#166534' : ''
+                                        }}
+                                    >
+                                        {emailStatus === 'sending' ? (
+                                            <>
+                                                <Loader2 size={18} className="animate-spin" style={{ marginRight: '0.5rem' }} />
+                                                Enviando...
+                                            </>
+                                        ) : emailStatus === 'success' ? (
+                                            <>
+                                                <Check size={18} style={{ marginRight: '0.5rem' }} />
+                                                ¡Enviado!
+                                            </>
+                                        ) : emailStatus === 'error' ? (
+                                            <>
+                                                <RefreshCw size={18} style={{ marginRight: '0.5rem' }} />
+                                                Error, reintentar
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Mail size={18} style={{ marginRight: '0.5rem' }} />
+                                                Enviar por correo
+                                            </>
+                                        )}
                                     </button>
                                 </div>
                             </div>
@@ -446,7 +461,7 @@ const Quiz = () => {
                     </div>
                 )}
             </div>
-        </section >
+        </section>
     );
 };
 

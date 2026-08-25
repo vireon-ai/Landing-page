@@ -1,3 +1,4 @@
+import { Instagram } from 'lucide-react';
 import vireonLogo from '../assets/vireon-logo.png';
 import './Footer.css';
 
@@ -38,6 +39,16 @@ const Footer = () => {
 
                 <div className="footer-bottom">
                     <p>&copy; {new Date().getFullYear()} Vireon. All rights reserved.</p>
+                    <div className="social-links">
+                        <a
+                            href="https://www.instagram.com/vireon_consulting/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram de Vireon"
+                        >
+                            <Instagram size={20} />
+                        </a>
+                    </div>
                 </div>
             </div>
         </footer>

@@ -1,0 +1,273 @@
+/* Diagrama de operación en vivo del hero. Tema claro, sobre --bg-primary. */
+
+.live-flow {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 1.25rem 1.25rem 1rem;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+}
+
+.live-flow__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    margin-bottom: 0.75rem;
+}
+
+.live-flow__eyebrow,
+.live-flow__live {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.live-flow__eyebrow {
+    color: var(--text-secondary);
+}
+
+.live-flow__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--primary-deep);
+    white-space: nowrap;
+}
+
+.live-flow__live i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--primary);
+    animation: live-flow-blink 2s ease-in-out infinite;
+}
+
+@keyframes live-flow-blink {
+
+    0%,
+    100% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* El diagrama se desplaza en horizontal en pantallas chicas
+   para que las etiquetas no se vuelvan ilegibles. */
+.live-flow__canvas {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.live-flow__canvas svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 700px) {
+    .live-flow__canvas svg {
+        min-width: 440px;
+    }
+}
+
+/* Cables */
+.live-flow__wires {
+    stroke: #cbd5e1;
+    stroke-dasharray: 3 7;
+    animation: live-flow-march 2.6s linear infinite;
+}
+
+@keyframes live-flow-march {
+    to {
+        stroke-dashoffset: -20;
+    }
+}
+
+/* Paquetes de datos */
+.live-flow__pkt {
+    fill: var(--primary-deep);
+    animation: live-flow-travel 4.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    offset-rotate: 0deg;
+}
+
+.live-flow__pkt--1 {
+    offset-path: path("M110,43 C155,43 155,130 200,130");
+}
+
+.live-flow__pkt--2 {
+    offset-path: path("M110,130 L200,130");
+    animation-delay: 1.4s;
+    fill: var(--secondary);
+}
+
+.live-flow__pkt--3 {
+    offset-path: path("M110,217 C155,217 155,130 200,130");
+    animation-delay: 2.8s;
+}
+
+.live-flow__pkt--4 {
+    offset-path: path("M320,130 C365,130 365,43 410,43");
+    animation-delay: 2.1s;
+}
+
+.live-flow__pkt--5 {
+    offset-path: path("M320,130 L410,130");
+    animation-delay: 3.5s;
+    fill: var(--secondary);
+}
+
+.live-flow__pkt--6 {
+    offset-path: path("M320,130 C365,130 365,217 410,217");
+    animation-delay: 0.7s;
+}
+
+@keyframes live-flow-travel {
+    0% {
+        offset-distance: 0%;
+        opacity: 0;
+    }
+
+    9% {
+        opacity: 1;
+    }
+
+    91% {
+        opacity: 1;
+    }
+
+    100% {
+        offset-distance: 100%;
+        opacity: 0;
+    }
+}
+
+/* Nodos */
+.live-flow__nodes {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+}
+
+.live-flow__node rect {
+    fill: var(--bg-secondary);
+    stroke: var(--border-color);
+    stroke-width: 1;
+}
+
+.live-flow__node text {
+    fill: var(--text-secondary);
+    text-anchor: middle;
+}
+
+.live-flow__node {
+    animation: live-flow-pulse 4.2s ease-in-out infinite;
+}
+
+.live-flow__node--d2 {
+    animation-delay: 1.4s;
+}
+
+.live-flow__node--d3 {
+    animation-delay: 2.8s;
+}
+
+.live-flow__node--d4 {
+    animation-delay: 2.1s;
+}
+
+.live-flow__node--d5 {
+    animation-delay: 3.5s;
+}
+
+.live-flow__node--d6 {
+    animation-delay: 0.7s;
+}
+
+@keyframes live-flow-pulse {
+
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+
+    42% {
+        opacity: 1;
+    }
+}
+
+.live-flow__agent rect {
+    fill: var(--bg-primary);
+    stroke: var(--primary);
+    stroke-width: 1.6;
+}
+
+.live-flow__agent-name {
+    fill: var(--text-primary);
+    text-anchor: middle;
+    font-size: 13.5px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+}
+
+.live-flow__agent-role {
+    fill: var(--primary-deep);
+    text-anchor: middle;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+/* Pie */
+.live-flow__foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.live-flow__foot-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.live-flow__foot-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--primary-deep);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .live-flow__wires,
+    .live-flow__live i,
+    .live-flow__node {
+        animation: none;
+    }
+
+    .live-flow__node {
+        opacity: 1;
+    }
+
+    .live-flow__pkt {
+        animation: none;
+        offset-distance: 52%;
+        opacity: 1;
+    }
+}

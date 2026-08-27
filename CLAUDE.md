@@ -53,10 +53,25 @@ build: es referencia.
 - `PLAN.md` — qué sección del prototipo corresponde a qué componente del repo,
   en qué orden conviene portarlas y qué se hizo ya.
 
-El prototipo está en tema oscuro. **El sitio sigue en tema claro** y así se
-queda hasta nueva orden: al portar una sección, traduce los colores a las
-variables claras de `src/styles/index.css`. Lo que se porta es la estructura, la
-jerarquía y el movimiento, no la paleta.
+### El sitio es de tema claro. Siempre.
+
+El prototipo de referencia está en oscuro; eso es un accidente del prototipo, no
+una decisión de producto. **El sitio se queda en tema claro de forma permanente.**
+
+- No conviertas el sitio ni ninguna sección a modo oscuro.
+- No agregues un interruptor de tema ni soporte de `prefers-color-scheme`.
+- No uses fondos oscuros "solo para esta sección".
+
+Al portar del prototipo se trae la estructura, la jerarquía, la densidad y el
+movimiento. Los colores se traducen a las variables claras de
+`src/styles/index.css`.
+
+### Cómo se porta una sección
+
+Con el comando `/portar-seccion <nombre>` (definido en
+`.claude/commands/portar-seccion.md`). Trae el protocolo completo: qué leer, en
+qué orden, las restricciones, cómo verificar y cómo cerrar. Una sección por
+sesión, en su propia rama.
 
 ## Convenciones
 

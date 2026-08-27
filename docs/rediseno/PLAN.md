@@ -8,9 +8,16 @@ Dirección acordada: la página deja de *describir* la automatización y la
 se quedan exactamente como están. Lo que cambia es estructura, jerarquía,
 densidad y movimiento.
 
-El prototipo de referencia está en tema oscuro. **El sitio sigue en claro.**
-Portar una sección significa traer su estructura y su movimiento traduciendo los
+El prototipo de referencia está en tema oscuro. **El sitio se queda en claro de
+forma permanente** — no es un paso intermedio, es la decisión. Portar una sección
+significa traer su estructura, su jerarquía y su movimiento, traduciendo los
 colores a las variables claras de `src/styles/index.css`.
+
+## Cómo se trabaja
+
+Una sección por sesión, en su propia rama, con el comando
+`/portar-seccion <nombre>`. Nada de portar varias de un jalón: cada sección se
+revisa en `localhost:5173` y se aprueba antes de pasar a la siguiente.
 
 ---
 
@@ -19,6 +26,7 @@ colores a las variables claras de `src/styles/index.css`.
 | # | Sección del prototipo | Componente del repo | Estado |
 |---|---|---|---|
 | 1 | Hero con flujo en vivo | `Hero.tsx` + `LiveFlow.tsx` | ✅ Hecho, en claro |
+| — | *(orden sugerido de aquí en adelante: 6 → 2 → 7 → 8 → 4 → 5 → 3 → 9)* | | |
 | 2 | ¿Qué te está costando? (calculadora arriba) | `ROICalculator.tsx` + orden en `App.tsx` | Pendiente |
 | 3 | Tres anatomías de proyecto | reemplaza a `SocialProof.tsx` | Pendiente · falta contenido real |
 | 4 | Servicios con mini-demos | `Services.tsx` | Pendiente |
@@ -27,6 +35,22 @@ colores a las variables claras de `src/styles/index.css`.
 | 7 | Objeciones reales | `FAQ.tsx` | Pendiente |
 | 8 | Cierre con WhatsApp primero | `FinalCTA.tsx` | Pendiente |
 | 9 | Footer en español | `Footer.tsx` | Pendiente |
+
+## Por qué ese orden
+
+1. **El quiz primero** (`/portar-seccion quiz`). Enseñar el score antes de pedir
+   el correo es el cambio con más efecto de toda la lista, y no depende de que
+   consigas contenido nuevo.
+2. **La calculadora después** (`/portar-seccion calculadora`), incluyendo subirla
+   en `App.tsx` a la posición 2. Ya funciona; lo que cambia es dónde está y cómo
+   se ve el resultado.
+3. **Objeciones y cierre** son reescrituras de copy sobre estructura existente:
+   baratas y de efecto inmediato en conversión.
+4. **Servicios y método** piden más trabajo de front (las mini-demos animadas).
+5. **Las anatomías al final**, porque dependen de que consigas los tres proyectos
+   reales con sus números. Es el único bloque bloqueado por contenido, no por
+   código.
+6. **El footer** se puede hacer en cualquier momento; es media hora.
 
 ## Arreglos sueltos, independientes del rediseño
 

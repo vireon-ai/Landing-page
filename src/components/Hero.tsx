@@ -40,7 +40,6 @@ const Hero = () => {
                     </div>
 
                     <ul className="hero-trust">
-                        <li>Diagnóstico sin costo</li>
                         <li>Primer flujo en 30 días</li>
                         <li>Sin equipo técnico interno</li>
                     </ul>

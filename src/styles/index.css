@@ -7,6 +7,10 @@
   /* Turquoise */
   --primary-dark: #368f8c;
   --primary-light: #72c9c6;
+  /* Mismo tono que --primary, un paso más oscuro. Úsalo para TEXTO turquesa
+     sobre fondo claro: --primary sobre blanco da 2.80:1 y reprueba WCAG AA,
+     este da 4.60:1. --primary se queda para rellenos, bordes e iconografía. */
+  --primary-deep: #2F817E;
   --secondary: #4281A4;
   /* Muted Blue/Green complement */
   --accent: #E4CC37;

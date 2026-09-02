@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import SocialProof from './components/SocialProof';
+import Solutions from './components/Solutions';
 import ProblemSolution from './components/ProblemSolution';
 import Quiz from './components/Quiz';
 import Services from './components/Services';
@@ -43,7 +43,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <SocialProof />
+        <Solutions />
         <ProblemSolution />
         <Quiz />
         <Services />

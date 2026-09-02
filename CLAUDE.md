@@ -21,8 +21,10 @@ y sube la carpeta `dist/` por FTP a Hostinger. **No hay ambiente de staging.**
 - `src/App.tsx` — define el orden de las secciones de la página.
 - `src/components/` — una sección por componente, cada uno con su `.css` del
   mismo nombre: Navbar, Hero, ProblemSolution, Services, Methodology,
-  ProofOfConcept, ROICalculator, Quiz, Authority, SocialProof, Resources, FAQ,
+  ProofOfConcept, ROICalculator, Quiz, Authority, Solutions, Resources, FAQ,
   FinalCTA, Footer.
+- `src/config.ts` — configuración compartida (número de WhatsApp y el armador de
+  la liga `wa.me`).
 - `src/styles/index.css` — variables de marca y estilos globales.
 - `src/assets/` — logos e imágenes que importa el código.
 - `public/` — archivos que se sirven tal cual (favicon).

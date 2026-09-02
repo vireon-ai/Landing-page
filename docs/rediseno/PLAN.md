@@ -26,15 +26,21 @@ revisa en `localhost:5173` y se aprueba antes de pasar a la siguiente.
 | # | Sección del prototipo | Componente del repo | Estado |
 |---|---|---|---|
 | 1 | Hero con flujo en vivo | `Hero.tsx` + `LiveFlow.tsx` | ✅ Hecho, en claro |
-| — | *(orden sugerido de aquí en adelante: 6 → 2 → 7 → 8 → 4 → 5 → 3 → 9)* | | |
+| — | *(orden sugerido de aquí en adelante: 6 → 2 → 7 → 8 → 4 → 5 → 9)* | | |
 | 2 | ¿Qué te está costando? (calculadora arriba) | `ROICalculator.tsx` + orden en `App.tsx` | Pendiente |
-| 3 | Tres anatomías de proyecto | reemplaza a `SocialProof.tsx` | Pendiente · falta contenido real |
+| 3 | Dos soluciones reales, con flujo animado | `Solutions.tsx` reemplaza a `SocialProof.tsx` | ✅ Hecho, en claro · faltan números |
 | 4 | Servicios con mini-demos | `Services.tsx` | Pendiente |
 | 5 | 30 días semana por semana | `Methodology.tsx` | Pendiente |
 | 6 | Test con score antes del correo | `Quiz.tsx` | Pendiente · el de mayor impacto |
 | 7 | Objeciones reales | `FAQ.tsx` | Pendiente |
 | 8 | Cierre con WhatsApp primero | `FinalCTA.tsx` | Pendiente |
 | 9 | Footer en español | `Footer.tsx` | Pendiente |
+
+> **Ojo con la 4.** Las dos soluciones reales (la inmobiliaria y la de contenido)
+> ya viven en `Solutions.tsx`, arriba. Cuando toque portar `Services.tsx` no las
+> repitas ahí: la página las enseñaría dos veces. Servicios tiene que hablar de
+> categorías de trabajo, no de estos dos productos. Existe un `servicios.patch`
+> que sí los duplicaba y por eso se descartó.
 
 ## Por qué ese orden
 
@@ -90,9 +96,17 @@ Ninguno de estos toca el diseño y todos se pueden publicar por separado.
 
 ## Contenido que hace falta antes de publicar el rediseño completo
 
-- Número real de WhatsApp
-- Las tres anatomías de proyecto con proyectos reales y sus números (en el
-  prototipo son contenido de ejemplo, marcado como tal)
+- ~~Número real de WhatsApp~~. Ya está: `src/config.ts` trae `5214779086863`.
+  Falta que alguien abra los dos CTA de `Solutions.tsx` desde un celular y
+  confirme que el chat abre con el mensaje ya escrito.
+- **Precio de las suscripciones.** `Solutions.tsx` dice "solo una mensualidad"
+  sin cifra, porque no hay una autorizada para publicar. En cuanto definas el
+  rango, el bloque `.model` es donde va.
+- Números reales de las dos soluciones de `Solutions.tsx`: hoy la sección enseña
+  el mecanismo, no resultados. Sin cifras ni permiso de los clientes no se puede
+  escribir "subimos X%" ni poner testimonios con nombre.
+- La conversación y la publicación de las demos son ejemplos ilustrativos,
+  marcados como tal en la interfaz ("una conversación de ejemplo")
 - Rango de precios que sí estés dispuesto a publicar
 - Liga de calendario y aviso de privacidad publicado
 - Fuente y año para cualquier estadística que se conserve

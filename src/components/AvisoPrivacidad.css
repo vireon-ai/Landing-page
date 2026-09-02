@@ -1,0 +1,307 @@
+/* Página del aviso de privacidad. Documento largo: la prioridad es que se lea
+   cómodo y que se pueda saltar a una sección concreta. */
+
+.aviso-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--gradient-bg);
+}
+
+/* Encabezado ------------------------------------------------------------- */
+
+.aviso-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgb(255 255 255 / 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.aviso-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    min-height: 68px;
+}
+
+.aviso-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.aviso-logo-img {
+    height: 32px;
+    width: auto;
+}
+
+.aviso-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-deep);
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    background: var(--bg-primary);
+    white-space: nowrap;
+}
+
+.aviso-volver:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Cuerpo ----------------------------------------------------------------- */
+
+.aviso-main {
+    flex: 1;
+    padding: var(--spacing-xl) 0 var(--spacing-2xl);
+}
+
+.aviso-container {
+    max-width: 780px;
+}
+
+.aviso-intro {
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.aviso-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-deep);
+    margin-bottom: var(--spacing-sm);
+}
+
+.aviso-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: var(--spacing-sm);
+}
+
+.aviso-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.aviso-lead {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 62ch;
+}
+
+/* Índice ----------------------------------------------------------------- */
+
+.aviso-toc {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-lg);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.aviso-toc-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.aviso-toc-list {
+    list-style: none;
+    counter-reset: seccion;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.4rem var(--spacing-lg);
+}
+
+.aviso-toc-list li {
+    counter-increment: seccion;
+    display: flex;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.aviso-toc-list li::before {
+    content: counter(seccion) '.';
+    color: var(--primary);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
+.aviso-toc-list a {
+    color: var(--text-secondary);
+    border-bottom: 1px solid transparent;
+}
+
+.aviso-toc-list a:hover {
+    color: var(--primary-deep);
+    border-bottom-color: var(--primary);
+}
+
+/* Texto legal ------------------------------------------------------------ */
+
+.aviso-cuerpo section {
+    /* El encabezado es fijo: sin esto, saltar desde el índice tapa el título. */
+    scroll-margin-top: 88px;
+    padding-top: var(--spacing-lg);
+}
+
+.aviso-cuerpo h2 {
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.aviso-cuerpo h3 {
+    font-size: 1.05rem;
+    color: var(--primary-deep);
+    margin: var(--spacing-lg) 0 var(--spacing-sm);
+}
+
+.aviso-cuerpo p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.aviso-cuerpo ul {
+    list-style: none;
+    margin-bottom: var(--spacing-md);
+    display: grid;
+    gap: 0.6rem;
+}
+
+.aviso-cuerpo ul li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--text-secondary);
+}
+
+.aviso-cuerpo ul li::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--primary);
+}
+
+.aviso-cuerpo strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.aviso-cuerpo a {
+    color: var(--primary-deep);
+    font-weight: 500;
+    border-bottom: 1px solid rgb(72 169 166 / 0.4);
+    /* Correos y URLs largos no deben desbordar en pantallas de 320px. */
+    overflow-wrap: anywhere;
+}
+
+.aviso-cuerpo a:hover {
+    border-bottom-color: var(--primary);
+}
+
+/* Bloque de contacto ----------------------------------------------------- */
+
+.aviso-contacto {
+    padding: var(--spacing-lg);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.aviso-contacto-nombre {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.aviso-contacto-nombre span {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+}
+
+.aviso-contacto-lista {
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.aviso-contacto-lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.aviso-contacto-lista svg {
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+/* Pie -------------------------------------------------------------------- */
+
+.aviso-footer {
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    padding: var(--spacing-lg) 0;
+}
+
+.aviso-footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.aviso-footer-inner a {
+    color: var(--primary-deep);
+    font-weight: 500;
+}
+
+@media (max-width: 640px) {
+    .aviso-main {
+        padding: var(--spacing-lg) 0 var(--spacing-xl);
+    }
+
+    .aviso-toc,
+    .aviso-contacto {
+        padding: var(--spacing-md);
+    }
+
+    .aviso-logo span {
+        display: none;
+    }
+}

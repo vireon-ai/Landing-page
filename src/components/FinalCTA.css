@@ -204,3 +204,20 @@
     text-decoration: underline;
     text-underline-offset: 2px;
 }
+
+/* Aviso de privacidad bajo el botón: el envío del formulario es el momento en
+   que la persona consiente el tratamiento de sus datos (sección 5 del aviso). */
+.form-privacidad {
+    margin-top: var(--spacing-md);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    /* Blanco pleno, sin bajarle opacidad: es la línea más chica del recuadro y
+       el consentimiento tiene que leerse. */
+    color: #fff;
+}
+
+.form-privacidad a {
+    color: white;
+    font-weight: 600;
+    text-decoration: underline;
+}

@@ -81,3 +81,12 @@
         text-align: center;
     }
 }
+.footer-legal-link {
+    color: var(--text-secondary);
+    border-bottom: 1px solid transparent;
+}
+
+.footer-legal-link:hover {
+    color: var(--primary-deep);
+    border-bottom-color: var(--primary);
+}

@@ -385,6 +385,13 @@ const Quiz = () => {
                                         <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
                                             Ver Mis Resultados
                                         </button>
+                                        <p className="quiz-privacidad">
+                                            Al enviar aceptas nuestro{' '}
+                                            <a href="/aviso-de-privacidad/" target="_blank" rel="noopener noreferrer">
+                                                Aviso de Privacidad
+                                            </a>
+                                            .
+                                        </p>
                                     </form>
                                 </div>
                             )}

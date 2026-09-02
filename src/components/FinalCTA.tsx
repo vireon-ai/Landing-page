@@ -228,6 +228,13 @@ const FinalCTA = () => {
                                         </>
                                     )}
                                 </button>
+                                <p className="form-privacidad">
+                                    Al enviar aceptas nuestro{' '}
+                                    <a href="/aviso-de-privacidad/" target="_blank" rel="noopener noreferrer">
+                                        Aviso de Privacidad
+                                    </a>
+                                    .
+                                </p>
                                 {status === 'error' && (
                                     <div className="form-error" role="alert">
                                         <AlertTriangle size={18} className="form-error-icon" />

@@ -39,6 +39,9 @@ const Footer = () => {
 
                 <div className="footer-bottom">
                     <p>&copy; {new Date().getFullYear()} Vireon. All rights reserved.</p>
+                    <a href="/aviso-de-privacidad/" className="footer-legal-link">
+                        Aviso de Privacidad
+                    </a>
                     <div className="social-links">
                         <a
                             href="https://www.instagram.com/vireon_consulting/"

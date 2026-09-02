@@ -210,3 +210,17 @@
         /* Keep buttons side-by-side on mobile if possible, or stack if text is long */
     }
 }
+/* El test pide el correo antes de entregar el resultado: ahí es donde la
+   persona consiente el tratamiento (sección 5 del aviso de privacidad). */
+.quiz-privacidad {
+    margin-top: var(--spacing-md);
+    font-size: 0.8125rem;
+    /* --text-tertiary da 2.4:1 sobre blanco y reprueba AA; este da 7.5:1. */
+    color: var(--text-secondary);
+}
+
+.quiz-privacidad a {
+    color: var(--primary-deep);
+    font-weight: 500;
+    text-decoration: underline;
+}

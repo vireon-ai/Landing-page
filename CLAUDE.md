@@ -26,6 +26,39 @@ y sube la carpeta `dist/` por FTP a Hostinger. **No hay ambiente de staging.**
 - `src/styles/index.css` — variables de marca y estilos globales.
 - `src/assets/` — logos e imágenes que importa el código.
 - `public/` — archivos que se sirven tal cual (favicon).
+- `aviso-de-privacidad/index.html` + `src/aviso.tsx` — segunda entrada del build.
+- `docs/legal/` — el texto del aviso de privacidad y sus pendientes.
+
+## El sitio tiene dos páginas, no una
+
+`vite.config.ts` declara dos entradas: `index.html` (la landing) y
+`aviso-de-privacidad/index.html` (el aviso). No hay router: cada página es un
+archivo real en el servidor.
+
+Se hizo así porque Meta exige que el aviso viva en una URL pública, permanente y
+sin inicio de sesión, y con ruteo del lado del cliente esa URL daría 404 al
+abrirla directo, salvo que se configuren reescrituras en Hostinger.
+
+- Si agregas otra página, añádela también a `build.rollupOptions.input`. Si no,
+  no entra al `dist/` y no se publica.
+- `base: './'` deja las rutas de assets relativas; por eso el aviso funciona
+  desde `/aviso-de-privacidad/`. No lo cambies a una ruta absoluta sin revisar
+  las dos páginas.
+
+## El aviso de privacidad
+
+El texto legal vive en `docs/legal/aviso-de-privacidad.md` y se publica desde
+`src/components/AvisoPrivacidad.tsx`. **Los dos tienen que decir lo mismo**: si
+cambia el aviso, cambia primero el markdown, luego el componente, y sube la fecha
+de última actualización en ambos.
+
+Los formularios que recaban datos (el del cierre en `FinalCTA.tsx` y el del
+correo en `Quiz.tsx`) enseñan la liga al aviso junto al botón de envío, porque
+enviarlos es el momento en que la persona consiente. Si agregas otro formulario,
+agrega también esa línea.
+
+`docs/legal/pendientes.md` lista lo que falta confirmar con el responsable. No se
+publica.
 
 ## Sistema de diseño
 

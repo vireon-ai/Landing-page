@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Calendar, Check, AlertTriangle } from 'lucide-react';
+import { Calendar, Check, AlertTriangle, MessageCircle } from 'lucide-react';
+import { whatsappUrl } from '../config';
 import './FinalCTA.css';
 
 // Endpoint de n8n que recibe los leads del formulario final.
@@ -7,6 +8,9 @@ const WEBHOOK_URL = 'https://n8n.srv946409.hstgr.cloud/webhook/a118b68a-92f9-463
 
 // A dónde mandamos al visitante si el webhook no responde.
 const CORREO_CONTACTO = 'juanmanuel.glez@vireonai.com.mx';
+
+// El número de la liga vive en src/config.ts; este es sólo el texto visible.
+const WHATSAPP_VISIBLE = '477 908 6863';
 
 const CLAVE_PENDIENTES = 'vireon_leads_pendientes';
 const INTENTOS = 3;
@@ -250,6 +254,18 @@ const FinalCTA = () => {
                                 )}
                             </form>
                         )}
+
+                        <p className="cta-whatsapp">
+                            ¿Prefieres WhatsApp? Escríbenos al{' '}
+                            <a
+                                href={whatsappUrl('Hola Vireon, quiero agendar mi diagnóstico gratuito.')}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <MessageCircle size={16} aria-hidden="true" />
+                                {WHATSAPP_VISIBLE}
+                            </a>
+                        </p>
 
                         <div className="guarantee">
                             <span style={{ margin: '0 0.5rem' }}><Check size={14} style={{ display: 'inline' }} /> Sin compromiso</span>

@@ -29,6 +29,40 @@
     line-height: 1.6;
 }
 
+.footer-contacto {
+    list-style: none;
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.footer-contacto a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: color var(--transition-fast);
+    /* Los correos largos no caben enteros a 320px: que corten antes de desbordar. */
+    overflow-wrap: anywhere;
+}
+
+.footer-contacto a:hover {
+    color: var(--primary-deep);
+}
+
+.footer-contacto svg {
+    flex-shrink: 0;
+}
+
+/* A 16px, juanmanuel.glez@… pide 298px y a 320px de ancho sólo hay 288. */
+@media (max-width: 400px) {
+    .footer-contacto a {
+        font-size: 0.875rem;
+    }
+}
+
 .footer-col h4 {
     color: var(--text-primary);
     margin-bottom: var(--spacing-md);

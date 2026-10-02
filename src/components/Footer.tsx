@@ -1,6 +1,16 @@
-import { Instagram } from 'lucide-react';
+import { Instagram, Mail, MessageCircle } from 'lucide-react';
 import vireonLogo from '../assets/vireon-logo.png';
+import { whatsappUrl } from '../config';
 import './Footer.css';
+
+// El número de la liga vive en src/config.ts; este es sólo el texto visible.
+const WHATSAPP_VISIBLE = '477 908 6863';
+
+const CORREOS = [
+    'juanmanuel.glez@vireonai.com.mx',
+    'luisfelipe.ayala@vireonai.com.mx',
+    'marco.fosado@vireonai.com.mx',
+];
 
 const Footer = () => {
     return (
@@ -15,6 +25,26 @@ const Footer = () => {
                         <p>
                             Empowering businesses with intelligent automation and data-driven strategies for the AI era.
                         </p>
+                        <ul className="footer-contacto">
+                            <li>
+                                <a
+                                    href={whatsappUrl('Hola Vireon, quiero más información.')}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <MessageCircle size={18} aria-hidden="true" />
+                                    WhatsApp: {WHATSAPP_VISIBLE}
+                                </a>
+                            </li>
+                            {CORREOS.map((correo) => (
+                                <li key={correo}>
+                                    <a href={`mailto:${correo}`}>
+                                        <Mail size={18} aria-hidden="true" />
+                                        {correo}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                     <div className="footer-col">

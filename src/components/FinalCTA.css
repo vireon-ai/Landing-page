@@ -221,3 +221,19 @@
     font-weight: 600;
     text-decoration: underline;
 }
+
+/* Alternativa al formulario para quien prefiere escribir por WhatsApp. */
+.cta-whatsapp {
+    font-size: 0.95rem;
+    color: white;
+}
+
+.cta-whatsapp a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: white;
+    font-weight: 700;
+    text-decoration: underline;
+    white-space: nowrap;
+}

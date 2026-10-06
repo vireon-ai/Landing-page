@@ -18,7 +18,7 @@ import './AvisoPrivacidad.css';
 const CORREO = 'vireonconsultores@gmail.com';
 const WHATSAPP_DISPLAY = '+52 477 908 6863';
 const WHATSAPP_LINK = 'https://wa.me/524779086863';
-const ACTUALIZADO = '2 de septiembre de 2026';
+const ACTUALIZADO = '6 de octubre de 2026';
 
 const SECCIONES = [
     { id: 'responsable', titulo: 'Identidad y domicilio del responsable' },
@@ -62,7 +62,7 @@ const AvisoPrivacidad = () => {
                         <p className="aviso-eyebrow">Documento legal</p>
                         <h1 className="aviso-title">Aviso de Privacidad</h1>
                         <p className="aviso-meta">
-                            Última actualización: {ACTUALIZADO} · Versión 1.0
+                            Última actualización: {ACTUALIZADO} · Versión 1.1
                         </p>
                         <p className="aviso-lead">
                             Este documento explica qué datos personales recaba Vireon a través de su
@@ -86,11 +86,16 @@ const AvisoPrivacidad = () => {
                         <section id="responsable">
                             <h2>1. Identidad y domicilio del responsable</h2>
                             <p>
-                                Juan Manuel González Ascencio, en adelante «Vireon», con domicilio en
-                                Picacho 112, Jardines del Moral, León, Guanajuato, C.P. 37160, México,
-                                es el responsable del tratamiento de los datos personales que usted nos
-                                proporciona, conforme a la Ley Federal de Protección de Datos Personales
-                                en Posesión de los Particulares (LFPDPPP) vigente en México.
+                                Vireon es una marca operada por Juan Manuel González Ascencio, con
+                                domicilio en Picacho 112, Jardines del Moral, León, Guanajuato, C.P.
+                                37160, México. En este aviso, «Vireon» se refiere a esa marca y a la
+                                persona que la opera.
+                            </p>
+                            <p>
+                                Juan Manuel González Ascencio es el responsable del tratamiento de los
+                                datos personales que usted nos proporciona, conforme a la Ley Federal de
+                                Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)
+                                vigente en México.
                             </p>
                             <p>Datos de contacto para asuntos de privacidad:</p>
                             <ul>
@@ -451,8 +456,7 @@ const AvisoPrivacidad = () => {
                                 <p className="aviso-contacto-nombre">
                                     Juan Manuel González Ascencio
                                     <span>
-                                        Persona física con actividad empresarial, que opera comercialmente
-                                        como Vireon
+                                        Persona física con actividad empresarial, que opera la marca Vireon
                                     </span>
                                 </p>
                                 <ul className="aviso-contacto-lista">

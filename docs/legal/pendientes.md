@@ -26,6 +26,14 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
 - ¿La razón social es la persona física o existe una sociedad? Si hay una S.A. de
   C.V. o S.A.P.I. de C.V., §1 y §17 cambian.
 - ¿El domicilio de §1 es el fiscal publicable?
+- **Grafía del apellido.** El aviso dice «González Ascencio»; al pedir el cambio
+  de la marca se escribió «Asensio». Confirmar contra la Constancia de Situación
+  Fiscal o la INE y que coincida letra por letra con el registro de Tech Provider
+  en Meta. Se cambia en §1 y §17 del markdown y del componente.
+- Desde la versión 1.1 el §1 dice que Vireon es una marca operada por Juan Manuel
+  González Ascencio, porque el registro como Tech Provider va a su nombre. Si
+  después se constituye una sociedad y se migra el registro, §1 y §17 vuelven a
+  cambiar.
 
 **Canal de WhatsApp**
 

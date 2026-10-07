@@ -62,7 +62,7 @@ const AvisoPrivacidad = () => {
                         <p className="aviso-eyebrow">Documento legal</p>
                         <h1 className="aviso-title">Aviso de Privacidad</h1>
                         <p className="aviso-meta">
-                            Última actualización: {ACTUALIZADO} · Versión 1.1
+                            Última actualización: {ACTUALIZADO} · Versión 1.2
                         </p>
                         <p className="aviso-lead">
                             Este documento explica qué datos personales recaba Vireon a través de su
@@ -86,12 +86,14 @@ const AvisoPrivacidad = () => {
                         <section id="responsable">
                             <h2>1. Identidad del responsable</h2>
                             <p>
-                                Juan Manuel González Ascencio, persona física con actividad
-                                empresarial, es el responsable del tratamiento de los datos personales
-                                que usted nos proporciona, conforme a la Ley Federal de Protección de
-                                Datos Personales en Posesión de los Particulares (LFPDPPP) vigente en
-                                México. Opera comercialmente bajo la marca Vireon, y en este aviso
-                                «Vireon» se refiere a él.
+                                Vireon es una marca operada por Juan Manuel González Ascencio. En este
+                                aviso, «Vireon» se refiere a esa marca y a la persona que la opera.
+                            </p>
+                            <p>
+                                Juan Manuel González Ascencio es el responsable del tratamiento de los
+                                datos personales que usted nos proporciona, conforme a la Ley Federal de
+                                Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)
+                                vigente en México.
                             </p>
                             <p>Datos de contacto para asuntos de privacidad:</p>
                             <ul>
@@ -452,8 +454,7 @@ const AvisoPrivacidad = () => {
                                 <p className="aviso-contacto-nombre">
                                     Juan Manuel González Ascencio
                                     <span>
-                                        Persona física con actividad empresarial, que opera comercialmente
-                                        bajo la marca Vireon
+                                        Persona física con actividad empresarial, que opera la marca Vireon
                                     </span>
                                 </p>
                                 <ul className="aviso-contacto-lista">

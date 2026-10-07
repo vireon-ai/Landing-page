@@ -24,13 +24,21 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
 
 - ¿La razón social es la persona física o existe una sociedad? Si hay una S.A. de
   C.V. o S.A.P.I. de C.V., §1 y §17 cambian.
-- **Domicilio.** Se quitó a propósito de §1 y §17 (la versión 1.0 está en el
-  historial de git, commit `7d6fdb2`). La LFPDPPP pide que el aviso de
-  privacidad indique la identidad *y el domicilio* del responsable, así que
-  conviene validar con quien lleve lo legal si se puede publicar sin él, o
-  definir un domicilio que sí se pueda hacer público (por ejemplo, un domicilio
-  fiscal o de correspondencia distinto del particular) y volver a ponerlo en §1 y
-  §17.
+- **Domicilio.** Se quitó a propósito de §1 y §17 en la versión 1.2 (las
+  versiones 1.0 y 1.1, con domicilio, están en el historial de git). La LFPDPPP
+  pide que el aviso de privacidad indique la identidad *y el domicilio* del
+  responsable, así que conviene validar con quien lleve lo legal si se puede
+  publicar sin él, o definir un domicilio que sí se pueda hacer público (por
+  ejemplo, un domicilio fiscal o de correspondencia distinto del particular) y
+  volver a ponerlo en §1 y §17.
+- **Grafía del apellido.** El aviso dice «González Ascencio»; al pedir el cambio
+  de la marca se escribió «Asensio». Confirmar contra la Constancia de Situación
+  Fiscal o la INE y que coincida letra por letra con el registro de Tech Provider
+  en Meta. Se cambia en §1 y §17 del markdown y del componente.
+- Desde la versión 1.1 el §1 dice que Vireon es una marca operada por Juan Manuel
+  González Ascencio, porque el registro como Tech Provider va a su nombre. Si
+  después se constituye una sociedad y se migra el registro, §1 y §17 vuelven a
+  cambiar.
 
 **Canal de WhatsApp**
 

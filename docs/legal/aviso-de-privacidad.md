@@ -1,7 +1,7 @@
 # Aviso de Privacidad de Vireon
 
 **Última actualización:** 6 de octubre de 2026
-**Versión:** 1.1
+**Versión:** 1.2
 **Dirección permanente de este aviso:** https://www.vireonai.com.mx/aviso-de-privacidad/
 
 > Este archivo es la fuente del texto que publica
@@ -11,11 +11,12 @@
 
 ## 1. Identidad del responsable
 
-Juan Manuel González Ascencio, persona física con actividad empresarial, es el
-responsable del tratamiento de los datos personales que usted nos proporciona,
-conforme a la Ley Federal de Protección de Datos Personales en Posesión de los
-Particulares (LFPDPPP) vigente en México. Opera comercialmente bajo la marca
-Vireon, y en este aviso "Vireon" se refiere a él.
+Vireon es una marca operada por Juan Manuel González Ascencio. En este aviso,
+"Vireon" se refiere a esa marca y a la persona que la opera.
+
+Juan Manuel González Ascencio es el responsable del tratamiento de los datos
+personales que usted nos proporciona, conforme a la Ley Federal de Protección de
+Datos Personales en Posesión de los Particulares (LFPDPPP) vigente en México.
 
 Datos de contacto para asuntos de privacidad:
 
@@ -227,6 +228,6 @@ Para cualquier duda sobre este aviso de privacidad o sobre el tratamiento de sus
 datos personales:
 
 - **Responsable:** Juan Manuel González Ascencio, persona física con actividad
-  empresarial, que opera comercialmente bajo la marca Vireon
+  empresarial, que opera la marca Vireon
 - **Correo electrónico:** vireonconsultores@gmail.com
 - **WhatsApp:** +52 477 908 6863

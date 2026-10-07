@@ -1,4 +1,4 @@
-import { ArrowLeft, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Mail, MessageCircle } from 'lucide-react';
 import vireonLogo from '../assets/vireon-logo.png';
 import './AvisoPrivacidad.css';
 
@@ -21,7 +21,7 @@ const WHATSAPP_LINK = 'https://wa.me/524779086863';
 const ACTUALIZADO = '6 de octubre de 2026';
 
 const SECCIONES = [
-    { id: 'responsable', titulo: 'Identidad y domicilio del responsable' },
+    { id: 'responsable', titulo: 'Identidad del responsable' },
     { id: 'alcance', titulo: 'Alcance de este aviso' },
     { id: 'datos', titulo: 'Datos personales que recopilamos' },
     { id: 'finalidades', titulo: 'Finalidades del tratamiento' },
@@ -62,7 +62,7 @@ const AvisoPrivacidad = () => {
                         <p className="aviso-eyebrow">Documento legal</p>
                         <h1 className="aviso-title">Aviso de Privacidad</h1>
                         <p className="aviso-meta">
-                            Última actualización: {ACTUALIZADO} · Versión 1.1
+                            Última actualización: {ACTUALIZADO} · Versión 1.2
                         </p>
                         <p className="aviso-lead">
                             Este documento explica qué datos personales recaba Vireon a través de su
@@ -84,12 +84,10 @@ const AvisoPrivacidad = () => {
 
                     <article className="aviso-cuerpo">
                         <section id="responsable">
-                            <h2>1. Identidad y domicilio del responsable</h2>
+                            <h2>1. Identidad del responsable</h2>
                             <p>
-                                Vireon es una marca operada por Juan Manuel González Ascencio, con
-                                domicilio en Picacho 112, Jardines del Moral, León, Guanajuato, C.P.
-                                37160, México. En este aviso, «Vireon» se refiere a esa marca y a la
-                                persona que la opera.
+                                Vireon es una marca operada por Juan Manuel González Ascencio. En este
+                                aviso, «Vireon» se refiere a esa marca y a la persona que la opera.
                             </p>
                             <p>
                                 Juan Manuel González Ascencio es el responsable del tratamiento de los
@@ -469,13 +467,6 @@ const AvisoPrivacidad = () => {
                                         <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
                                             {WHATSAPP_DISPLAY}
                                         </a>
-                                    </li>
-                                    <li>
-                                        <MapPin size={18} aria-hidden="true" />
-                                        <span>
-                                            Picacho 112, Jardines del Moral, León, Guanajuato, C.P. 37160,
-                                            México
-                                        </span>
                                     </li>
                                 </ul>
                             </div>

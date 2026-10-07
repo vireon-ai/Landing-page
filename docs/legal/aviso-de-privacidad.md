@@ -1,7 +1,7 @@
 # Aviso de Privacidad de Vireon
 
 **Última actualización:** 6 de octubre de 2026
-**Versión:** 1.1
+**Versión:** 1.2
 **Dirección permanente de este aviso:** https://www.vireonai.com.mx/aviso-de-privacidad/
 
 > Este archivo es la fuente del texto que publica
@@ -9,11 +9,10 @@
 > luego el componente, y sube la fecha de última actualización en los dos.
 > Los pendientes de confirmación viven en `pendientes.md`.
 
-## 1. Identidad y domicilio del responsable
+## 1. Identidad del responsable
 
-Vireon es una marca operada por Juan Manuel González Ascencio, con domicilio en
-Picacho 112, Jardines del Moral, León, Guanajuato, C.P. 37160, México. En este
-aviso, "Vireon" se refiere a esa marca y a la persona que la opera.
+Vireon es una marca operada por Juan Manuel González Ascencio. En este aviso,
+"Vireon" se refiere a esa marca y a la persona que la opera.
 
 Juan Manuel González Ascencio es el responsable del tratamiento de los datos
 personales que usted nos proporciona, conforme a la Ley Federal de Protección de
@@ -232,5 +231,3 @@ datos personales:
   empresarial, que opera la marca Vireon
 - **Correo electrónico:** vireonconsultores@gmail.com
 - **WhatsApp:** +52 477 908 6863
-- **Domicilio:** Picacho 112, Jardines del Moral, León, Guanajuato, C.P. 37160,
-  México

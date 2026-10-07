@@ -1,4 +1,4 @@
-import { ArrowLeft, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Mail, MessageCircle } from 'lucide-react';
 import vireonLogo from '../assets/vireon-logo.png';
 import './AvisoPrivacidad.css';
 
@@ -18,10 +18,10 @@ import './AvisoPrivacidad.css';
 const CORREO = 'vireonconsultores@gmail.com';
 const WHATSAPP_DISPLAY = '+52 477 908 6863';
 const WHATSAPP_LINK = 'https://wa.me/524779086863';
-const ACTUALIZADO = '2 de septiembre de 2026';
+const ACTUALIZADO = '6 de octubre de 2026';
 
 const SECCIONES = [
-    { id: 'responsable', titulo: 'Identidad y domicilio del responsable' },
+    { id: 'responsable', titulo: 'Identidad del responsable' },
     { id: 'alcance', titulo: 'Alcance de este aviso' },
     { id: 'datos', titulo: 'Datos personales que recopilamos' },
     { id: 'finalidades', titulo: 'Finalidades del tratamiento' },
@@ -62,7 +62,7 @@ const AvisoPrivacidad = () => {
                         <p className="aviso-eyebrow">Documento legal</p>
                         <h1 className="aviso-title">Aviso de Privacidad</h1>
                         <p className="aviso-meta">
-                            Última actualización: {ACTUALIZADO} · Versión 1.0
+                            Última actualización: {ACTUALIZADO} · Versión 1.1
                         </p>
                         <p className="aviso-lead">
                             Este documento explica qué datos personales recaba Vireon a través de su
@@ -84,13 +84,14 @@ const AvisoPrivacidad = () => {
 
                     <article className="aviso-cuerpo">
                         <section id="responsable">
-                            <h2>1. Identidad y domicilio del responsable</h2>
+                            <h2>1. Identidad del responsable</h2>
                             <p>
-                                Juan Manuel González Ascencio, en adelante «Vireon», con domicilio en
-                                Picacho 112, Jardines del Moral, León, Guanajuato, C.P. 37160, México,
-                                es el responsable del tratamiento de los datos personales que usted nos
-                                proporciona, conforme a la Ley Federal de Protección de Datos Personales
-                                en Posesión de los Particulares (LFPDPPP) vigente en México.
+                                Juan Manuel González Ascencio, persona física con actividad
+                                empresarial, es el responsable del tratamiento de los datos personales
+                                que usted nos proporciona, conforme a la Ley Federal de Protección de
+                                Datos Personales en Posesión de los Particulares (LFPDPPP) vigente en
+                                México. Opera comercialmente bajo la marca Vireon, y en este aviso
+                                «Vireon» se refiere a él.
                             </p>
                             <p>Datos de contacto para asuntos de privacidad:</p>
                             <ul>
@@ -452,7 +453,7 @@ const AvisoPrivacidad = () => {
                                     Juan Manuel González Ascencio
                                     <span>
                                         Persona física con actividad empresarial, que opera comercialmente
-                                        como Vireon
+                                        bajo la marca Vireon
                                     </span>
                                 </p>
                                 <ul className="aviso-contacto-lista">
@@ -465,13 +466,6 @@ const AvisoPrivacidad = () => {
                                         <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
                                             {WHATSAPP_DISPLAY}
                                         </a>
-                                    </li>
-                                    <li>
-                                        <MapPin size={18} aria-hidden="true" />
-                                        <span>
-                                            Picacho 112, Jardines del Moral, León, Guanajuato, C.P. 37160,
-                                            México
-                                        </span>
                                     </li>
                                 </ul>
                             </div>

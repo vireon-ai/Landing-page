@@ -9,11 +9,10 @@ abierto. Esta lista **no** se publica.
 | Dónde | Qué se puso | De dónde salió |
 |---|---|---|
 | Encabezado y §15 | `https://www.vireonai.com.mx/aviso-de-privacidad/` | La URL de ejemplo del propio borrador, que es la que sirve esta implementación |
-| §1 | Picacho 112, Jardines del Moral, León, Guanajuato, C.P. 37160 | El domicilio ya venía escrito dentro del `[FILL]` |
+| §1 | Nombre de la persona física, su actividad empresarial y que Vireon es la marca bajo la que opera | Decisión del responsable (6 de octubre de 2026): el aviso no publica domicilio |
 | §7 | Se quitó el `[FILL: confirmar si existe alguna otra transferencia]` | El párrafo ya declara que no hay otras transferencias. **Confírmalo antes de publicar** |
 | §17, razón social | Juan Manuel González Ascencio, persona física con actividad empresarial | §1 nombra a la persona física, no a una sociedad |
 | §17, WhatsApp | +52 477 908 6863 | Es el número que el sitio usa como oficial (`src/config.ts` en la rama del rediseño) y el primero de los tres de §1 |
-| §17, domicilio fiscal | El mismo de §1 | Mismo responsable |
 | §13 | "no usa cookies ni tecnologías de seguimiento" | El borrador decía "no se usan cookies"; se redactó completo |
 | Versión | 1.0, sin la nota "borrador para revisión legal" | Una página pública no se publica marcada como borrador. **Esto supone que ya pasó revisión** |
 
@@ -25,7 +24,13 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
 
 - ¿La razón social es la persona física o existe una sociedad? Si hay una S.A. de
   C.V. o S.A.P.I. de C.V., §1 y §17 cambian.
-- ¿El domicilio de §1 es el fiscal publicable?
+- **Domicilio.** Se quitó a propósito de §1 y §17 (la versión 1.0 está en el
+  historial de git, commit `7d6fdb2`). La LFPDPPP pide que el aviso de
+  privacidad indique la identidad *y el domicilio* del responsable, así que
+  conviene validar con quien lleve lo legal si se puede publicar sin él, o
+  definir un domicilio que sí se pueda hacer público (por ejemplo, un domicilio
+  fiscal o de correspondencia distinto del particular) y volver a ponerlo en §1 y
+  §17.
 
 **Canal de WhatsApp**
 

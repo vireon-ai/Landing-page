@@ -1,0 +1,603 @@
+/* Página de Portero (/soluciones/portero/). Tema claro, mismo lenguaje que la
+   landing: Outfit en títulos, Inter en texto, tarjetas con borde fino.
+   Contraste: --primary-deep solo va como texto sobre blanco puro; sobre
+   --bg-secondary o fondos teñidos baja de 4.5:1, así que ahí el texto es oscuro y
+   el turquesa queda para iconos y bordes. */
+
+.portero-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+}
+
+.portero-page main {
+    flex: 1;
+}
+
+/* Las secciones de esta página llevan su propio aire; el global de 8rem es
+   para la landing. */
+.portero-page section {
+    padding: 0;
+}
+
+.portero-angosto {
+    max-width: 820px;
+}
+
+/* Encabezado ------------------------------------------------------------- */
+
+.portero-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgb(255 255 255 / 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.portero-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    min-height: 68px;
+}
+
+.portero-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.portero-logo-img {
+    height: 32px;
+    width: auto;
+}
+
+.portero-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-deep);
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    background: var(--bg-primary);
+    white-space: nowrap;
+}
+
+.portero-volver:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Hero ------------------------------------------------------------------- */
+
+.portero-page .portero-hero {
+    position: relative;
+    padding: clamp(3.5rem, 10vw, 6.5rem) 0 clamp(3rem, 8vw, 5rem);
+    text-align: center;
+    overflow: hidden;
+    background:
+        radial-gradient(60% 70% at 50% 0%, color-mix(in srgb, var(--primary) 14%, transparent) 0%, transparent 70%),
+        var(--bg-primary);
+}
+
+.portero-hero .portero-angosto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.portero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.portero-eyebrow a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-underline-offset: 4px;
+}
+
+.portero-eyebrow a:hover {
+    color: var(--text-primary);
+}
+
+.portero-etiqueta {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: var(--radius-full);
+    background: var(--bg-primary);
+    border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.portero-estado {
+    font-weight: 700;
+}
+
+.portero-titulo {
+    font-size: clamp(2.75rem, 9vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+}
+
+.portero-frase {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.2rem, 3.2vw, 1.6rem);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--text-secondary);
+    max-width: 30ch;
+}
+
+/* Blanco sobre --primary da 2.80:1; sobre --primary-deep, 4.60:1. */
+.portero-boton.btn-primary {
+    gap: 0.5rem;
+    margin-top: var(--spacing-sm);
+    background: var(--primary-deep);
+    text-align: center;
+}
+
+.portero-boton.btn-primary:hover:not([aria-disabled='true']) {
+    background: color-mix(in srgb, var(--primary-deep) 85%, black);
+}
+
+.portero-boton.btn-primary[aria-disabled='true'] {
+    cursor: progress;
+    opacity: 0.75;
+    transform: none;
+}
+
+.portero-boton svg {
+    flex-shrink: 0;
+}
+
+/* Secciones -------------------------------------------------------------- */
+
+.portero-page .portero-seccion {
+    padding: clamp(3rem, 8vw, 5.5rem) 0;
+}
+
+.portero-page .portero-seccion--alterna {
+    background: var(--bg-secondary);
+    border-block: 1px solid var(--border-color);
+}
+
+.portero-h2 {
+    font-size: clamp(1.75rem, 4.5vw, 2.25rem);
+    margin-bottom: var(--spacing-md);
+}
+
+.portero-destacado {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.25rem, 3.4vw, 1.6rem);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    padding-left: var(--spacing-md);
+    border-left: 4px solid var(--primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.portero-texto {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+}
+
+/* Cómo funciona ---------------------------------------------------------- */
+
+.portero-pasos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    counter-reset: none;
+}
+
+.portero-paso {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.portero-paso p {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+
+.portero-paso-num {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1;
+    /* Decorativo (el <ol> ya da el orden), pero que se lea como número. */
+    color: var(--text-tertiary);
+}
+
+.portero-paso-icono {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--primary) 12%, transparent);
+    color: var(--primary-deep);
+}
+
+/* Prueba (oculta por defecto) -------------------------------------------- */
+
+.portero-metricas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.portero-metricas div {
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.portero-metricas dt {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.portero-metricas dd {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Lista de espera -------------------------------------------------------- */
+
+.portero-lista {
+    padding: clamp(1.25rem, 5vw, 2.5rem);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.portero-lista::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.portero-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.portero-form-nota {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.portero-form-fila {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: var(--spacing-md);
+}
+
+.portero-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+}
+
+.portero-campo > label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.portero-opcional {
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.portero-campo input:not([type='checkbox']),
+.portero-campo select {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.7rem 0.95rem;
+    /* Borde a 3:1 o más (WCAG 1.4.11); --text-tertiary sobre blanco da 2.56:1. */
+    border: 1px solid color-mix(in srgb, var(--text-secondary) 75%, white);
+    border-radius: var(--radius-md);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 1rem;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.portero-campo select {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--text-secondary) 50%),
+        linear-gradient(135deg, var(--text-secondary) 50%, transparent 50%);
+    background-position:
+        calc(100% - 1.15rem) 50%,
+        calc(100% - 0.8rem) 50%;
+    background-size: 0.35rem 0.35rem;
+    background-repeat: no-repeat;
+}
+
+.portero-campo input:not([type='checkbox']):hover,
+.portero-campo select:hover {
+    border-color: var(--text-secondary);
+}
+
+/* Foco a 4.60:1 contra el blanco: un halo claro no llega a 3:1. */
+.portero-campo input:not([type='checkbox']):focus-visible,
+.portero-campo select:focus-visible {
+    outline: 2px solid var(--primary-deep);
+    outline-offset: 2px;
+    border-color: var(--primary-deep);
+}
+
+/* Misma especificidad que la regla del borde base, para que gane. */
+.portero-campo input[aria-invalid='true']:not([type='checkbox']),
+.portero-campo select[aria-invalid='true'] {
+    border-color: var(--danger);
+}
+
+.portero-ayuda {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.portero-campo-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--danger);
+}
+
+.portero-campo-error svg {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.portero-aviso-fila {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+}
+
+.portero-aviso-fila input {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.15rem;
+    accent-color: var(--primary-deep);
+    cursor: pointer;
+}
+
+.portero-aviso-fila label {
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.portero-aviso-fila a,
+.portero-form-error a {
+    color: var(--primary-deep);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.portero-form .portero-boton {
+    align-self: flex-start;
+}
+
+/* Solo para lectores de pantalla. */
+.portero-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Campo trampa: fuera de la vista sin display:none, que algunos bots detectan. */
+.portero-trampa {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.portero-form-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--danger);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.portero-form-error svg {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    color: var(--danger);
+}
+
+.portero-form-error a {
+    overflow-wrap: anywhere;
+}
+
+.portero-exito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+}
+
+.portero-exito-icono {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--primary) 14%, transparent);
+    color: var(--primary-deep);
+    margin-bottom: var(--spacing-sm);
+}
+
+.portero-exito h3 {
+    font-size: 1.5rem;
+}
+
+.portero-exito h3:focus {
+    outline: none;
+}
+
+.portero-exito p {
+    color: var(--text-secondary);
+}
+
+.portero-enlace {
+    margin-top: var(--spacing-sm);
+    padding: 0.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--primary-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Cierre y pie ----------------------------------------------------------- */
+
+.portero-page .portero-cierre {
+    padding: 0 0 clamp(3rem, 8vw, 5rem);
+    text-align: center;
+}
+
+.portero-cierre a {
+    color: var(--primary-deep);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.portero-cierre a:hover {
+    text-decoration-thickness: 2px;
+}
+
+.portero-footer {
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    padding: var(--spacing-lg) 0;
+}
+
+.portero-footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.portero-footer-inner a {
+    color: var(--primary-deep);
+    font-weight: 500;
+}
+
+/* Foco visible en todo lo que se puede tabular. */
+.portero-page a:focus-visible,
+.portero-page button:focus-visible,
+.portero-aviso-fila input:focus-visible {
+    outline: 3px solid var(--secondary);
+    outline-offset: 3px;
+}
+
+html:has(.portero-page) {
+    scroll-padding-top: 84px;
+}
+
+@media (max-width: 480px) {
+    .portero-volver {
+        padding: 0.45rem 0.7rem;
+        font-size: 0.85rem;
+    }
+
+    .portero-form .portero-boton {
+        align-self: stretch;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .portero-boton.btn-primary,
+    .portero-campo input,
+    .portero-campo select {
+        transition: none;
+    }
+
+    .portero-boton.btn-primary:hover {
+        transform: none;
+    }
+}

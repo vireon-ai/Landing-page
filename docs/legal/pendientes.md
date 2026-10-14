@@ -54,6 +54,16 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
 - §13 declara que no hay cookies ni analítica. Si más adelante se instala GA4,
   Clarity o el píxel de Meta, §13 deja de ser cierta y hay que actualizarla.
 - ¿Habrá liga de calendario que recabe datos adicionales?
+- **Lista de espera de Portero** (`/soluciones/portero/`). El formulario se
+  enlaza el aviso tal como está, sin cambiar el texto legal. **Antes de publicarlo**
+  (antes del merge a `main`), el aviso tiene que:
+  - Sumar a §4 la finalidad "contacto sobre la lista de espera de Portero".
+  - Sumar a §3, en lo que se recaba por el sitio web, el número de WhatsApp
+    (opcional en ese formulario) y el volumen aproximado de leads al mes.
+  - Revisar §2 y §5: hoy hablan de "el formulario" en singular; la casilla de la
+    lista de espera es un segundo formulario.
+  - Confirmar que §5 cubre escribir por WhatsApp a quien dejó su número en la
+    lista de espera (el formulario lo avisa bajo el campo).
 
 **Operación**
 

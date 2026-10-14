@@ -5,6 +5,7 @@ import SocialProof from './components/SocialProof';
 import ProblemSolution from './components/ProblemSolution';
 import Quiz from './components/Quiz';
 import Services from './components/Services';
+import Solutions from './components/Solutions';
 import Methodology from './components/Methodology';
 import Authority from './components/Authority';
 import ROICalculator from './components/ROICalculator';
@@ -48,6 +49,7 @@ function App() {
         <ProblemSolution />
         <Quiz />
         <Services />
+        <Solutions />
         <Methodology />
         <Authority />
         <ROICalculator />

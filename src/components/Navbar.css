@@ -55,6 +55,7 @@
     color: var(--text-secondary);
     font-weight: 500;
     font-size: 0.95rem;
+    white-space: nowrap;
     transition: color var(--transition-fast);
 }
 
@@ -80,7 +81,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.25rem;
     transform: translateY(-100%);
     transition: transform var(--transition-normal);
     z-index: 999;
@@ -95,7 +96,23 @@
     color: var(--text-primary);
 }
 
-@media (max-width: 768px) {
+/* Siete enlaces y el logo no caben en una línea abajo de ~1180px: primero se
+   compactan y, abajo de 1024px, pasan al menú de hamburguesa. */
+@media (max-width: 1180px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.875rem;
+    }
+
+    .nav-links .btn {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 1023px) {
     .nav-links {
         display: none;
     }

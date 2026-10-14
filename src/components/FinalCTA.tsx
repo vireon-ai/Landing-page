@@ -1,80 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Calendar, Check, AlertTriangle, MessageCircle } from 'lucide-react';
-import { whatsappUrl } from '../config';
+import { CORREO_CONTACTO, whatsappUrl } from '../config';
+import { enviarConReintentos, guardarPendiente, reintentarPendientes, type Lead } from '../leads';
 import './FinalCTA.css';
-
-// Endpoint de n8n que recibe los leads del formulario final.
-const WEBHOOK_URL = 'https://n8n.srv946409.hstgr.cloud/webhook/a118b68a-92f9-463a-8609-b9f48e9d5b04';
-
-// A dónde mandamos al visitante si el webhook no responde.
-const CORREO_CONTACTO = 'juanmanuel.glez@vireonai.com.mx';
 
 // El número de la liga vive en src/config.ts; este es sólo el texto visible.
 const WHATSAPP_VISIBLE = '477 908 6863';
-
-const CLAVE_PENDIENTES = 'vireon_leads_pendientes';
-const INTENTOS = 3;
-const TIMEOUT_MS = 12000;
-
-// Los nombres de estos campos DEBEN coincidir con el mapeo del nodo
-// "Append row in sheet" del flujo "webhook web page" en n8n.
-type Lead = {
-    name: string;
-    company: string;
-    email: string;
-    message: string;
-    origen: string;
-    enviadoEn: string;
-};
-
-// Respaldo local: si n8n no responde, el lead no se pierde.
-const leerPendientes = (): Lead[] => {
-    try {
-        const crudo = localStorage.getItem(CLAVE_PENDIENTES);
-        const datos = crudo ? JSON.parse(crudo) : [];
-        return Array.isArray(datos) ? datos : [];
-    } catch {
-        return [];
-    }
-};
-
-const guardarPendientes = (leads: Lead[]): void => {
-    try {
-        localStorage.setItem(CLAVE_PENDIENTES, JSON.stringify(leads.slice(-10)));
-    } catch {
-        // Navegación privada o almacenamiento bloqueado: seguimos sin respaldo.
-    }
-};
-
-const enviarUnaVez = async (lead: Lead): Promise<boolean> => {
-    const control = new AbortController();
-    const reloj = setTimeout(() => control.abort(), TIMEOUT_MS);
-    try {
-        const respuesta = await fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(lead),
-            signal: control.signal,
-        });
-        return respuesta.ok;
-    } finally {
-        clearTimeout(reloj);
-    }
-};
-
-const enviarConReintentos = async (lead: Lead): Promise<boolean> => {
-    for (let intento = 1; intento <= INTENTOS; intento++) {
-        try {
-            if (await enviarUnaVez(lead)) return true;
-        } catch (error) {
-            console.error(`Intento ${intento} de ${INTENTOS} fallido al enviar el lead:`, error);
-        }
-        if (intento < INTENTOS) {
-            await new Promise((resolver) => setTimeout(resolver, 600 * 2 ** (intento - 1)));
-        }
-    }
-    return false;
-};
 
 const FinalCTA = () => {
     const [formData, setFormData] = useState({
@@ -86,24 +17,7 @@ const FinalCTA = () => {
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
     // Al cargar la página reintentamos en segundo plano los leads que quedaron guardados.
-    useEffect(() => {
-        const pendientes = leerPendientes();
-        if (pendientes.length === 0) return;
-
-        let cancelado = false;
-        (async () => {
-            const sobrantes: Lead[] = [];
-            for (const lead of pendientes) {
-                const enviado = await enviarConReintentos(lead);
-                if (!enviado) sobrantes.push(lead);
-            }
-            if (!cancelado) guardarPendientes(sobrantes);
-        })();
-
-        return () => {
-            cancelado = true;
-        };
-    }, []);
+    useEffect(() => reintentarPendientes(), []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData(prev => ({
@@ -132,7 +46,7 @@ const FinalCTA = () => {
             setFormData({ name: '', company: '', email: '', message: '' });
         } else {
             // No perdemos el lead: queda guardado y se reintenta al recargar.
-            guardarPendientes([...leerPendientes(), lead]);
+            guardarPendiente(lead);
             setStatus('error');
         }
     };

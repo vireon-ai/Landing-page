@@ -3,6 +3,12 @@ description: Porta una sección del prototipo "Producto Vivo" al sitio, en tema 
 argument-hint: [nombre de la sección, p. ej. calculadora | quiz | servicios | metodo | faq | cierre | footer]
 ---
 
+> Si la sección tiene tarjeta en ClickUp, el camino es `/ticket <id>` y luego
+> `/cerrar-ticket <id>` (ver `docs/flujo-de-tickets.md`): esas skills aplican el
+> Paso 1 y las restricciones de este archivo, y además auditan, dejan el reporte
+> en la tarjeta y confirman producción. Este comando queda para una sección sin
+> tarjeta.
+
 Vas a portar **una sola sección** del rediseño "Producto Vivo" al sitio.
 
 Sección a portar: **$ARGUMENTS**

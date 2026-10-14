@@ -15,8 +15,13 @@ colores a las variables claras de `src/styles/index.css`.
 
 ## Cómo se trabaja
 
-Una sección por sesión, en su propia rama, con el comando
-`/portar-seccion <nombre>`. Nada de portar varias de un jalón: cada sección se
+**El estado de cada pendiente vive en ClickUp**, en el tablero
+`Landing Vireon — Rediseño Producto Vivo`, y se trabaja con `/ticket` y
+`/cerrar-ticket` (`docs/flujo-de-tickets.md`). Este archivo se queda como
+referencia de diseño: qué sección del prototipo va en qué componente y por qué ese
+orden. La tabla de estado y las listas de abajo pueden ir atrás del tablero.
+
+Una sección por sesión, en su propia rama. Nada de portar varias de un jalón: cada sección se
 revisa en `localhost:5173` y se aprueba antes de pasar a la siguiente.
 
 ---
@@ -69,9 +74,9 @@ Ninguno de estos toca el diseño y todos se pueden publicar por separado.
 - [ ] No hay analítica de ningún tipo. GA4 + Microsoft Clarity, con eventos
       nombrados en: inicio del test, cada pregunta, abandono, uso de la
       calculadora y clic en cada CTA. Sin esto el rediseño se evalúa a ciegas.
-- [ ] No hay WhatsApp en ninguna parte. En B2B PyME mexicana es el canal que
+- [x] No hay WhatsApp en ninguna parte. En B2B PyME mexicana es el canal que
       cierra.
-- [ ] No hay aviso de privacidad y `FinalCTA.tsx` y `Quiz.tsx` capturan nombre,
+- [x] No hay aviso de privacidad y `FinalCTA.tsx` y `Quiz.tsx` capturan nombre,
       empresa y correo. La LFPDPPP lo exige.
 - [ ] `Quiz.tsx`: las opciones son `<div className="quiz-option">` sin `role` ni
       foco. Deben ser `<button>` para que funcionen con teclado.

@@ -101,10 +101,32 @@ movimiento. Los colores se traducen a las variables claras de
 
 ### Cómo se porta una sección
 
-Con el comando `/portar-seccion <nombre>` (definido en
-`.claude/commands/portar-seccion.md`). Trae el protocolo completo: qué leer, en
-qué orden, las restricciones, cómo verificar y cómo cerrar. Una sección por
-sesión, en su propia rama.
+Si la sección tiene tarjeta en ClickUp (casi todas), con `/ticket <id>`, que
+aplica el protocolo de `.claude/commands/portar-seccion.md`: qué leer, en qué
+orden y las restricciones. `/portar-seccion <nombre>` queda para portar una
+sección sin tarjeta. Una sección por sesión, en su propia rama.
+
+## Flujo de trabajo: tarjetas de ClickUp con auditoría
+
+Los pendientes de la landing son tarjetas del tablero de ClickUp
+`Landing Vireon — Rediseño Producto Vivo` (`list_id` 901419755322). **ClickUp es
+la fuente de verdad del backlog**; las reglas del flujo viven en
+`docs/flujo-de-tickets.md` y mandan sobre las skills.
+
+`/retomar` al abrir la sesión → `/ticket <id>` implementa una tarjeta en su rama
+→ `/cerrar-ticket <id>` corre `bash scripts/verificar.sh`, lanza los auditores que
+el script nombra, revisa en el navegador, deja el reporte en la tarjeta y prepara
+el PR → una persona mergea → `/cerrar-ticket <id>` otra vez confirma producción y
+marca la tarjeta `complete`. `/nuevo-ticket` solo para el trabajo que no cabe en
+una tarjeta abierta; un hallazgo BAJO va a la tarjeta `Deuda de la landing`.
+
+- `scripts/verificar.sh` es la autoridad del cierre. Si sale en rojo, la tarjeta
+  no se cierra. CI lo corre en cada PR (`.github/workflows/verificar.yml`).
+- Auditores en `.claude/agents/`: `auditor-leads`, `auditor-accesibilidad`,
+  `auditor-contenido`, `auditor-rendimiento`. Solo leen y reportan.
+- `node scripts/contraste.mjs <color> <fondo>` mide contraste WCAG; acepta
+  nombres de variable (`--primary-deep`).
+- Las skills necesitan el conector de ClickUp. Sin él, se detienen.
 
 ## Convenciones
 
@@ -116,5 +138,5 @@ sesión, en su propia rama.
 ## Antes de dar por terminado un cambio
 
 1. `npm run dev` y revisa el resultado en http://localhost:5173
-2. `npm run lint`
-3. `npm run build`
+2. `bash scripts/verificar.sh` (corre `npm run lint` y `npm run build`, más las
+   reglas de este archivo que se pueden comprobar con un comando)

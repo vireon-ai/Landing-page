@@ -1,0 +1,32 @@
+name: Verificar PR
+
+# La misma compuerta que /cerrar-ticket, en cada PR a main. El deploy
+# (deploy.yml) solo corre el build; esto corre además lint y las reglas del sitio
+# antes de que un merge publique nada.
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Traer el código con el historial de main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Node 20, igual que el deploy
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Verificar
+        run: bash scripts/verificar.sh

@@ -111,25 +111,21 @@ const questions: Question[] = [
 ];
 
 const Quiz = () => {
-    const [step, setStep] = useState(0);
-    const [answers, setAnswers] = useState<Record<number, number>>({});
+    // Load progress from localStorage on first render (resume if progress exists)
+    const [step, setStep] = useState(() => {
+        const savedStep = localStorage.getItem('quizStep');
+        return savedStep ? parseInt(savedStep) : 0;
+    });
+    const [answers, setAnswers] = useState<Record<number, number>>(() => {
+        const savedAnswers = localStorage.getItem('quizAnswers');
+        return savedAnswers ? JSON.parse(savedAnswers) : {};
+    });
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [email, setEmail] = useState('');
     const [score, setScore] = useState(0);
     const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-    const [hasStarted, setHasStarted] = useState(false);
-
-    // Load progress from localStorage
-    useEffect(() => {
-        const savedStep = localStorage.getItem('quizStep');
-        const savedAnswers = localStorage.getItem('quizAnswers');
-        if (savedStep) {
-            setStep(parseInt(savedStep));
-            setHasStarted(true); // Resume if progress exists
-        }
-        if (savedAnswers) setAnswers(JSON.parse(savedAnswers));
-    }, []);
+    const [hasStarted, setHasStarted] = useState(() => Boolean(localStorage.getItem('quizStep')));
 
     // Save progress
     useEffect(() => {

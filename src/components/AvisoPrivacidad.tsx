@@ -18,7 +18,7 @@ import './AvisoPrivacidad.css';
 const CORREO = 'vireonconsultores@gmail.com';
 const WHATSAPP_DISPLAY = '+52 477 908 6863';
 const WHATSAPP_LINK = 'https://wa.me/524779086863';
-const ACTUALIZADO = '6 de octubre de 2026';
+const ACTUALIZADO = '14 de octubre de 2026';
 
 const SECCIONES = [
     { id: 'responsable', titulo: 'Identidad del responsable' },
@@ -62,7 +62,7 @@ const AvisoPrivacidad = () => {
                         <p className="aviso-eyebrow">Documento legal</p>
                         <h1 className="aviso-title">Aviso de Privacidad</h1>
                         <p className="aviso-meta">
-                            Última actualización: {ACTUALIZADO} · Versión 1.2
+                            Última actualización: {ACTUALIZADO} · Versión 1.3
                         </p>
                         <p className="aviso-lead">
                             Este documento explica qué datos personales recaba Vireon a través de su
@@ -118,7 +118,9 @@ const AvisoPrivacidad = () => {
                                 <li>
                                     El sitio web{' '}
                                     <a href="https://www.vireonai.com.mx">www.vireonai.com.mx</a>,
-                                    incluidos su formulario de contacto y su test de madurez.
+                                    incluidos su formulario de contacto, su test de madurez y el
+                                    formulario de la lista de espera de Portero, el agente de WhatsApp
+                                    de Vireon para inmobiliarias.
                                 </li>
                                 <li>
                                     El canal de WhatsApp de Vireon, operado mediante la Plataforma de
@@ -141,6 +143,14 @@ const AvisoPrivacidad = () => {
                                 <li>Nombre</li>
                                 <li>Correo electrónico</li>
                                 <li>Nombre de la empresa</li>
+                                <li>
+                                    Número de WhatsApp, solo si usted decide proporcionarlo en el
+                                    formulario de la lista de espera de Portero, donde es opcional
+                                </li>
+                                <li>
+                                    Volumen aproximado de prospectos (leads) que su empresa recibe al
+                                    mes, en el formulario de la lista de espera de Portero
+                                </li>
                             </ul>
                             <h3>A través de WhatsApp</h3>
                             <ul>
@@ -175,6 +185,10 @@ const AvisoPrivacidad = () => {
                                     el resultado del test de madurez
                                 </li>
                                 <li>
+                                    Contactarle sobre Portero y su lista de espera, por correo
+                                    electrónico o, si nos dejó su número, por WhatsApp
+                                </li>
+                                <li>
                                     Prestar, dar soporte y dar mantenimiento a los servicios contratados
                                 </li>
                                 <li>Cumplir obligaciones legales, contables y fiscales aplicables</li>
@@ -204,14 +218,16 @@ const AvisoPrivacidad = () => {
                         <section id="consentimiento">
                             <h2>5. Consentimiento</h2>
                             <p>
-                                Al enviar el formulario del sitio web, al completar el test de madurez o
+                                Al enviar cualquiera de los formularios del sitio web (el de contacto o
+                                el de la lista de espera de Portero), al completar el test de madurez o
                                 al iniciar una conversación por WhatsApp con Vireon, usted acepta este
                                 aviso de privacidad y consiente el tratamiento de sus datos personales
                                 para las finalidades descritas.
                             </p>
                             <p>
                                 Vireon únicamente inicia conversaciones por WhatsApp con personas que
-                                proporcionaron su número y aceptaron ser contactadas por ese medio.
+                                proporcionaron su número y aceptaron ser contactadas por ese medio, por
+                                ejemplo al dejarlo en el formulario de la lista de espera de Portero.
                             </p>
                         </section>
 

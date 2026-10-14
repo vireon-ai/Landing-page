@@ -17,6 +17,9 @@ export default defineConfig({
         // Meta exige una URL pública y permanente, y así queda como un archivo
         // real en el servidor, sin depender de reescrituras en Hostinger.
         aviso: desdeRaiz('./aviso-de-privacidad/index.html'),
+        // Página de Portero (Vireon Solutions), por la misma razón: una URL real
+        // que se puede compartir y abrir directo.
+        portero: desdeRaiz('./soluciones/portero/index.html'),
       },
     },
   },

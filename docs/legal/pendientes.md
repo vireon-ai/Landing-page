@@ -44,16 +44,34 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
 
 - ¿Cuál de los tres números se da de alta como WhatsApp Business en Meta? §17
   publica hoy el 477 908 6863.
-- ¿Vireon iniciará conversaciones con plantillas hacia gente que no escribió
-  primero? Si sí, §5 se tiene que redactar distinto.
+- ~~¿Vireon iniciará conversaciones con plantillas hacia gente que no escribió
+  primero?~~ Sí, a quien dejó su número en la lista de espera de Portero; §5 se
+  ajustó en la versión 1.3. Falta confirmar que la leyenda bajo el campo de
+  WhatsApp del formulario ("Si lo dejas, podremos escribirte por WhatsApp sobre
+  Portero.") cumple lo que Meta pide como consentimiento para escribir primero.
 
 **Sitio web**
 
 - ¿El test de madurez guarda las respuestas individuales o sólo el resultado? §3
-  hoy sólo declara nombre, correo y empresa.
+  no menciona las respuestas del test.
 - §13 declara que no hay cookies ni analítica. Si más adelante se instala GA4,
   Clarity o el píxel de Meta, §13 deja de ser cierta y hay que actualizarla.
 - ¿Habrá liga de calendario que recabe datos adicionales?
+- §7 dice que Hostinger hospeda "el sitio web y el correo electrónico", pero los
+  formularios envían a n8n en un VPS de Hostinger. Conviene decir "…del sitio
+  web, del correo electrónico y de la automatización que recibe los
+  formularios".
+- §3 "A través del sitio web" no declara el mensaje libre del formulario de
+  contacto (el campo "¿Cómo te podemos ayudar?" de `FinalCTA.tsx`).
+- Si un envío falla, nombre, correo y WhatsApp quedan en el `localStorage` del
+  navegador hasta que un reintento sale bien (`src/leads.ts`). No contradice §13,
+  pero el aviso no lo menciona.
+- ~~**Lista de espera de Portero** (`/soluciones/portero/`).~~ Resuelto en la
+  versión 1.3 (14 de octubre de 2026): §2 incluye el formulario de la lista de
+  espera, §3 suma el WhatsApp opcional y el volumen de prospectos al mes, §4 suma
+  la finalidad de contacto sobre la lista de espera y §5 habla de los formularios
+  en plural y del consentimiento para escribir por WhatsApp. Falta que lo revise
+  quien lleve lo legal, como el resto de la versión vigente.
 
 **Operación**
 

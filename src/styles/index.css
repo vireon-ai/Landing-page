@@ -17,6 +17,8 @@
      sobre blanco y reprueba incluso como icono; este da 5.02:1. */
   --whatsapp: #1A7F4B;
   --accent: #E4CC37;
+  /* Rojo para errores de formulario. Da 6.57:1 sobre blanco. */
+  --danger: #B42318;
   /* Subtle yellow for highlights/badges if needed, or keep clean */
 
   /* Neutral Colors (Light Theme Base) */

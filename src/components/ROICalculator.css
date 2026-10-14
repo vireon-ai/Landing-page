@@ -115,3 +115,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
         text-align: center;
     }
 }
+
+/* A 320px el relleno de la tarjeta deja el control de rango sin espacio y el
+   ancho mínimo de la tarjeta (~321px) ensancha toda la página (scroll
+   horizontal), lo que además deja cortado el botón flotante de WhatsApp. */
+@media (max-width: 480px) {
+    .roi-calculator-card {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+}

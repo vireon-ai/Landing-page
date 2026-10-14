@@ -103,6 +103,14 @@
     color: var(--primary);
 }
 
+/* Deja libre el rincón donde va el botón flotante de WhatsApp (50px + 16px de
+   margen + 16px de aire) para que no tape el icono de Instagram ni su foco. */
+@media (min-width: 769px) {
+    .footer-bottom {
+        padding-right: calc(50px + var(--spacing-md));
+    }
+}
+
 @media (max-width: 768px) {
     .footer-grid {
         grid-template-columns: 1fr;

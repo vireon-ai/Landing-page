@@ -1,0 +1,66 @@
+/* Botón flotante de WhatsApp. Círculo con el icono; con cursor o foco de
+   teclado se expande y muestra la etiqueta. En pantallas táctiles, solo icono.
+   z-index por debajo del menú móvil (999) y de la barra (1000). */
+.wa-float {
+    position: fixed;
+    right: var(--spacing-md);
+    bottom: var(--spacing-md);
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    padding: 13px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: var(--shadow-lg);
+    transition: gap var(--transition-fast), padding var(--transition-fast), border-color var(--transition-fast);
+}
+
+.wa-float svg {
+    flex: 0 0 auto;
+    color: var(--whatsapp);
+}
+
+.wa-float span {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width var(--transition-normal);
+}
+
+.wa-float:hover,
+.wa-float:focus-visible {
+    gap: 9px;
+    padding-right: 20px;
+    border-color: var(--whatsapp);
+}
+
+.wa-float:hover span,
+.wa-float:focus-visible span {
+    max-width: 110px;
+}
+
+.wa-float:focus-visible {
+    outline: 3px solid var(--secondary);
+    /* Pegado al relleno blanco del botón: así el anillo siempre se mide contra
+       blanco, aunque el botón quede encima de una sección turquesa. */
+    outline-offset: 0;
+}
+
+@media (hover: none) {
+    .wa-float span {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wa-float,
+    .wa-float span {
+        transition: none;
+    }
+}

@@ -13,6 +13,9 @@
   --primary-deep: #2F817E;
   --secondary: #4281A4;
   /* Muted Blue/Green complement */
+  /* Verde de WhatsApp para el botón flotante. El oficial (#25D366) da 1.98:1
+     sobre blanco y reprueba incluso como icono; este da 5.02:1. */
+  --whatsapp: #1A7F4B;
   --accent: #E4CC37;
   /* Subtle yellow for highlights/badges if needed, or keep clean */
 

@@ -13,6 +13,7 @@ import FAQ from './components/FAQ';
 //import Resources from './components/Resources';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import WhatsAppFloat from './components/WhatsAppFloat';
 
 function App() {
   useEffect(() => {
@@ -56,6 +57,7 @@ function App() {
         <FinalCTA />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 # Aviso de Privacidad de Vireon
 
-**Última actualización:** 6 de octubre de 2026
-**Versión:** 1.2
+**Última actualización:** 14 de octubre de 2026
+**Versión:** 1.3
 **Dirección permanente de este aviso:** https://www.vireonai.com.mx/aviso-de-privacidad/
 
 > Este archivo es la fuente del texto que publica
@@ -29,8 +29,9 @@ Datos de contacto para asuntos de privacidad:
 Este aviso aplica a los datos personales que Vireon recaba a través de dos
 canales:
 
-- El sitio web https://www.vireonai.com.mx, incluidos su formulario de contacto y
-  su test de madurez.
+- El sitio web https://www.vireonai.com.mx, incluidos su formulario de contacto,
+  su test de madurez y el formulario de la lista de espera de Portero, el agente
+  de WhatsApp de Vireon para inmobiliarias.
 - El canal de WhatsApp de Vireon, operado mediante la Plataforma de WhatsApp
   Business de Meta.
 
@@ -46,6 +47,10 @@ privacidad de ese cliente.
 - Nombre
 - Correo electrónico
 - Nombre de la empresa
+- Número de WhatsApp, solo si usted decide proporcionarlo en el formulario de la
+  lista de espera de Portero, donde es opcional
+- Volumen aproximado de prospectos (leads) que su empresa recibe al mes, en el
+  formulario de la lista de espera de Portero
 
 **A través de WhatsApp:**
 
@@ -69,6 +74,8 @@ relación que exista con usted:
 - Responder sus mensajes, dudas y solicitudes de información
 - Darle seguimiento comercial: cotizar, agendar reuniones y entregarle el
   resultado del test de madurez
+- Contactarle sobre Portero y su lista de espera, por correo electrónico o, si
+  nos dejó su número, por WhatsApp
 - Prestar, dar soporte y dar mantenimiento a los servicios contratados
 - Cumplir obligaciones legales, contables y fiscales aplicables
 
@@ -84,13 +91,14 @@ Para negarse a estas finalidades, escriba a vireonconsultores@gmail.com
 
 ## 5. Consentimiento
 
-Al enviar el formulario del sitio web, al completar el test de madurez o al
-iniciar una conversación por WhatsApp con Vireon, usted acepta este aviso de
-privacidad y consiente el tratamiento de sus datos personales para las
-finalidades descritas.
+Al enviar cualquiera de los formularios del sitio web (el de contacto o el de la
+lista de espera de Portero), al completar el test de madurez o al iniciar una
+conversación por WhatsApp con Vireon, usted acepta este aviso de privacidad y
+consiente el tratamiento de sus datos personales para las finalidades descritas.
 
 Vireon únicamente inicia conversaciones por WhatsApp con personas que
-proporcionaron su número y aceptaron ser contactadas por ese medio.
+proporcionaron su número y aceptaron ser contactadas por ese medio, por ejemplo al
+dejarlo en el formulario de la lista de espera de Portero.
 
 ## 6. Uso de la Plataforma de WhatsApp Business de Meta
 

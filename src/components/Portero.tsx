@@ -292,8 +292,9 @@ const ListaDeEspera = () => {
                         aria-invalid={Boolean(errores.whatsapp)}
                         aria-describedby={describir('whatsapp', 'portero-ayuda-whatsapp')}
                     />
-                    {/* VALIDAR: el aviso (§5) dice que Vireon solo escribe por WhatsApp a quien
-                        aceptó ser contactado por ese medio; esta línea lo deja dicho. */}
+                    {/* No quitar ni cambiar sin revisar el aviso: esta leyenda es el
+                        consentimiento en el que se apoya §5 ("aceptaron ser contactadas por ese
+                        medio") para escribir por WhatsApp a quien deja su número. */}
                     <p id="portero-ayuda-whatsapp" className="portero-ayuda">
                         Si lo dejas, podremos escribirte por WhatsApp sobre Portero.
                     </p>

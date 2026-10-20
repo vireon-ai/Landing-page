@@ -74,7 +74,7 @@ const Services = () => {
 
                 <div className="services-grid">
                     {/* 1 · Automatización de procesos */}
-                    <article className="svc tarjeta-brillo">
+                    <article className="svc tarjeta-brillo tarjeta-brillo--linea">
                         <div className="svc-demo" aria-hidden="true">
                             <div className="svc-apps">
                                 <span className="svc-chip">Formulario</span>
@@ -96,7 +96,7 @@ const Services = () => {
                     </article>
 
                     {/* 2 · Agentes de IA */}
-                    <article className="svc tarjeta-brillo">
+                    <article className="svc tarjeta-brillo tarjeta-brillo--linea">
                         <div className="svc-demo" aria-hidden="true">
                             <div className="svc-chat">
                                 <div className="svc-bub svc-bub--them">¿Tienen la 27 en negro? ¿Cuándo me llega a Mérida?</div>
@@ -114,7 +114,7 @@ const Services = () => {
                     </article>
 
                     {/* 3 · Dashboards inteligentes */}
-                    <article className="svc tarjeta-brillo">
+                    <article className="svc tarjeta-brillo tarjeta-brillo--linea">
                         <div className="svc-demo" aria-hidden="true">
                             <div className="svc-kpis">
                                 <div className="svc-kpi">

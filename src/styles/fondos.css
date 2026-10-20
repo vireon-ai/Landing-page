@@ -86,8 +86,15 @@
 }
 
 /* Tarjeta con brillo ---------------------------------------------------------
-   Un halo de color en la esquina y una línea de degradado que se dibuja arriba
-   al pasar el cursor. La tarjeta necesita su propio fondo y radio. */
+   Base: un halo de color en la esquina y brillo turquesa al pasar el cursor.
+   Cada sección elige además UNA variante, para que no todas reaccionen igual:
+
+     --linea     una línea de degradado se dibuja arriba (Servicios)
+     --contorno  todo el borde se enciende en degradado (cifras)
+     --relleno   un tinte de marca llena la tarjeta desde abajo (Por qué Vireon)
+
+   La tarjeta necesita su propio fondo y radio. Recorta lo que sale (overflow),
+   así la línea y el tinte siguen las esquinas redondeadas. */
 
 .tarjeta-brillo {
     position: relative;
@@ -109,18 +116,6 @@
     transition: transform var(--transition-slow);
 }
 
-.tarjeta-brillo::after {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary) 60%, var(--accent));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--transition-slow);
-    pointer-events: none;
-}
-
 .tarjeta-brillo:hover {
     border-color: var(--border-tint);
     box-shadow: var(--shadow-lg), var(--glow-primary);
@@ -130,9 +125,64 @@
     transform: scale(1.25);
 }
 
-.tarjeta-brillo:hover::after,
-.tarjeta-brillo:focus-within::after {
+.tarjeta-brillo--linea::after,
+.tarjeta-brillo--contorno::after,
+.tarjeta-brillo--relleno::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Línea superior. */
+.tarjeta-brillo--linea::after {
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary) 60%, var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-slow);
+}
+
+.tarjeta-brillo--linea:hover::after,
+.tarjeta-brillo--linea:focus-within::after {
     transform: scaleX(1);
+}
+
+/* Contorno completo: un borde de degradado de 2px recortado con máscara, que
+   aparece encima del borde gris. */
+.tarjeta-brillo--contorno::after {
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary) 55%, var(--accent));
+    -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.tarjeta-brillo--contorno:hover::after,
+.tarjeta-brillo--contorno:focus-within::after {
+    opacity: 1;
+}
+
+/* Relleno: un tinte claro de marca sube desde abajo y cubre la tarjeta. Es
+   tenue a propósito: el texto oscuro conserva su contraste encima. */
+.tarjeta-brillo--relleno::after {
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top,
+            color-mix(in srgb, var(--primary) 16%, var(--bg-primary)),
+            color-mix(in srgb, var(--secondary) 6%, var(--bg-primary)));
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--transition-slow);
+}
+
+.tarjeta-brillo--relleno:hover::after,
+.tarjeta-brillo--relleno:focus-within::after {
+    transform: scaleY(1);
 }
 
 @media (prefers-reduced-motion: reduce) {

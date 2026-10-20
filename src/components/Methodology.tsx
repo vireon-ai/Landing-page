@@ -41,7 +41,13 @@ const Methodology = () => {
                 </div>
 
                 <div className="process-grid stagger-children">
-                    {steps.map((step, index) => (
+                    {/* Un solo riel detrás de los iconos, fuera de las tarjetas:
+                        si viviera dentro de cada una, al levantarse la tarjeta
+                        la línea quedaría pintada encima del icono siguiente. */}
+                    <div className="process-rail" aria-hidden="true">
+                        {steps.slice(1).map((step) => <span key={step.number} />)}
+                    </div>
+                    {steps.map((step) => (
                         <div key={step.number} className="process-card">
                             <div className="process-icon-wrapper">
                                 {step.icon}
@@ -49,7 +55,6 @@ const Methodology = () => {
                             </div>
                             <h3 className="process-title">{step.title}</h3>
                             <p className="process-description">{step.description}</p>
-                            {index < steps.length - 1 && <div className="process-connector" aria-hidden="true"></div>}
                         </div>
                     ))}
                 </div>

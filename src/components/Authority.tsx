@@ -14,22 +14,22 @@ const Authority = () => {
                 </div>
 
                 <div className="authority-grid">
-                    <div className="authority-card tarjeta-brillo">
+                    <div className="authority-card tarjeta-brillo tarjeta-brillo--relleno">
                         <div className="authority-icon"><Users size={32} /></div>
                         <h3>Expertise Comprobado</h3>
                         <p>Equipo senior con experiencia en implementación de soluciones empresariales.</p>
                     </div>
-                    <div className="authority-card tarjeta-brillo">
+                    <div className="authority-card tarjeta-brillo tarjeta-brillo--relleno">
                         <div className="authority-icon"><Zap size={32} /></div>
                         <h3>Metodología Ágil</h3>
                         <p>Sin la burocracia de las grandes consultoras. Resultados en semanas, no meses.</p>
                     </div>
-                    <div className="authority-card tarjeta-brillo">
+                    <div className="authority-card tarjeta-brillo tarjeta-brillo--relleno">
                         <div className="authority-icon"><Award size={32} /></div>
                         <h3>Tecnología de Punta</h3>
                         <p>Dominamos las últimas herramientas de IA y automatización (OpenAI, Cursor, n8n).</p>
                     </div>
-                    <div className="authority-card tarjeta-brillo">
+                    <div className="authority-card tarjeta-brillo tarjeta-brillo--relleno">
                         <div className="authority-icon"><ShieldCheck size={32} /></div>
                         <h3>Colaboración en Conjunto</h3>
                         <p>Trabajamos de la mano del cliente en todo momento, creando productos incrementales que garantizan resultados.</p>

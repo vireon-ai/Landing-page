@@ -78,22 +78,159 @@
     box-shadow: var(--shadow-sm);
 }
 
+/* Lenguaje visual de la página --------------------------------------------
+   Tema claro siempre. El aire "de tecnología" sale de capas claras: halos de
+   color de marca, retículas y puntos enmascarados, vidrio esmerilado y bordes en
+   degradado. Nada de fondos oscuros. */
+
+.portero-page {
+    --portero-vidrio: color-mix(in srgb, var(--bg-primary) 82%, transparent);
+    --portero-borde-tinte: color-mix(in srgb, var(--primary) 28%, var(--border-color));
+    --portero-brillo: 0 24px 60px -28px color-mix(in srgb, var(--primary) 55%, transparent);
+    --portero-degradado-borde: linear-gradient(135deg, var(--primary), var(--secondary) 60%, var(--accent));
+}
+
+/* El contenido va arriba de las capas de fondo. */
+.portero-page section > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Texto con degradado. Solo en texto grande (títulos, cifras): de
+   --primary-deep (4.60:1 sobre blanco) a --secondary (4.28:1); en los fondos
+   teñidos más claros de la página ninguno baja de 3:1, el mínimo de texto
+   grande. */
+.portero-acento {
+    background: linear-gradient(90deg, var(--primary-deep), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+@media (forced-colors: active) {
+    .portero-acento,
+    .portero-datos strong {
+        background: none;
+        color: CanvasText;
+        -webkit-text-fill-color: CanvasText;
+    }
+}
+
+.portero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.35rem 0.9rem 0.35rem 0.7rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--portero-borde-tinte);
+    background: var(--portero-vidrio);
+    backdrop-filter: blur(8px);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.portero-kicker span {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* Capas de fondo --------------------------------------------------------- */
+
+.portero-fondo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.portero-fondo::before,
+.portero-fondo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+/* Puntos finos que se desvanecen hacia las orillas. */
+.portero-fondo--hero::after,
+.portero-fondo--puntos::after {
+    background-image: radial-gradient(color-mix(in srgb, var(--secondary) 30%, transparent) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+}
+
+.portero-fondo--hero::before {
+    background:
+        radial-gradient(38% 48% at 12% 12%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 70%),
+        radial-gradient(34% 44% at 88% 18%, color-mix(in srgb, var(--secondary) 18%, transparent), transparent 70%),
+        radial-gradient(30% 36% at 72% 92%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%);
+}
+
+.portero-fondo--puntos::before {
+    background:
+        radial-gradient(40% 50% at 85% 30%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 70%),
+        radial-gradient(36% 46% at 10% 80%, color-mix(in srgb, var(--secondary) 12%, transparent), transparent 70%);
+}
+
+/* Retícula de líneas, como papel milimétrico. */
+.portero-fondo--reticula::after {
+    background-image:
+        linear-gradient(to right, color-mix(in srgb, var(--secondary) 12%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in srgb, var(--secondary) 12%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, black 25%, transparent 80%);
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, black 25%, transparent 80%);
+}
+
+.portero-fondo--reticula::before {
+    background: radial-gradient(50% 40% at 50% 30%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 75%);
+}
+
+.portero-fondo--final::before {
+    background:
+        radial-gradient(45% 40% at 20% 10%, color-mix(in srgb, var(--primary) 20%, transparent), transparent 70%),
+        radial-gradient(40% 40% at 85% 25%, color-mix(in srgb, var(--secondary) 16%, transparent), transparent 70%),
+        radial-gradient(35% 30% at 50% 100%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+}
+
+.portero-fondo--final::after {
+    background-image: radial-gradient(color-mix(in srgb, var(--primary) 30%, transparent) 1px, transparent 1.5px);
+    background-size: 24px 24px;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 55%);
+    mask-image: linear-gradient(to bottom, black, transparent 55%);
+}
+
 /* Hero ------------------------------------------------------------------- */
 
 .portero-page .portero-hero {
     position: relative;
-    padding: clamp(3.5rem, 10vw, 6.5rem) 0 clamp(3rem, 8vw, 5rem);
-    text-align: center;
+    padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(3rem, 7vw, 5rem);
     overflow: hidden;
-    background:
-        radial-gradient(60% 70% at 50% 0%, color-mix(in srgb, var(--primary) 14%, transparent) 0%, transparent 70%),
-        var(--bg-primary);
+    background: var(--bg-primary);
 }
 
-.portero-hero .portero-angosto {
+.portero-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    max-width: 1200px;
+}
+
+.portero-hero-copy {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--spacing-md);
 }
 
@@ -105,6 +242,8 @@
 }
 
 .portero-eyebrow a {
+    display: inline-block;
+    padding-block: 0.6rem;
     color: var(--text-secondary);
     text-decoration: underline;
     text-decoration-color: var(--primary);
@@ -118,38 +257,376 @@
 .portero-etiqueta {
     display: inline-flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.3rem 0.85rem;
+    padding: 0.35rem 0.9rem;
     border-radius: var(--radius-full);
-    background: var(--bg-primary);
-    border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+    background: var(--portero-vidrio);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--portero-borde-tinte);
     color: var(--text-primary);
     font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: 0.02em;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Que cada parte de la pastilla se parta entera, sin dejar el punto colgado. */
+.portero-etiqueta span {
+    white-space: nowrap;
 }
 
 .portero-estado {
     font-weight: 700;
 }
 
+.portero-etiqueta .portero-etiqueta-pulso {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+    background: var(--primary);
+    /* Dos pulsos y se detiene: WCAG 2.2.2 pide que nada se mueva más de 5 s. */
+    animation: portero-pulso 2.4s ease-out 2;
+}
+
+@keyframes portero-pulso {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 55%, transparent);
+    }
+    70%,
+    100% {
+        box-shadow: 0 0 0 8px transparent;
+    }
+}
+
 .portero-titulo {
-    font-size: clamp(2.75rem, 9vw, 4.5rem);
+    font-size: clamp(2.2rem, 5.6vw, 3.9rem);
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     line-height: 1.05;
+    text-wrap: balance;
 }
 
 .portero-frase {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.2rem, 3.2vw, 1.6rem);
-    font-weight: 500;
-    line-height: 1.35;
+    font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
+    line-height: 1.6;
     color: var(--text-secondary);
-    max-width: 30ch;
+    max-width: 40ch;
+    text-wrap: pretty;
 }
+
+.portero-origen {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    max-width: 44ch;
+}
+
+.portero-origen svg {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: var(--primary-deep);
+}
+
+/* Datos destacados: una franja de vidrio con cuatro cifras. */
+.portero-datos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    border: 1px solid var(--portero-borde-tinte);
+    border-radius: var(--radius-xl);
+    background: var(--portero-vidrio);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-lg), var(--portero-brillo);
+    overflow: hidden;
+}
+
+.portero-datos li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: clamp(1.1rem, 2.5vw, 1.6rem) clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.portero-datos li + li {
+    border-left: 1px solid var(--border-color);
+}
+
+.portero-datos strong {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 2.85rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, var(--primary-deep), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.portero-datos span {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+}
+
+/* Visual del hero: mensaje → perfil → asignación ------------------------- */
+
+.phero-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 1.5rem 0.5rem 2.25rem;
+    max-width: 460px;
+    width: 100%;
+    margin-inline: auto;
+}
+
+/* La línea que une las tres tarjetas, con un pulso que la recorre. */
+.phero-visual::before {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    bottom: 4rem;
+    left: 2.6rem;
+    width: 2px;
+    background: linear-gradient(var(--primary), var(--secondary), var(--accent));
+    opacity: 0.5;
+}
+
+.phero-visual::after {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    left: calc(2.6rem - 4px);
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    background: var(--primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent);
+    animation: phero-recorrido 4.5s ease-in-out 1 both;
+}
+
+@keyframes phero-recorrido {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(15rem);
+        opacity: 0;
+    }
+}
+
+.phero-orbita {
+    position: absolute;
+    inset: 8% -6% 4% 10%;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 65%);
+    filter: blur(8px);
+}
+
+.phero-orbita::after {
+    content: '';
+    position: absolute;
+    inset: 6%;
+    border-radius: 50%;
+    border: 1px dashed color-mix(in srgb, var(--secondary) 40%, transparent);
+}
+
+.phero-tarjeta {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    width: min(100%, 340px);
+    padding: 1rem 1.1rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--portero-borde-tinte);
+    background: var(--portero-vidrio);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-lg), var(--portero-brillo);
+    /* Flota dos veces y queda en reposo (menos de 5 s en total). */
+    animation: phero-flotar 2.4s ease-in-out 2;
+}
+
+.phero-tarjeta--perfil {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-self: flex-end;
+    animation-delay: -0.8s;
+}
+
+.phero-tarjeta--asignado {
+    align-items: center;
+    width: min(100% - clamp(0rem, 4vw, 1.5rem), 340px);
+    margin-left: clamp(0rem, 4vw, 1.5rem);
+    animation-delay: -1.6s;
+}
+
+@keyframes phero-flotar {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+.phero-tarjeta-icono {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: var(--radius-md);
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 8px 18px -8px color-mix(in srgb, var(--secondary) 70%, transparent);
+}
+
+.phero-tarjeta-icono--ok {
+    background: linear-gradient(135deg, var(--primary-deep), var(--primary));
+}
+
+.phero-tarjeta-meta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.phero-burbuja {
+    margin-top: 0.35rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-md);
+    border-top-left-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--primary) 14%, var(--bg-primary));
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+}
+
+.phero-escribiendo {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.phero-escribiendo svg {
+    color: var(--primary-deep);
+}
+
+.phero-puntos {
+    display: inline-flex;
+    gap: 3px;
+}
+
+.phero-puntos i {
+    width: 4px;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: var(--text-secondary);
+    animation: phero-escribe 1.2s ease-in-out 3;
+}
+
+.phero-puntos i:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.phero-puntos i:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes phero-escribe {
+    0%,
+    60%,
+    100% {
+        opacity: 0.3;
+        transform: translateY(0);
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+}
+
+.phero-perfil-cabeza {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.phero-prioridad {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    background: var(--primary-deep);
+    color: var(--bg-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.phero-perfil-nombre {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.phero-chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.phero-chips li {
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--portero-borde-tinte);
+    background: var(--bg-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.phero-asignado-titulo {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.phero-nota {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Botón principal -------------------------------------------------------- */
 
 /* Blanco sobre --primary da 2.80:1; sobre --primary-deep, 4.60:1. */
 .portero-boton.btn-primary {
@@ -157,6 +634,7 @@
     margin-top: var(--spacing-sm);
     background: var(--primary-deep);
     text-align: center;
+    box-shadow: var(--shadow-md), 0 14px 30px -12px color-mix(in srgb, var(--primary-deep) 70%, transparent);
 }
 
 .portero-boton.btn-primary:hover:not([aria-disabled='true']) {
@@ -176,28 +654,21 @@
 /* Secciones -------------------------------------------------------------- */
 
 .portero-page .portero-seccion {
-    padding: clamp(3rem, 8vw, 5.5rem) 0;
+    position: relative;
+    padding: clamp(4rem, 9vw, 6.5rem) 0;
+    overflow: hidden;
 }
 
-.portero-page .portero-seccion--alterna {
+.portero-page .portero-seccion--malla {
     background: var(--bg-secondary);
     border-block: 1px solid var(--border-color);
 }
 
 .portero-h2 {
-    font-size: clamp(1.75rem, 4.5vw, 2.25rem);
+    font-size: clamp(1.85rem, 4.6vw, 2.75rem);
+    letter-spacing: -0.02em;
     margin-bottom: var(--spacing-md);
-}
-
-.portero-destacado {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.25rem, 3.4vw, 1.6rem);
-    font-weight: 600;
-    line-height: 1.35;
-    color: var(--text-primary);
-    padding-left: var(--spacing-md);
-    border-left: 4px solid var(--primary);
-    margin-bottom: var(--spacing-md);
+    text-wrap: balance;
 }
 
 .portero-texto {
@@ -206,56 +677,389 @@
     color: var(--text-secondary);
 }
 
-/* Cómo funciona ---------------------------------------------------------- */
-
-.portero-pasos {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
-    counter-reset: none;
+.portero-medio {
+    max-width: 1100px;
 }
 
-.portero-paso {
+.portero-encabezado {
+    max-width: 780px;
+    margin: 0 auto clamp(2.25rem, 5vw, 3.5rem);
+    text-align: center;
+}
+
+.portero-encabezado .portero-texto {
+    text-wrap: pretty;
+}
+
+/* De dónde a dónde ------------------------------------------------------- */
+
+.portero-comparativo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.portero-columna {
+    height: 100%;
+    padding: clamp(1.4rem, 4vw, 2.1rem);
+    border-radius: var(--radius-xl);
+}
+
+.portero-columna-cabeza {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1.4rem;
+}
+
+.portero-columna-cabeza h3 {
+    font-size: 1.5rem;
+}
+
+.portero-columna-cabeza p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.portero-columna-icono {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-md);
+}
+
+.portero-columna ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+}
+
+.portero-columna li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 1.03rem;
+    line-height: 1.5;
+}
+
+.portero-columna li svg {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    padding: 0.2rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: var(--radius-full);
+}
+
+.portero-columna--hoy {
+    border: 1px dashed color-mix(in srgb, var(--text-secondary) 35%, transparent);
+    background: color-mix(in srgb, var(--bg-tertiary) 70%, var(--bg-primary));
+}
+
+.portero-columna--hoy .portero-columna-icono {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.portero-columna--hoy li {
+    color: var(--text-secondary);
+}
+
+.portero-columna--hoy li svg {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+/* Borde en degradado: fondo blanco en el padding-box y el degradado debajo. */
+.portero-columna--portero {
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+        var(--portero-degradado-borde) border-box;
+    box-shadow: var(--shadow-xl), var(--portero-brillo);
+}
+
+.portero-columna--portero .portero-columna-icono {
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--secondary) 80%, transparent);
+}
+
+.portero-columna--portero li {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.portero-columna--portero li svg {
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+}
+
+.portero-comparativo-flecha {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: var(--radius-full);
+    background: var(--bg-primary);
+    border: 1px solid var(--portero-borde-tinte);
+    color: var(--primary-deep);
+    box-shadow: var(--shadow-lg), var(--portero-brillo);
+}
+
+/* Beneficios ------------------------------------------------------------- */
+
+.portero-beneficios {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.portero-beneficio {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-    padding: 1.5rem;
+    gap: 0.75rem;
+    padding: 1.75rem 1.6rem;
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     background: var(--bg-primary);
     box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition:
+        transform var(--transition-normal),
+        box-shadow var(--transition-normal),
+        border-color var(--transition-normal);
 }
 
-.portero-paso p {
-    font-size: 1.0625rem;
+/* Un halo de color en la esquina y una línea de degradado arriba al pasar. */
+.portero-beneficio::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -30%;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--primary) 16%, transparent), transparent 70%);
+    pointer-events: none;
+}
+
+.portero-beneficio::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: var(--portero-degradado-borde);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-slow);
+}
+
+/* Sin elevarse: las tarjetas no son clicables. */
+.portero-beneficio:hover {
+    border-color: var(--portero-borde-tinte);
+    box-shadow: var(--shadow-lg), var(--portero-brillo);
+}
+
+.portero-beneficio:hover::after {
+    transform: scaleX(1);
+}
+
+.portero-beneficio-icono {
+    display: grid;
+    place-items: center;
+    width: 3.1rem;
+    height: 3.1rem;
+    margin-bottom: 0.25rem;
+    border-radius: var(--radius-lg);
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 12px 24px -12px color-mix(in srgb, var(--secondary) 80%, transparent);
+}
+
+.portero-beneficio h3 {
+    font-size: 1.2rem;
+}
+
+.portero-beneficio p {
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+/* Hecho a la medida: una ventana del portal ------------------------------ */
+
+.portero-medida {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 4.5rem);
+    max-width: 1100px;
+}
+
+.portero-portal {
+    border-radius: var(--radius-xl);
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+        var(--portero-degradado-borde) border-box;
+    box-shadow: var(--shadow-xl), var(--portero-brillo);
+    overflow: hidden;
+}
+
+.portero-portal-barra {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.portero-portal-barra span {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: var(--radius-full);
+    background: var(--border-color);
+}
+
+.portero-portal-barra span:first-child {
+    background: color-mix(in srgb, var(--primary) 60%, var(--bg-primary));
+}
+
+.portero-portal-barra p {
+    margin-left: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.portero-medida-titulo {
+    padding: 1.1rem 1.4rem 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.portero-portal ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0.4rem 0.9rem 1rem;
+}
+
+.portero-portal li {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 0.5rem;
+    border-radius: var(--radius-md);
     font-weight: 500;
-    line-height: 1.5;
     color: var(--text-primary);
 }
 
-.portero-paso-num {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.5rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: 2.25rem;
-    font-weight: 800;
-    line-height: 1;
-    /* Decorativo (el <ol> ya da el orden), pero que se lea como número. */
-    color: var(--text-tertiary);
+.portero-portal li + li {
+    border-top: 1px solid var(--border-color);
 }
 
-.portero-paso-icono {
+.portero-medida-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.portero-medida-icono {
     display: grid;
     place-items: center;
-    width: 3rem;
-    height: 3rem;
+    flex-shrink: 0;
+    width: 2.3rem;
+    height: 2.3rem;
     border-radius: var(--radius-md);
-    background: color-mix(in srgb, var(--primary) 12%, transparent);
+    background: color-mix(in srgb, var(--primary) 12%, var(--bg-primary));
     color: var(--primary-deep);
+}
+
+/* Palomita de "incluido". Adorno (aria-hidden): no parece control. */
+.portero-medida-check {
+    flex-shrink: 0;
+    color: var(--primary-deep);
+}
+
+/* Cierre ----------------------------------------------------------------- */
+
+.portero-page .portero-final {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+.portero-lema {
+    margin: 0 auto clamp(2.25rem, 5vw, 3.25rem);
+    max-width: 24ch;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.6rem, 4.4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    text-align: center;
+    color: var(--text-primary);
+    text-wrap: balance;
+}
+
+/* Entrada al hacer scroll (la decide useRevelar) ------------------------- */
+
+.portero-revelar {
+    transition:
+        opacity 700ms ease,
+        transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .portero-revelar.is-pendiente {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    .portero-beneficios.is-pendiente .portero-beneficio {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+}
+
+/* Los beneficios entran uno tras otro, no como bloque. */
+.portero-beneficios.portero-revelar.is-pendiente {
+    opacity: 1;
+    transform: none;
+}
+
+.portero-beneficios.portero-revelar .portero-beneficio {
+    transition:
+        opacity 600ms ease,
+        transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        box-shadow var(--transition-normal),
+        border-color var(--transition-normal);
+}
+
+.portero-beneficios.portero-revelar .portero-beneficio:nth-child(2) { transition-delay: 80ms; }
+.portero-beneficios.portero-revelar .portero-beneficio:nth-child(3) { transition-delay: 160ms; }
+.portero-beneficios.portero-revelar .portero-beneficio:nth-child(4) { transition-delay: 240ms; }
+.portero-beneficios.portero-revelar .portero-beneficio:nth-child(5) { transition-delay: 320ms; }
+.portero-beneficios.portero-revelar .portero-beneficio:nth-child(6) { transition-delay: 400ms; }
+
+/* Al pasar el cursor no hay retraso. */
+.portero-beneficios.portero-revelar .portero-beneficio:hover {
+    transition-delay: 0ms;
 }
 
 /* Prueba (oculta por defecto) -------------------------------------------- */
@@ -292,7 +1096,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--radius-xl);
     background: var(--bg-primary);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-xl), var(--portero-brillo);
     position: relative;
     overflow: hidden;
 }
@@ -530,8 +1334,8 @@
 
 /* Cierre y pie ----------------------------------------------------------- */
 
-.portero-page .portero-cierre {
-    padding: 0 0 clamp(3rem, 8vw, 5rem);
+.portero-cierre {
+    margin-top: var(--spacing-lg);
     text-align: center;
 }
 
@@ -579,7 +1383,108 @@ html:has(.portero-page) {
     scroll-padding-top: 84px;
 }
 
+@media (max-width: 960px) {
+    .portero-hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .portero-hero-copy {
+        align-items: center;
+        text-align: center;
+    }
+
+    .portero-frase,
+    .portero-origen {
+        margin-inline: auto;
+    }
+
+    .portero-origen {
+        justify-content: center;
+    }
+
+    .portero-datos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .portero-datos li:nth-child(3) {
+        border-left: 0;
+    }
+
+    .portero-datos li:nth-child(n + 3) {
+        border-top: 1px solid var(--border-color);
+    }
+
+    .portero-beneficios {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .portero-comparativo {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
+    }
+
+    .portero-columna {
+        width: 100%;
+    }
+
+    .portero-comparativo-flecha {
+        transform: rotate(90deg);
+    }
+
+    .portero-medida {
+        grid-template-columns: minmax(0, 1fr);
+        text-align: center;
+    }
+
+    .portero-beneficios {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+    }
+
+    /* En móvil, ícono a la izquierda: la lista mide la mitad de alto. */
+    .portero-beneficio {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: 1rem;
+        row-gap: 0.25rem;
+        padding: 1.15rem 1.1rem;
+        text-align: left;
+    }
+
+    .portero-beneficio-icono {
+        grid-row: 1 / span 2;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: 0;
+    }
+
+    .portero-beneficio h3 {
+        font-size: 1.0625rem;
+    }
+
+    .portero-beneficio p {
+        font-size: 0.9375rem;
+    }
+
+    .portero-portal {
+        text-align: left;
+    }
+}
+
 @media (max-width: 480px) {
+    .portero-etiqueta {
+        gap: 0.3rem;
+        padding-inline: 0.75rem;
+        font-size: 0.75rem;
+        letter-spacing: 0;
+    }
+
+    .portero-datos li {
+        padding: 1rem 0.85rem;
+    }
+
     .portero-volver {
         padding: 0.45rem 0.7rem;
         font-size: 0.85rem;
@@ -588,16 +1493,71 @@ html:has(.portero-page) {
     .portero-form .portero-boton {
         align-self: stretch;
     }
+
+    .phero-visual::before,
+    .phero-visual::after {
+        left: 2.2rem;
+    }
+
+    .phero-tarjeta {
+        padding: 0.85rem 0.9rem;
+    }
+}
+
+/* A 320 px la pastilla ya no cabe en una línea: que se parta como tarjeta. */
+@media (max-width: 360px) {
+    .portero-etiqueta {
+        justify-content: center;
+        border-radius: var(--radius-lg);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
+    /* El botón del hero baja miles de píxeles hasta el formulario. */
+    html:has(.portero-page) {
+        scroll-behavior: auto;
+    }
+
+    .portero-etiqueta .portero-etiqueta-pulso,
+    .phero-visual::after,
+    .phero-orbita::after,
+    .phero-tarjeta,
+    .phero-puntos i {
+        animation: none;
+    }
+
+    .phero-visual::after {
+        display: none;
+    }
+
     .portero-boton.btn-primary,
+    .portero-beneficios .portero-beneficio,
+    .portero-beneficios.portero-revelar .portero-beneficio,
+    .portero-beneficio::after,
     .portero-campo input,
     .portero-campo select {
         transition: none;
     }
 
     .portero-boton.btn-primary:hover {
+        transform: none;
+    }
+}
+
+/* Al imprimir o guardar en PDF los fondos no salen: el texto con degradado
+   quedaría vacío y lo pendiente de revelar, invisible. */
+@media print {
+    .portero-acento,
+    .portero-datos strong {
+        background: none;
+        color: var(--text-primary);
+        -webkit-text-fill-color: currentColor;
+    }
+
+    .portero-revelar.is-pendiente,
+    .is-pendiente .portero-beneficio,
+    .is-pendiente .ptab-barra span {
+        opacity: 1;
         transform: none;
     }
 }

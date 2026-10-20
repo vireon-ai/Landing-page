@@ -1,0 +1,282 @@
+/* Maqueta del tablero de Portero. Tema claro. Las barras van en --primary
+   (relleno, no texto); todo número y etiqueta va en tinta de texto. */
+
+.ptab {
+    border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--border-color));
+    border-radius: var(--radius-xl);
+    background: var(--bg-secondary);
+    box-shadow:
+        var(--shadow-xl),
+        0 40px 80px -40px color-mix(in srgb, var(--secondary) 55%, transparent);
+    overflow: hidden;
+}
+
+.ptab-ventana {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1rem;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ptab-ventana span {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: var(--radius-full);
+    background: var(--border-color);
+}
+
+.ptab-ventana span:first-child {
+    background: color-mix(in srgb, var(--primary) 60%, var(--bg-primary));
+}
+
+.ptab-ventana p {
+    flex: 1;
+    max-width: 18rem;
+    margin: 0 auto;
+    padding: 0.2rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: var(--bg-primary);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.ptab-cabeza {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem clamp(1rem, 3vw, 1.5rem);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ptab-titulo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ptab-periodo {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.ptab-ilustrativo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--accent) 30%, var(--bg-primary));
+    border: 1px solid var(--accent);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ptab-cuerpo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+        'kpis kpis'
+        'embudo asesores'
+        'prioridad prioridad';
+    gap: clamp(0.75rem, 2vw, 1rem);
+    padding: clamp(0.75rem, 3vw, 1.5rem);
+}
+
+.ptab-panel {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: var(--bg-primary);
+    min-width: 0;
+}
+
+.ptab-panel-titulo {
+    margin-bottom: 0.85rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+}
+
+/* KPIs -------------------------------------------------------------------- */
+
+.ptab-kpis {
+    grid-area: kpis;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: inherit;
+}
+
+.ptab-kpi {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 0.6rem;
+}
+
+.ptab-kpi-icono {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: var(--radius-md);
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 8px 16px -8px color-mix(in srgb, var(--secondary) 80%, transparent);
+}
+
+.ptab-kpi-etiqueta {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.ptab-kpi-valor,
+.ptab-kpi-nota {
+    grid-column: 1 / -1;
+}
+
+.ptab-kpi-valor {
+    margin-top: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-primary);
+}
+
+.ptab-kpi-nota {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Filas con barra --------------------------------------------------------- */
+
+.ptab-embudo {
+    grid-area: embudo;
+}
+
+.ptab-asesores {
+    grid-area: asesores;
+}
+
+.ptab-prioridad {
+    grid-area: prioridad;
+}
+
+.ptab-filas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ptab-prioridad .ptab-filas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.ptab-fila-texto {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 0.5rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.ptab-fila-valor {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.ptab-fila-extra {
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.ptab-barra {
+    display: block;
+    height: 10px;
+    border-radius: var(--radius-full);
+    background: var(--bg-tertiary);
+    overflow: hidden;
+}
+
+.ptab-barra span {
+    display: block;
+    height: 100%;
+    border-radius: var(--radius-full);
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform-origin: left;
+    transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s;
+}
+
+/* Las barras crecen cuando el tablero entra en pantalla (useRevelar en
+   Portero.tsx quita .is-pendiente). Sin JS o con movimiento reducido, ya
+   están completas. */
+@media (prefers-reduced-motion: no-preference) {
+    .is-pendiente .ptab-barra span {
+        transform: scaleX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ptab-barra span {
+        transition: none;
+    }
+}
+
+.ptab-pie {
+    padding: 0.7rem clamp(1rem, 3vw, 1.5rem);
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 720px) {
+    .ptab-cuerpo {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            'kpis'
+            'embudo'
+            'prioridad'
+            'asesores';
+    }
+
+    .ptab-prioridad .ptab-filas {
+        display: flex;
+    }
+}
+
+@media (max-width: 520px) {
+    .ptab-kpis {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ptab-kpi {
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .ptab-kpi-valor {
+        grid-column: 3;
+        grid-row: 1;
+        margin-top: 0;
+        font-size: 1.5rem;
+    }
+
+    .ptab-kpi-nota {
+        grid-column: 2 / -1;
+    }
+}

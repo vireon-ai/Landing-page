@@ -1,221 +1,499 @@
+/* Test de madurez: seis preguntas y el resultado en pantalla, antes de pedir
+   el correo. Estructura del prototipo "Producto Vivo", en tema claro. */
+
 .quiz-section {
-    padding: 5vh 0;
-    background: white;
+    padding: var(--spacing-xl) 0;
+    background: var(--bg-primary);
     position: relative;
     overflow: hidden;
 }
 
 .quiz-container {
-    max-width: 800px;
-    width: 90%;
+    max-width: 840px;
     margin: 0 auto;
+    position: relative;
 }
+
+/* ---------- Encabezado ---------- */
 
 .quiz-header {
     text-align: center;
-    margin-bottom: 3vh;
+    max-width: 64ch;
+    margin: 0 auto var(--spacing-lg);
 }
+
+.quiz-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    /* --primary-deep queda en 4.60:1 sobre blanco y reprueba sobre el halo
+       turquesa en móvil; esta mezcla da 4.93:1 incluso en el centro del halo. */
+    color: color-mix(in srgb, var(--primary-deep) 85%, black);
+    margin-bottom: var(--spacing-sm);
+}
+
+.quiz-lede {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ---------- Tarjeta ---------- */
 
 /* Vidrio casi opaco sobre los halos, con borde teñido y brillo turquesa. */
 .quiz-card {
-    background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
+    background: color-mix(in srgb, var(--bg-primary) 94%, transparent);
     border: 1px solid var(--border-tint);
     border-radius: var(--radius-xl);
-    padding: 4vh 4vw;
+    padding: clamp(1.5rem, 3.4vw, 2.5rem);
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow-xl), var(--glow-primary);
-    position: relative;
-    overflow: hidden;
-    min-height: 50vh;
+    /* Al desplazarse hasta la tarjeta, que no quede debajo de la barra fija. */
+    scroll-margin-top: 96px;
+}
+
+/* Los botones primarios del test van en --primary-deep: el blanco sobre
+   --primary da 2.80:1 y reprueba; sobre --primary-deep da 4.60:1. */
+.quiz-card .btn-primary {
+    background: var(--primary-deep);
+    gap: var(--spacing-sm);
+}
+
+.quiz-card .btn-primary:hover {
+    background: color-mix(in srgb, var(--primary-deep) 85%, black);
+}
+
+.quiz-card .btn-primary[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.quiz-card button:focus-visible,
+.quiz-card a:focus-visible,
+.quiz-card input:focus-visible {
+    outline: 3px solid var(--primary-deep);
+    outline-offset: 3px;
+}
+
+/* Los títulos reciben el foco por código al cambiar de pantalla; con mouse
+   no enseñan anillo, con teclado sí. */
+.quiz-card [tabindex="-1"]:focus {
+    outline: none;
+}
+
+.quiz-card [tabindex="-1"]:focus-visible {
+    outline: 3px solid var(--primary-deep);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Inicio ---------- */
+
+.quiz-intro {
+    text-align: center;
+}
+
+.quiz-intro-titulo {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin-bottom: var(--spacing-md);
+}
+
+.quiz-intro-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto var(--spacing-lg);
+    max-width: 420px;
+    text-align: left;
     display: flex;
     flex-direction: column;
+    gap: 0.85rem;
+}
+
+.quiz-intro-lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+}
+
+.quiz-intro-lista svg {
+    flex-shrink: 0;
+    color: var(--primary-deep);
+}
+
+.quiz-comenzar {
+    width: 100%;
+    max-width: 320px;
+    font-size: 1.05rem;
+}
+
+.quiz-duracion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: var(--spacing-md);
+    font-size: 0.9rem;
+    /* --text-tertiary reprueba sobre blanco; este da 7.5:1. */
+    color: var(--text-secondary);
+}
+
+/* ---------- Pregunta ---------- */
+
+.quiz-progreso {
+    display: flex;
+    gap: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+}
+
+.quiz-progreso li {
+    flex: 1;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: var(--bg-tertiary);
+    transition: background var(--transition-normal);
+}
+
+.quiz-progreso li.hecho {
+    background: var(--primary-deep);
+}
+
+.quiz-meta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.quiz-pregunta .quiz-meta {
+    display: block;
+    font-family: 'Inter', sans-serif;
+}
+
+.quiz-pregunta {
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.4rem;
+}
+
+.quiz-opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.quiz-opcion {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    text-align: left;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    padding: 0.95rem 1.05rem;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.quiz-opcion:hover {
+    border-color: var(--primary-deep);
+}
+
+.quiz-opcion[aria-pressed="true"] {
+    border-color: var(--primary-deep);
+    background: color-mix(in srgb, var(--primary) 12%, var(--bg-primary));
+}
+
+.quiz-marca {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-secondary);
+    flex: 0 0 auto;
+    position: relative;
+}
+
+.quiz-opcion[aria-pressed="true"] .quiz-marca {
+    border-color: var(--primary-deep);
+}
+
+.quiz-opcion[aria-pressed="true"] .quiz-marca::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--primary-deep);
+}
+
+.quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.875rem;
+    margin-top: 1.5rem;
+    padding-top: 1.125rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.quiz-atras {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: 0;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding: 0.5rem 0.25rem;
+    border-radius: var(--radius-sm);
+}
+
+.quiz-atras:hover {
+    color: var(--text-primary);
+}
+
+.quiz-atras[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.quiz-siguiente {
+    padding: 0.75rem 1.5rem;
+}
+
+/* ---------- Resultado ---------- */
+
+.quiz-score-grid {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    align-items: center;
+}
+
+.quiz-dial {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    flex: 0 0 auto;
+}
+
+.quiz-dial svg {
+    transform: rotate(-90deg);
+    display: block;
+}
+
+.quiz-dial circle {
+    fill: none;
+    stroke-width: 10;
+}
+
+.quiz-dial-pista {
+    stroke: var(--bg-tertiary);
+}
+
+/* El arco se queda en su valor final (inline); la animación solo lo trae
+   desde vacío. Con movimiento reducido aparece lleno de inmediato. */
+.quiz-dial-arco {
+    stroke: var(--primary-deep);
+    stroke-linecap: round;
+    animation: quiz-llenar-arco 1s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes quiz-llenar-arco {
+    from {
+        stroke-dashoffset: var(--circunferencia);
+    }
+}
+
+.quiz-dial-valor {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.progress-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 0.5rem;
-    background: var(--bg-tertiary);
+.quiz-dial-numero {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 3.25rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--primary-deep);
+    font-variant-numeric: tabular-nums;
 }
 
-.progress-bar {
-    height: 100%;
-    background: var(--gradient-primary);
-    transition: width 0.5s ease;
-}
-
-.question-counter {
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-    color: var(--text-tertiary);
-    margin-bottom: 1rem;
+.quiz-dial-escala {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+}
+
+.quiz-nivel {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: -0.028em;
+    margin-bottom: 0.5rem;
+}
+
+.quiz-nivel-descripcion {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.quiz-areas {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.quiz-area-etiqueta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.35rem;
+}
+
+.quiz-area-etiqueta span:last-child {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.quiz-barra {
+    display: block;
+    height: 9px;
+    border-radius: var(--radius-full);
+    background: var(--bg-tertiary);
+    overflow: hidden;
+}
+
+.quiz-barra span {
+    display: block;
+    height: 100%;
+    border-radius: var(--radius-full);
+    background: var(--primary-deep);
+    animation: quiz-llenar-barra 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes quiz-llenar-barra {
+    from {
+        width: 0;
+    }
+}
+
+.quiz-recs-titulo {
+    font-size: 1.05rem;
+    margin: 1.75rem 0 0.75rem;
+}
+
+.quiz-recs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.quiz-recs li {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+}
+
+.quiz-recs-numero {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-deep);
+    padding-top: 0.2rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.quiz-recs strong {
+    color: var(--text-primary);
     font-weight: 600;
 }
 
-.quiz-question {
-    font-size: clamp(1.25rem, 4vw, 1.75rem);
-    margin-bottom: 3vh;
-    line-height: 1.3;
-}
+/* ---------- Correo, opcional y después del score ---------- */
 
-.options-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
-.quiz-option {
-    padding: 1rem 1.5rem;
-    background: var(--bg-secondary);
-    border: 2px solid transparent;
-    border-radius: var(--radius-lg);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    text-align: left;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-}
-
-.quiz-option:hover {
-    background: white;
-    border-color: var(--primary-light);
-    box-shadow: var(--shadow-md);
-}
-
-.quiz-option.selected {
-    background: rgba(72, 169, 166, 0.05);
-    border-color: var(--primary);
-    color: var(--primary-dark);
-}
-
-.quiz-actions {
-    margin-top: 4vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Results Page */
-.results-content {
-    text-align: center;
-    animation: fade-in 0.5s ease-out;
-}
-
-.score-display {
-    margin-bottom: 3vh;
-}
-
-.score-circle {
-    width: clamp(150px, 30vw, 200px);
-    height: clamp(150px, 30vw, 200px);
-    border-radius: 50%;
-    background: var(--bg-secondary);
+.quiz-gate {
+    margin-top: 1.75rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 2vh;
-    position: relative;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+    gap: 0.75rem;
 }
 
-.score-number {
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    font-weight: 800;
-    color: var(--primary);
-    font-family: 'Outfit', sans-serif;
-    line-height: 1;
-}
-
-.score-total {
-    font-size: 1rem;
-    color: var(--text-tertiary);
-}
-
-.result-badge {
-    display: inline-block;
-    padding: 0.5rem 1.5rem;
-    border-radius: var(--radius-full);
-    font-weight: 700;
-    font-size: clamp(0.9rem, 3vw, 1.1rem);
-    margin-bottom: 1rem;
-}
-
-.badge-green {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.badge-yellow {
-    background: #fef9c3;
-    color: #854d0e;
-}
-
-.badge-orange {
-    background: #ffedd5;
-    color: #9a3412;
-}
-
-.badge-red {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-.result-message {
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    margin-bottom: 3vh;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.comparison-box {
-    background: var(--bg-secondary);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    margin-bottom: 3vh;
-    text-align: left;
-}
-
-.comparison-box h4 {
-    margin-bottom: 1rem;
-    text-align: center;
-    font-size: clamp(1rem, 3vw, 1.1rem);
-}
-
-.comparison-list {
-    list-style: none;
-}
-
-.comparison-list li {
-    margin-bottom: 0.5rem;
+.quiz-form {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-@media (max-width: 768px) {
-    .quiz-card {
-        padding: 2rem 1rem;
-    }
-
-    .quiz-actions {
-        flex-direction: row;
-        /* Keep buttons side-by-side on mobile if possible, or stack if text is long */
-    }
+.quiz-form-etiqueta {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
 }
-/* El test pide el correo antes de entregar el resultado: ahí es donde la
-   persona consiente el tratamiento (sección 5 del aviso de privacidad). */
+
+.quiz-form-fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+}
+
+.quiz-input {
+    flex: 1 1 220px;
+    min-width: 0;
+    background: var(--bg-primary);
+    /* El borde del campo tiene que pasar 3:1 contra el blanco (--text-tertiary da 2.6:1). */
+    border: 1px solid color-mix(in srgb, var(--text-secondary) 75%, var(--bg-primary));
+    color: var(--text-primary);
+    border-radius: var(--radius-full);
+    padding: 0.8rem 1.25rem;
+    font: inherit;
+    font-size: 1rem;
+}
+
+.quiz-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.quiz-form-fila .btn {
+    flex: 0 1 auto;
+}
+
 .quiz-privacidad {
-    margin-top: var(--spacing-md);
+    margin: 0;
     font-size: 0.8125rem;
     /* --text-tertiary da 2.4:1 sobre blanco y reprueba AA; este da 7.5:1. */
     color: var(--text-secondary);
@@ -225,4 +503,154 @@
     color: var(--primary-deep);
     font-weight: 500;
     text-decoration: underline;
+}
+
+.quiz-nota {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.quiz-repetir {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: none;
+    border: 0;
+    padding: 0.25rem 0;
+    font: inherit;
+    color: var(--primary-deep);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+}
+
+/* Estado del envío para lectores de pantalla y a la vista: "Enviando…" y "Listo". */
+.quiz-estado {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    /* Un correo largo no tiene dónde partirse y se saldría de la tarjeta. */
+    overflow-wrap: anywhere;
+}
+
+/* Vacía sigue en el árbol de accesibilidad (si no, "Enviando…" no se anuncia);
+   el margen negativo solo compensa el hueco del gap. */
+.quiz-estado:empty {
+    margin-bottom: -0.75rem;
+}
+
+.quiz-estado svg {
+    flex-shrink: 0;
+    color: var(--primary-deep);
+}
+
+/* Si el reporte no sale después de reintentar, lo decimos y ofrecemos WhatsApp. */
+.quiz-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
+    /* Al 6 % la liga de WhatsApp da 4.56:1 sobre este fondo; al 10 % ya
+       reprueba (4.26:1). No subas la mezcla sin volver a medir. */
+    background: color-mix(in srgb, var(--danger) 6%, var(--bg-primary));
+    border: 1px solid color-mix(in srgb, var(--danger) 35%, var(--bg-primary));
+    color: var(--danger);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.quiz-error-icon {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+}
+
+.quiz-error a {
+    color: var(--whatsapp);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.quiz-error a svg {
+    vertical-align: -0.15em;
+    margin-right: 0.25rem;
+}
+
+/* El ícono de carga del botón. */
+.animate-spin {
+    animation: quiz-girar 1s linear infinite;
+}
+
+@keyframes quiz-girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Texto solo para lectores de pantalla, como .portero-sr. */
+.quiz-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 720px) {
+    .quiz-score-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .quiz-score-grid > div:last-child {
+        width: 100%;
+    }
+
+    .quiz-score-grid .quiz-meta,
+    .quiz-nivel {
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .quiz-nav {
+        flex-wrap: wrap;
+    }
+
+    .quiz-siguiente {
+        flex: 1 1 auto;
+    }
+
+    .quiz-form-fila .btn {
+        flex: 1 1 100%;
+    }
+}
+
+/* Con movimiento reducido todo aparece en su estado final: arco lleno hasta
+   el score, barras completas y sin giro. */
+@media (prefers-reduced-motion: reduce) {
+    .quiz-dial-arco,
+    .quiz-barra span,
+    .animate-spin {
+        animation: none;
+    }
+
+    .quiz-progreso li,
+    .quiz-opcion {
+        transition: none;
+    }
 }

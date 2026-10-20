@@ -1,9 +1,36 @@
 import { useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { AlertTriangle, ArrowDown, ArrowLeft, Check, LayoutDashboard, MessageCircle, MessagesSquare } from 'lucide-react';
+import {
+    AlertTriangle,
+    ArrowDown,
+    ArrowLeft,
+    ArrowRight,
+    Bot,
+    Building2,
+    Check,
+    CircleCheck,
+    Clock,
+    FileSpreadsheet,
+    Flame,
+    ListChecks,
+    MessageCircle,
+    MessageSquareText,
+    Route,
+    Scale,
+    ShieldCheck,
+    SlidersHorizontal,
+    Sparkles,
+    Target,
+    TrendingUp,
+    UserCheck,
+    Users,
+    X,
+} from 'lucide-react';
 import vireonLogo from '../assets/vireon-logo.png';
 import { CORREO_CONTACTO } from '../config';
 import { enviarConReintentos, guardarPendiente, reintentarPendientes, type Lead } from '../leads';
+import PorteroConversacion from './PorteroConversacion';
+import PorteroTablero from './PorteroTablero';
 import './Portero.css';
 
 /**
@@ -12,9 +39,14 @@ import './Portero.css';
  * privacidad), sin ruteo del lado del cliente.
  *
  * Portero todavía no está a la venta: la página se promociona como
- * "Próximamente" con lista de espera. Restricciones del brief: sin fechas de
- * lanzamiento, sin decir que Vireon es Tech Provider ni partner de Meta, sin
- * métricas ni testimonios inventados.
+ * "Próximamente" con lista de espera, y todos los botones llevan al formulario.
+ * Restricciones del brief: sin fechas de lanzamiento, sin decir que Vireon es
+ * Tech Provider ni partner de Meta, sin métricas ni testimonios inventados.
+ * Sin precios de Portero ni nada de tarifas, costo por mensaje, ventanas o
+ * categorías de mensajes de Meta. Sin nombres de clientes ni de personas reales:
+ * el cliente que ya opera es "nuestro primer cliente, una desarrolladora
+ * inmobiliaria". Las cifras de las maquetas (chat y tablero) son ilustrativas y
+ * así lo dicen en pantalla.
  *
  * Los textos marcados con VALIDAR no venían en el brief; se escribieron para que
  * la página funcione y hay que confirmarlos antes de publicar.
@@ -84,7 +116,7 @@ const validarCampo = (campo: keyof Campos, datos: Campos): string | undefined =>
         case 'nombre':
             return datos.nombre.trim() ? undefined : 'Escribe tu nombre.';
         case 'empresa':
-            return datos.empresa.trim() ? undefined : 'Escribe el nombre de tu empresa o inmobiliaria.';
+            return datos.empresa.trim() ? undefined : 'Escribe el nombre de tu empresa o desarrolladora.';
         case 'correo':
             if (!datos.correo.trim()) return 'Escribe tu correo.';
             return CORREO_VALIDO.test(datos.correo.trim()) ? undefined : 'Revisa tu correo; parece incompleto.';
@@ -240,7 +272,7 @@ const ListaDeEspera = () => {
                 </div>
 
                 <div className="portero-campo">
-                    <label htmlFor="portero-empresa">Empresa o inmobiliaria *</label>
+                    <label htmlFor="portero-empresa">Empresa o desarrolladora *</label>
                     <input
                         id="portero-empresa"
                         ref={(el) => { campos.current.empresa = el; }}
@@ -303,7 +335,7 @@ const ListaDeEspera = () => {
             </div>
 
             <div className="portero-campo">
-                <label htmlFor="portero-leads">Leads aproximados al mes *</label>
+                <label htmlFor="portero-leads">Prospectos aproximados al mes *</label>
                 <select
                     id="portero-leads"
                     ref={(el) => { campos.current.leadsMes = el; }}
@@ -394,13 +426,188 @@ const ListaDeEspera = () => {
 // Página
 // ---------------------------------------------------------------------------
 
-const PASOS = [
-    { icono: MessageCircle, texto: 'El prospecto escribe por WhatsApp.' },
-    { icono: MessagesSquare, texto: 'Portero responde y da seguimiento con la información de tu inmobiliaria.' },
-    { icono: LayoutDashboard, texto: 'Tu equipo ve las conversaciones y los leads en el portal web.' },
+const LISTA = '#lista-de-espera';
+
+const DATOS = [
+    { valor: '24/7', texto: 'Atención inmediata, todos los días' },
+    { valor: '100%', texto: 'De los prospectos que escriben por WhatsApp, registrados y trazables' },
+    { valor: '0', texto: 'Capturas de pantalla al grupo de WhatsApp para repartir prospectos' },
+    { valor: '1', texto: 'Sola fuente de verdad del embudo comercial' },
 ];
 
+const HOY = [
+    'Un teléfono físico que trae quien esté en la oficina.',
+    'Mensajes de bienvenida copiados y pegados a mano.',
+    'La ruleta de asignación, en un Excel sin dueño.',
+    'Reconstruir el historial buscando entre conversaciones.',
+    'Cero visibilidad del embudo para la dirección.',
+];
+
+const CON_PORTERO = [
+    'Un agente de IA responde en segundos, siempre.',
+    'Bienvenida personalizada y automática para cada prospecto.',
+    'Rotación automática entre los asesores activos.',
+    'Resumen, insights y perfil listos antes del primer contacto.',
+    'Tablero en vivo de captación, embudo y asesores.',
+];
+
+const BENEFICIOS = [
+    {
+        icono: Clock,
+        titulo: 'Ningún prospecto sin respuesta',
+        texto: 'Responde en segundos a cualquier hora, incluso en fin de semana.',
+    },
+    {
+        icono: Target,
+        titulo: 'Tiempo comercial en lo que vende',
+        texto: 'Tus asesores atienden primero a quien tiene más intención de compra.',
+    },
+    {
+        icono: Scale,
+        titulo: 'Asignación justa y auditable',
+        texto: 'Rotación automática, con registro del momento exacto de cada asignación.',
+    },
+    {
+        icono: Route,
+        titulo: 'Trazabilidad completa',
+        texto: 'Fecha, fuente, campaña, asesor y etapa de cada prospecto.',
+    },
+    {
+        icono: TrendingUp,
+        titulo: 'Decisiones con evidencia',
+        texto: 'Sabes qué campaña trae compradores, no solo mensajes.',
+    },
+    {
+        icono: ShieldCheck,
+        titulo: 'La rotación de personal deja de doler',
+        texto: 'La información vive en el sistema, no en el teléfono de quien se va.',
+    },
+];
+
+const A_LA_MEDIDA = [
+    { icono: Building2, texto: 'La información de sus desarrollos' },
+    { icono: MessageSquareText, texto: 'El guion y el tono del agente' },
+    { icono: ListChecks, texto: 'Las preguntas de perfilamiento' },
+    { icono: SlidersHorizontal, texto: 'Las reglas de prioridad' },
+    { icono: Users, texto: 'El catálogo de asesores' },
+];
+
+const BotonLista = () => (
+    <a href={LISTA} className="btn btn-primary portero-boton">
+        Unirme a la lista de espera
+        <ArrowDown size={18} aria-hidden="true" />
+    </a>
+);
+
+/** Etiqueta corta sobre el título de cada sección. */
+const Kicker = ({ children }: { children: string }) => (
+    <p className="portero-kicker">
+        <span aria-hidden="true" />
+        {children}
+    </p>
+);
+
+/**
+ * Lo que Portero hace con un prospecto, en tres tarjetas: llega el mensaje, se
+ * perfila y se asigna. Es una ilustración: un lector de pantalla oye la
+ * descripción del aria-label, no las tarjetas una por una.
+ */
+const VisualHero = () => (
+    <div
+        className="phero-visual"
+        role="img"
+        aria-label="Ejemplo ilustrativo: llega un mensaje de WhatsApp, Portero perfila al prospecto con prioridad alta y lo asigna a un asesor."
+    >
+        <div className="phero-orbita" />
+
+        <div className="phero-tarjeta phero-tarjeta--mensaje">
+            <span className="phero-tarjeta-icono">
+                <MessageCircle size={18} />
+            </span>
+            <div>
+                <p className="phero-tarjeta-meta">WhatsApp · Nuevo prospecto</p>
+                <p className="phero-burbuja">Hola, vi el anuncio. ¿Cuánto cuestan los departamentos?</p>
+                <p className="phero-escribiendo">
+                    <Bot size={14} />
+                    Portero está respondiendo
+                    <span className="phero-puntos">
+                        <i />
+                        <i />
+                        <i />
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div className="phero-tarjeta phero-tarjeta--perfil">
+            <div className="phero-perfil-cabeza">
+                <p className="phero-tarjeta-meta">Perfil capturado</p>
+                <span className="phero-prioridad">
+                    <Flame size={13} />
+                    Prioridad alta
+                </span>
+            </div>
+            <p className="phero-perfil-nombre">Andrea</p>
+            <ul className="phero-chips">
+                <li>Para vivir</li>
+                <li>3 recámaras</li>
+                <li>Infonavit</li>
+                <li>Antes de fin de año</li>
+            </ul>
+        </div>
+
+        <div className="phero-tarjeta phero-tarjeta--asignado">
+            <span className="phero-tarjeta-icono phero-tarjeta-icono--ok">
+                <UserCheck size={18} />
+            </span>
+            <div>
+                <p className="phero-asignado-titulo">Asignado a Carlos</p>
+                <p className="phero-tarjeta-meta">Con resumen y perfil · rotación automática</p>
+            </div>
+        </div>
+
+        <p className="phero-nota">Ejemplo ilustrativo</p>
+    </div>
+);
+
+/**
+ * Animación de entrada de los bloques al hacer scroll. Igual que en App.tsx: un
+ * solo IntersectionObserver y clases en el DOM. Lo que ya está en pantalla al
+ * cargar no se esconde, y con movimiento reducido no se anima nada.
+ */
+const useRevelar = () => {
+    useEffect(() => {
+        const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (sinMovimiento || !('IntersectionObserver' in window)) return;
+
+        const pendientes = [...document.querySelectorAll<HTMLElement>('.portero-revelar')].filter(
+            (el) => el.getBoundingClientRect().top > window.innerHeight * 0.9,
+        );
+        if (pendientes.length === 0) return;
+
+        const observador = new IntersectionObserver(
+            (entradas) => {
+                for (const entrada of entradas) {
+                    if (!entrada.isIntersecting) continue;
+                    entrada.target.classList.remove('is-pendiente');
+                    observador.unobserve(entrada.target);
+                }
+            },
+            // Sin umbral por porcentaje: un bloque más alto que la pantalla
+            // nunca llegaría a mostrar el 30 %.
+            { threshold: 0, rootMargin: '0px 0px -12% 0px' },
+        );
+        for (const el of pendientes) {
+            el.classList.add('is-pendiente');
+            observador.observe(el);
+        }
+        return () => observador.disconnect();
+    }, []);
+};
+
 const Portero = () => {
+    useRevelar();
+
     return (
         <div className="portero-page">
             <header className="portero-header">
@@ -419,79 +626,238 @@ const Portero = () => {
             <main>
                 {/* 1 · Hero */}
                 <section className="portero-hero" aria-labelledby="portero-titulo">
-                    <div className="container portero-angosto">
-                        <p className="portero-eyebrow">
-                            <a href="/#soluciones">Vireon Solutions</a>
-                        </p>
-                        <p className="portero-etiqueta">
-                            <span>Inmobiliarias</span>
-                            <span aria-hidden="true">·</span>
-                            <span className="portero-estado">Próximamente</span>
-                        </p>
-                        <h1 id="portero-titulo" className="portero-titulo">Portero</h1>
-                        <p className="portero-frase">
-                            El agente de WhatsApp que atiende a tus leads inmobiliarios al instante.
-                        </p>
-                        <a href="#lista-de-espera" className="btn btn-primary portero-boton">
-                            Unirme a la lista de espera
-                            <ArrowDown size={18} aria-hidden="true" />
-                        </a>
-                    </div>
-                </section>
+                    <div className="portero-fondo portero-fondo--hero" aria-hidden="true" />
+                    <div className="container portero-hero-inner">
+                        <div className="portero-hero-copy">
+                            <p className="portero-eyebrow">
+                                <a href="/#soluciones">Vireon Solutions</a>
+                            </p>
+                            <p className="portero-etiqueta">
+                                <span className="portero-etiqueta-pulso" aria-hidden="true" />
+                                <span>Desarrolladoras inmobiliarias</span>
+                                <span aria-hidden="true">·</span>
+                                <span className="portero-estado">Próximamente</span>
+                            </p>
+                            <h1 id="portero-titulo" className="portero-titulo">
+                                <span className="portero-acento">Portero:</span> ningún prospecto se queda sin
+                                respuesta
+                            </h1>
+                            <p className="portero-frase">
+                                Un agente de IA que atiende, perfila y asigna cada prospecto de tus desarrollos por
+                                WhatsApp. Sin teléfono compartido. Sin Excel a mano.
+                            </p>
+                            <BotonLista />
+                            <p className="portero-origen">
+                                <Sparkles size={16} aria-hidden="true" />
+                                Nace de un sistema que ya opera con nuestro primer cliente, una desarrolladora
+                                inmobiliaria.
+                            </p>
+                        </div>
 
-                {/* 2 · El problema */}
-                <section className="portero-seccion" aria-labelledby="portero-problema-titulo">
-                    <div className="container portero-angosto">
-                        {/* VALIDAR: encabezado de la sección (el brief no lo trae). */}
-                        <h2 id="portero-problema-titulo" className="portero-h2">El problema</h2>
-                        <p className="portero-destacado">
-                            Los leads inmobiliarios se enfrían cuando la primera respuesta tarda.
-                        </p>
-                        <p className="portero-texto">
-                            Portero responde de inmediato y el equipo humano entra con el prospecto ya atendido.
-                        </p>
+                        <VisualHero />
                     </div>
-                </section>
 
-                {/* 3 · Cómo funciona */}
-                <section className="portero-seccion portero-seccion--alterna" aria-labelledby="portero-pasos-titulo">
                     <div className="container">
-                        <h2 id="portero-pasos-titulo" className="portero-h2 text-center">Cómo funciona</h2>
-                        <ol className="portero-pasos">
-                            {PASOS.map(({ icono: Icono, texto }, i) => (
-                                <li key={texto} className="portero-paso">
-                                    <span className="portero-paso-num" aria-hidden="true">{i + 1}</span>
-                                    <span className="portero-paso-icono" aria-hidden="true">
+                        <ul role="list" className="portero-datos">
+                            {DATOS.map(({ valor, texto }) => (
+                                <li key={valor}>
+                                    <strong>{valor}</strong>
+                                    <span>{texto}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+
+                {/* 2 · De dónde a dónde */}
+                <section className="portero-seccion" aria-labelledby="portero-cambio-titulo">
+                    <div className="container">
+                        <div className="portero-encabezado portero-revelar">
+                            <Kicker>El cambio</Kicker>
+                            <h2 id="portero-cambio-titulo" className="portero-h2">
+                                De dónde <span className="portero-acento">a dónde</span>
+                            </h2>
+                            <p className="portero-texto">
+                                Así se atiende a los prospectos en muchas desarrolladoras hoy, y así cambia con
+                                Portero.
+                            </p>
+                        </div>
+                        <div className="portero-comparativo portero-revelar">
+                            <div className="portero-columna portero-columna--hoy">
+                                <div className="portero-columna-cabeza">
+                                    <span className="portero-columna-icono" aria-hidden="true">
+                                        <FileSpreadsheet size={20} />
+                                    </span>
+                                    <div>
+                                        <h3>Hoy</h3>
+                                        <p>Manual, disperso y sin visibilidad</p>
+                                    </div>
+                                </div>
+                                <ul role="list">
+                                    {HOY.map((texto) => (
+                                        <li key={texto}>
+                                            <X size={18} aria-hidden="true" />
+                                            {texto}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <span className="portero-comparativo-flecha" aria-hidden="true">
+                                <ArrowRight size={22} />
+                            </span>
+
+                            <div className="portero-columna portero-columna--portero">
+                                <div className="portero-columna-cabeza">
+                                    <span className="portero-columna-icono" aria-hidden="true">
+                                        <Sparkles size={20} />
+                                    </span>
+                                    <div>
+                                        <h3>Con Portero</h3>
+                                        <p>Automático, ordenado y medible</p>
+                                    </div>
+                                </div>
+                                <ul role="list">
+                                    {CON_PORTERO.map((texto) => (
+                                        <li key={texto}>
+                                            <Check size={18} aria-hidden="true" />
+                                            {texto}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 3 · Así se ve en la práctica */}
+                <section className="portero-seccion portero-seccion--malla" aria-labelledby="portero-practica-titulo">
+                    <div className="portero-fondo portero-fondo--puntos" aria-hidden="true" />
+                    <div className="container">
+                        <div className="portero-encabezado portero-revelar">
+                            <Kicker>En acción</Kicker>
+                            <h2 id="portero-practica-titulo" className="portero-h2">
+                                Así se ve <span className="portero-acento">en la práctica</span>
+                            </h2>
+                            <p className="portero-texto">
+                                Domingo, 9:42 de la noche: Andrea escribe por un anuncio. En este ejemplo, en
+                                tres minutos ya tiene respuesta, recomendación, brochure y asesor. Y el asesor ya
+                                tiene su perfil.
+                            </p>
+                        </div>
+                        <PorteroConversacion />
+                    </div>
+                </section>
+
+                {/* 4 · Vista previa del tablero */}
+                <section className="portero-seccion portero-seccion--reticula" aria-labelledby="portero-tablero-titulo">
+                    <div className="portero-fondo portero-fondo--reticula" aria-hidden="true" />
+                    <div className="container portero-medio">
+                        <div className="portero-encabezado portero-revelar">
+                            <Kicker>Vista previa del tablero</Kicker>
+                            <h2 id="portero-tablero-titulo" className="portero-h2">
+                                La dirección deja de preguntar cómo va el mes.{' '}
+                                <span className="portero-acento">Lo ve.</span>
+                            </h2>
+                            <p className="portero-texto">
+                                Captación, embudo, prioridades y carga por asesor, desde el portal y sin pedirle
+                                reportes a nadie.
+                            </p>
+                        </div>
+                        <div className="portero-revelar">
+                            <PorteroTablero />
+                        </div>
+                    </div>
+                </section>
+
+                {/* 5 · Beneficios */}
+                <section className="portero-seccion portero-seccion--malla" aria-labelledby="portero-beneficios-titulo">
+                    <div className="container">
+                        <div className="portero-encabezado portero-revelar">
+                            <Kicker>Beneficios</Kicker>
+                            <h2 id="portero-beneficios-titulo" className="portero-h2">
+                                Lo que gana <span className="portero-acento">tu equipo</span>
+                            </h2>
+                        </div>
+                        <ul role="list" className="portero-beneficios portero-revelar">
+                            {BENEFICIOS.map(({ icono: Icono, titulo, texto }) => (
+                                <li key={titulo} className="portero-beneficio">
+                                    <span className="portero-beneficio-icono" aria-hidden="true">
                                         <Icono size={22} />
                                     </span>
+                                    <h3>{titulo}</h3>
                                     <p>{texto}</p>
                                 </li>
                             ))}
-                        </ol>
+                        </ul>
                     </div>
                 </section>
 
-                {/* 4 · Prueba de que funciona (oculta por defecto) */}
+                {/* 6 · Hecho a la medida */}
+                <section className="portero-seccion" aria-labelledby="portero-medida-titulo">
+                    <div className="container portero-medida">
+                        <div className="portero-revelar">
+                            <Kicker>A tu medida</Kicker>
+                            <h2 id="portero-medida-titulo" className="portero-h2">
+                                Hecho a la medida de{' '}
+                                <span className="portero-acento">cada desarrolladora</span>
+                            </h2>
+                            <p className="portero-texto">
+                                Portero no es un bot genérico. Lo configuramos contigo al arrancar y después tu
+                                empresa lo administra desde su portal web, sin depender de nosotros para el día a
+                                día.
+                            </p>
+                        </div>
+
+                        <div className="portero-portal portero-revelar">
+                            <div className="portero-portal-barra" aria-hidden="true">
+                                <span />
+                                <span />
+                                <span />
+                                <p>Portal · Configuración del agente</p>
+                            </div>
+                            <p id="portero-medida-lista" className="portero-medida-titulo">
+                                Cada empresa define
+                            </p>
+                            <ul role="list" aria-labelledby="portero-medida-lista">
+                                {A_LA_MEDIDA.map(({ icono: Icono, texto }) => (
+                                    <li key={texto}>
+                                        <span className="portero-medida-icono" aria-hidden="true">
+                                            <Icono size={18} />
+                                        </span>
+                                        <span className="portero-medida-texto">{texto}</span>
+                                        <CircleCheck size={20} className="portero-medida-check" aria-hidden="true" />
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Prueba de que funciona (oculta por defecto) */}
                 <PruebaPortero />
 
-                {/* 5 · Lista de espera */}
-                <section id="lista-de-espera" className="portero-seccion" aria-labelledby="portero-lista-titulo">
+                {/* 7 · Cierre y lista de espera */}
+                <section
+                    id="lista-de-espera"
+                    className="portero-seccion portero-final"
+                    aria-labelledby="portero-lista-titulo"
+                >
+                    <div className="portero-fondo portero-fondo--final" aria-hidden="true" />
                     <div className="container portero-angosto">
+                        <p className="portero-lema portero-revelar">
+                            Cada proceso puede ser más simple, cada decisión más inteligente y{' '}
+                            <span className="portero-acento">cada día más productivo.</span>
+                        </p>
                         <div className="portero-lista">
                             {/* VALIDAR: encabezado e introducción del formulario. */}
-                            <h2 id="portero-lista-titulo" className="portero-h2">Lista de espera</h2>
+                            <h2 id="portero-lista-titulo" className="portero-h2">Únete a la lista de espera</h2>
                             <p className="portero-texto">
                                 Déjanos tus datos para sumarte a la lista de espera de Portero.
                             </p>
                             <ListaDeEspera />
                         </div>
-                    </div>
-                </section>
-
-                {/* 6 · Cierre */}
-                <section className="portero-cierre" aria-label="Contacto">
-                    <div className="container">
-                        <p>
+                        <p className="portero-cierre">
                             <a href="/#final-cta">¿Tienes un caso específico? Escríbenos</a>
                         </p>
                     </div>

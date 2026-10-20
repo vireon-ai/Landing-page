@@ -36,7 +36,7 @@ revisa en `localhost:5173` y se aprueba antes de pasar a la siguiente.
 | 3 | Tres anatomías de proyecto | reemplaza a `SocialProof.tsx` | Pendiente · falta contenido real |
 | 4 | Servicios con mini-demos | `Services.tsx` | Pendiente |
 | 5 | 30 días semana por semana | `Methodology.tsx` | Pendiente |
-| 6 | Test con score antes del correo | `Quiz.tsx` | Pendiente · el de mayor impacto |
+| 6 | Test con score antes del correo | `Quiz.tsx` | ✅ Hecho, en claro · falta confirmar qué trae el reporte por correo (lo arma n8n) |
 | 7 | Objeciones reales | `FAQ.tsx` | Pendiente |
 | 8 | Cierre con WhatsApp primero | `FinalCTA.tsx` | Pendiente |
 | 9 | Footer en español | `Footer.tsx` | Pendiente |
@@ -68,7 +68,7 @@ Ninguno de estos toca el diseño y todos se pueden publicar por separado.
       en español ("Services", "Process", "About Us", "Get Started").
 - [ ] Los tres botones "Conocer más" de `Services.tsx` no hacen nada. O apuntan a
       páginas reales o se quitan.
-- [ ] `Quiz.tsx`: el botón de inicio debe desplazar la vista hasta el test. Hoy el
+- [x] `Quiz.tsx`: el botón de inicio debe desplazar la vista hasta el test. Hoy el
       quiz se abre en su lugar y si el botón quedó fuera de pantalla parece que
       no pasó nada.
 - [ ] No hay analítica de ningún tipo. GA4 + Microsoft Clarity, con eventos
@@ -78,7 +78,7 @@ Ninguno de estos toca el diseño y todos se pueden publicar por separado.
       cierra.
 - [x] No hay aviso de privacidad y `FinalCTA.tsx` y `Quiz.tsx` capturan nombre,
       empresa y correo. La LFPDPPP lo exige.
-- [ ] `Quiz.tsx`: las opciones son `<div className="quiz-option">` sin `role` ni
+- [x] `Quiz.tsx`: las opciones son `<div className="quiz-option">` sin `role` ni
       foco. Deben ser `<button>` para que funcionen con teclado.
 - [ ] La escasez de "solo 5 diagnósticos disponibles este mes" está escrita en el
       código y no cambia nunca. O se vuelve real o se quita.

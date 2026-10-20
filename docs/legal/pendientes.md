@@ -53,7 +53,16 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
 **Sitio web**
 
 - ¿El test de madurez guarda las respuestas individuales o sólo el resultado? §3
-  no menciona las respuestas del test.
+  no menciona las respuestas del test. Desde el rediseño del test (tarjeta
+  86bbqm7ku) viajan a n8n, junto al correo, el puntaje, el nivel y el texto de
+  las seis respuestas. Propuesta para §3: "Respuestas al test de madurez y el
+  resultado calculado".
+- §5 dice que se acepta el aviso "al completar el test de madurez". Desde el
+  rediseño (tarjeta 86bbqm7ku) el test se completa y enseña el resultado sin
+  pedir ningún dato; el consentimiento ocurre al enviar el correo, junto al botón
+  que lleva la liga al aviso. Propuesta: "al enviar su correo desde el test de
+  madurez". Cambia el texto legal: lo decide una persona, y va en markdown y
+  componente con fecha nueva.
 - §13 declara que no hay cookies ni analítica. Si más adelante se instala GA4,
   Clarity o el píxel de Meta, §13 deja de ser cierta y hay que actualizarla.
 - ¿Habrá liga de calendario que recabe datos adicionales?

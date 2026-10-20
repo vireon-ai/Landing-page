@@ -226,3 +226,65 @@
     font-weight: 500;
     text-decoration: underline;
 }
+
+/* Si el reporte no sale después de reintentar, lo decimos y ofrecemos WhatsApp. */
+.quiz-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
+    /* Al 6 % la liga de WhatsApp da 4.56:1 sobre este fondo; al 10 % ya
+       reprueba (4.26:1). No subas la mezcla sin volver a medir. */
+    background: color-mix(in srgb, var(--danger) 6%, var(--bg-primary));
+    border: 1px solid color-mix(in srgb, var(--danger) 35%, var(--bg-primary));
+    color: var(--danger);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.quiz-error-icon {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+}
+
+.quiz-error a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--whatsapp);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Estado del envío para lectores de pantalla y a la vista: "Enviando…" y "Listo". */
+.quiz-estado {
+    min-height: 1.4em;
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.quiz-estado:empty {
+    min-height: 0;
+}
+
+/* El ícono de carga del botón. Con movimiento reducido se queda quieto. */
+.animate-spin {
+    animation: quiz-girar 1s linear infinite;
+}
+
+@keyframes quiz-girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-spin {
+        animation: none;
+    }
+}

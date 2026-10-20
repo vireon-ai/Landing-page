@@ -63,9 +63,11 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
   formularios".
 - §3 "A través del sitio web" no declara el mensaje libre del formulario de
   contacto (el campo "¿Cómo te podemos ayudar?" de `FinalCTA.tsx`).
-- Si un envío falla, nombre, correo y WhatsApp quedan en el `localStorage` del
-  navegador hasta que un reintento sale bien (`src/leads.ts`). No contradice §13,
-  pero el aviso no lo menciona.
+- Mientras un envío no sale bien, nombre, correo y WhatsApp (formularios de
+  contacto y de Portero) o correo, score y respuestas (test de madurez) quedan en
+  el `localStorage` del navegador, sin vencimiento y hasta diez por formulario
+  (`src/leads.ts`). Se guardan antes del primer intento y se borran cuando uno
+  sale bien. No contradice §13, pero el aviso no lo menciona.
 - ~~**Lista de espera de Portero** (`/soluciones/portero/`).~~ Resuelto en la
   versión 1.3 (14 de octubre de 2026): §2 incluye el formulario de la lista de
   espera, §3 suma el WhatsApp opcional y el volumen de prospectos al mes, §4 suma

@@ -159,9 +159,9 @@ const FinalCTA = () => {
                                     <div className="form-error" role="alert">
                                         <AlertTriangle size={18} className="form-error-icon" />
                                         <span>
-                                            No pudimos enviar tu solicitud en este momento. Guardamos tus datos
-                                            y lo reintentaremos automáticamente. Si prefieres no esperar,
-                                            escríbenos a{' '}
+                                            No pudimos enviar tu solicitud en este momento. Tus datos quedaron
+                                            guardados en este navegador y los volveremos a enviar la próxima vez
+                                            que abras esta página. Si prefieres no esperar, escríbenos a{' '}
                                             <a href={`mailto:${CORREO_CONTACTO}?subject=Solicitud%20de%20diagn%C3%B3stico%20gratuito`}>
                                                 {CORREO_CONTACTO}
                                             </a>.

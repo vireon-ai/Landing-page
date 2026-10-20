@@ -1,6 +1,6 @@
 ---
 name: auditor-leads
-description: Audita todo lo que en la landing de Vireon recaba, envía o guarda datos de una persona: los formularios del test (Quiz.tsx) y del cierre (FinalCTA.tsx), los envíos a los webhooks de n8n, localStorage, la analítica y el aviso de privacidad. Busca leads que se pierden en silencio, datos personales mal manejados y promesas del aviso que el código deja de cumplir. Úsalo en toda tarjeta cuyo diff toque esas piezas. Solo lee y reporta; nunca edita.
+description: "Audita todo lo que en la landing de Vireon recaba, envía o guarda datos de una persona: los formularios del test (Quiz.tsx) y del cierre (FinalCTA.tsx), los envíos a los webhooks de n8n, localStorage, la analítica y el aviso de privacidad. Busca leads que se pierden en silencio, datos personales mal manejados y promesas del aviso que el código deja de cumplir. Úsalo en toda tarjeta cuyo diff toque esas piezas. Solo lee y reporta; nunca edita."
 tools: Read, Grep, Glob, Bash
 model: opus
 ---

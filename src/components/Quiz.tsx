@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import { ArrowRight, ArrowLeft, CheckCircle2, RefreshCw, Mail, Check, Loader2 } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { ArrowRight, ArrowLeft, CheckCircle2, RefreshCw, Mail, Check, Loader2, AlertTriangle, MessageCircle } from 'lucide-react';
+import { whatsappUrl } from '../config';
+import { DESTINO_TEST, enviarConReintentos, guardarPendiente, reintentarPendientes } from '../leads';
 import './Quiz.css';
 
 interface Question {
@@ -126,6 +128,12 @@ const Quiz = () => {
     const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
     const [hasStarted, setHasStarted] = useState(() => Boolean(localStorage.getItem('quizStep')));
+    // Candado síncrono contra el doble clic: el estado de React tarda un render
+    // en actualizarse y dos clics seguidos alcanzarían a mandar dos filas.
+    const enviando = useRef(false);
+
+    // Al cargar la página reintentamos en segundo plano los resultados que quedaron guardados.
+    useEffect(() => reintentarPendientes(DESTINO_TEST), []);
 
     // Save progress
     useEffect(() => {
@@ -170,38 +178,36 @@ const Quiz = () => {
     };
 
     const handleSendResults = async () => {
-        if (emailStatus === 'sending' || emailStatus === 'success') return;
-
+        if (enviando.current || emailStatus === 'success') return;
+        enviando.current = true;
         setEmailStatus('sending');
+
         const finalScore = score;
         const resultData = getResultContent();
+        // Mismos nombres y mismos valores (todos texto) que viajaban antes en la
+        // URL, para que la hoja siga llenando las mismas columnas.
+        const resultado = {
+            email: email.trim(),
+            score: finalScore.toString(),
+            scoreNormalized: Math.round(finalScore / 10).toString(),
+            answers: JSON.stringify(answers),
+            submittedAt: new Date().toISOString(),
+            badge: resultData.badge,
+            message: resultData.message,
+            cta: resultData.cta
+        };
 
-        try {
-            const queryParams = new URLSearchParams({
-                email,
-                score: finalScore.toString(),
-                scoreNormalized: Math.round(finalScore / 10).toString(),
-                answers: JSON.stringify(answers),
-                submittedAt: new Date().toISOString(),
-                badge: resultData.badge,
-                message: resultData.message,
-                cta: resultData.cta
-            });
+        const enviado = await enviarConReintentos(resultado, DESTINO_TEST);
 
-            await fetch(`https://n8n.srv946409.hstgr.cloud/webhook/e1a1bbba-2b28-4a2a-8942-cb434cd6d280?${queryParams.toString()}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
+        if (enviado) {
+            // Se queda en "¡Enviado!": volver a habilitar el botón invitaría a mandar la misma fila otra vez.
             setEmailStatus('success');
-            setTimeout(() => setEmailStatus('idle'), 5000); // Reset after 5 seconds
-        } catch (error) {
-            console.error('Error sending results:', error);
+        } else {
+            // No perdemos el resultado: queda guardado y se reintenta al recargar.
+            guardarPendiente(resultado, DESTINO_TEST);
             setEmailStatus('error');
-            setTimeout(() => setEmailStatus('idle'), 3000); // Reset error easier
         }
+        enviando.current = false;
     };
 
     const getResultContent = () => {
@@ -367,6 +373,7 @@ const Quiz = () => {
                                         <input
                                             type="email"
                                             placeholder="Tu correo empresarial"
+                                            aria-label="Tu correo empresarial"
                                             className="email-input"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
@@ -421,16 +428,16 @@ const Quiz = () => {
                                 <button className="btn btn-primary" style={{ width: '100%' }}>
                                     {result.cta} <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
                                 </button>
-                                <div style={{ display: 'flex', gap: '1rem' }}>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
                                     <button className="btn btn-secondary" onClick={() => window.location.reload()}>
                                         <RefreshCw size={18} style={{ marginRight: '0.5rem' }} /> Reintentar
                                     </button>
                                     <button
                                         className="btn btn-secondary"
                                         onClick={handleSendResults}
-                                        disabled={emailStatus === 'sending' || emailStatus === 'success'}
+                                        aria-disabled={emailStatus === 'sending' || emailStatus === 'success'}
                                         style={{
-                                            minWidth: '200px',
+                                            minWidth: 'min(200px, 100%)',
                                             transition: 'all 0.3s ease',
                                             backgroundColor: emailStatus === 'success' ? '#dcfce7' : '',
                                             color: emailStatus === 'success' ? '#166534' : '',
@@ -460,6 +467,29 @@ const Quiz = () => {
                                         )}
                                     </button>
                                 </div>
+                                <p className="quiz-estado" role="status">
+                                    {emailStatus === 'sending' && 'Enviando tu reporte…'}
+                                    {emailStatus === 'success' && `Listo. Te enviaremos el reporte a ${email.trim()}.`}
+                                </p>
+                                {emailStatus === 'error' && (
+                                    <div className="quiz-error" role="alert">
+                                        <AlertTriangle size={18} className="quiz-error-icon" aria-hidden="true" />
+                                        <span>
+                                            No pudimos enviar tu reporte. Tu resultado quedó guardado en este
+                                            navegador y lo volveremos a enviar la próxima vez que abras esta
+                                            página. Si lo quieres ya,{' '}
+                                            <a
+                                                href={whatsappUrl(`Hola Vireon, hice el test de madurez (resultado: ${Math.round(score / 10)} de 100, ${result.badge}) y no me llegó el reporte.`)}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                aria-label="Escríbenos por WhatsApp (se abre en otra pestaña)"
+                                            >
+                                                <MessageCircle size={16} aria-hidden="true" />
+                                                escríbenos por WhatsApp
+                                            </a>.
+                                        </span>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

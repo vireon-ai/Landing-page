@@ -38,8 +38,8 @@
 
 .svc:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary-light);
+    box-shadow: var(--shadow-xl), var(--glow-primary);
+    border-color: var(--border-tint);
 }
 
 .svc-title {

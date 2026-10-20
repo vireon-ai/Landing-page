@@ -6,6 +6,7 @@ import LiveFlow from './LiveFlow';
 const Hero = () => {
     return (
         <section className="hero">
+            <div className="fondo fondo--halos" aria-hidden="true" />
             <div className="hero-bg">
                 <DynamicBackground />
             </div>

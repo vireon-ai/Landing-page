@@ -36,10 +36,14 @@
 }
 
 /* El turquesa de marca sobre fondo claro va en --primary-deep, no en --primary:
-   #48A9A6 sobre #f8fafc da 2.80:1 y reprueba WCAG; --primary-deep da 4.40:1,
-   suficiente para texto de este tamaño. */
+   --primary sobre --bg-secondary da 2.80:1 y reprueba WCAG. El degradado va de
+   --primary-deep a --secondary y los dos extremos pasan para texto grande. */
 .hero-title-accent {
     color: var(--primary-deep);
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-copy {
@@ -48,9 +52,21 @@
     align-items: flex-start;
 }
 
+/* Pastilla de vidrio sobre los halos, como el kicker de Portero. */
 .hero-badge {
     margin-bottom: var(--spacing-lg);
+    padding: 0.4rem 0.95rem 0.4rem 0.75rem;
+    background: var(--glass);
+    border-color: var(--border-tint);
+    /* Texto oscuro: sobre el vidrio teñido --primary-deep baja de 4.5:1. */
+    color: var(--text-primary);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-sm);
     animation: fade-in-up 0.8s ease-out;
+}
+
+.hero-badge svg {
+    color: var(--primary-deep);
 }
 
 .hero-title {

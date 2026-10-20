@@ -4,14 +4,16 @@
     padding: var(--spacing-2xl) 0;
 }
 
+/* --gradient-deep y no --gradient-primary: todo el recuadro lleva texto blanco
+   y el turquesa plano con blanco encima da 2.80:1. */
 .cta-box {
-    background: var(--gradient-primary);
+    background: var(--gradient-deep);
     border-radius: var(--radius-xl);
     padding: var(--spacing-2xl) var(--spacing-lg);
     color: white;
     position: relative;
     overflow: hidden;
-    box-shadow: var(--shadow-2xl);
+    box-shadow: var(--shadow-2xl), var(--glow-primary);
 }
 
 .cta-content {
@@ -29,7 +31,7 @@
 
 .cta-subtitle {
     font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: white;
     margin-bottom: var(--spacing-xl);
 }
 

@@ -31,15 +31,16 @@ const steps = [
 const Methodology = () => {
     return (
         <section id="methodology" className="methodology">
+            <div className="fondo fondo--reticula" aria-hidden="true" />
             <div className="container">
                 <div className="text-center">
-                    <h2 className="section-title">Nuestro Proceso</h2>
+                    <h2 className="section-title">Nuestro <span className="texto-degradado">Proceso</span></h2>
                     <p className="section-subtitle">
                         Un enfoque estructurado para transformar tu negocio.
                     </p>
                 </div>
 
-                <div className="process-grid">
+                <div className="process-grid stagger-children">
                     {steps.map((step, index) => (
                         <div key={step.number} className="process-card">
                             <div className="process-icon-wrapper">
@@ -48,7 +49,7 @@ const Methodology = () => {
                             </div>
                             <h3 className="process-title">{step.title}</h3>
                             <p className="process-description">{step.description}</p>
-                            {index < steps.length - 1 && <div className="process-connector"></div>}
+                            {index < steps.length - 1 && <div className="process-connector" aria-hidden="true"></div>}
                         </div>
                     ))}
                 </div>

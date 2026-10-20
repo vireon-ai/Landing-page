@@ -38,6 +38,17 @@
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   --gradient-bg: linear-gradient(to bottom, #f0fdfa, #ffffff);
+  /* Para superficies de color con TEXTO BLANCO encima. --gradient-primary
+     reprueba ahí (blanco sobre --primary da 2.80:1); este arranca en
+     --primary-deep (4.60:1) y termina en un azul más hondo (5.6:1). */
+  --gradient-deep: linear-gradient(135deg, var(--primary-deep) 0%, color-mix(in srgb, var(--secondary) 85%, black) 100%);
+  /* Para texto de título en degradado sobre fondo claro: los dos extremos
+     pasan 3:1, el mínimo para texto grande. No lo uses en texto corrido. */
+  --gradient-text: linear-gradient(90deg, var(--primary-deep), var(--secondary));
+  /* Brillo turquesa bajo tarjetas y botones destacados. */
+  --glow-primary: 0 24px 60px -28px color-mix(in srgb, var(--primary) 55%, transparent);
+  --border-tint: color-mix(in srgb, var(--primary) 28%, var(--border-color));
+  --glass: color-mix(in srgb, var(--bg-primary) 82%, transparent);
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -64,6 +75,7 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
 
 * {
@@ -123,6 +135,14 @@ button {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Palabra destacada de un título. Solo en títulos: ver --gradient-text. */
+.texto-degradado {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .text-center {

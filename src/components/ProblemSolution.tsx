@@ -4,9 +4,10 @@ import './ProblemSolution.css';
 const ProblemSolution = () => {
     return (
         <section id="problem" className="problem-solution">
+            <div className="fondo fondo--puntos" aria-hidden="true" />
             <div className="container">
                 <div className="text-center">
-                    <h2 className="section-title">¿Por qué las PyMEs luchan con la IA?</h2>
+                    <h2 className="section-title">¿Por qué las PyMEs luchan <span className="texto-degradado">con la IA?</span></h2>
                     <p className="section-subtitle">
                         La mayoría de las empresas saben que necesitan automatizar, pero el camino tradicional es costoso y lento.
                     </p>
@@ -46,6 +47,7 @@ const ProblemSolution = () => {
 
                     {/* Solution Side */}
                     <div className="comparison-card solution-card">
+                        <div className="fondo fondo--banda" aria-hidden="true" />
                         <div className="card-header">
                             <h3>El Método Vireon</h3>
                             <p>Agilidad y resultados tangibles</p>

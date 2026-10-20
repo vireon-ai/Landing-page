@@ -30,17 +30,19 @@ const FAQ = () => {
 
     return (
         <section id="faq" className="faq-section">
+            <div className="fondo fondo--puntos" aria-hidden="true" />
             <div className="container faq-container">
                 <div className="text-center">
-                    <h2 className="section-title">Preguntas Frecuentes</h2>
+                    <h2 className="section-title">Preguntas <span className="texto-degradado">Frecuentes</span></h2>
                     <p className="section-subtitle">Resolvemos tus dudas antes de empezar.</p>
                 </div>
 
                 <div className="faq-list">
                     {faqs.map((faq, index) => (
-                        <div key={index} className="faq-item">
+                        <div key={index} className={`faq-item ${openIndex === index ? 'faq-item--abierta' : ''}`}>
                             <button
                                 className="faq-question"
+                                aria-expanded={openIndex === index}
                                 onClick={() => toggleFAQ(index)}
                             >
                                 {faq.question}

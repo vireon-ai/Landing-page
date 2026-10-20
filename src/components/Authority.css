@@ -2,44 +2,73 @@
     background: var(--bg-secondary);
 }
 
+/* Cuatro tarjetas: en fila en escritorio y en 2x2 en tableta, para que nunca
+   quede una sola huérfana abajo como con auto-fit. */
 .authority-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--spacing-lg);
     margin-top: var(--spacing-xl);
 }
 
+@media (max-width: 1199px) {
+    .authority-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .authority-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .authority-card {
-    background: white;
-    padding: var(--spacing-xl);
+    background: var(--bg-primary);
+    padding: var(--spacing-xl) var(--spacing-lg);
     border-radius: var(--radius-lg);
-    text-align: center;
+    text-align: left;
     border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
     transition: all var(--transition-normal);
 }
 
 .authority-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--primary);
+    box-shadow: var(--shadow-lg), var(--glow-primary);
+    border-color: var(--border-tint);
 }
 
+/* Icono en un cuadro redondeado con el degradado de marca, como los
+   beneficios de Portero. */
 .authority-icon {
-    width: 4rem;
-    height: 4rem;
-    background: var(--bg-tertiary);
-    border-radius: 50%;
+    width: 3.25rem;
+    height: 3.25rem;
+    background: var(--gradient-deep);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto var(--spacing-md);
-    color: var(--primary);
-    transition: all var(--transition-normal);
+    margin: 0 0 var(--spacing-md);
+    color: white;
+    box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--primary) 70%, transparent);
+    transition: transform var(--transition-normal);
+}
+
+.authority-icon svg {
+    width: 1.6rem;
+    height: 1.6rem;
 }
 
 .authority-card:hover .authority-icon {
-    background: var(--primary);
-    color: white;
+    transform: rotate(-6deg) scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .authority-card:hover,
+    .authority-card:hover .authority-icon {
+        transform: none;
+    }
 }
 
 .authority-card h3 {

@@ -10,20 +10,35 @@
 }
 
 .comparison-card {
+    position: relative;
+    overflow: hidden;
     padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
     transition: all var(--transition-normal);
 }
 
+/* Lo de hoy: tarjeta apagada, con un filo rojo tenue arriba. */
 .problem-card {
-    background: white;
+    background: var(--bg-primary);
     border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
 }
 
+.problem-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--danger) 55%, transparent), transparent);
+}
+
+/* Con Vireon: --gradient-deep y no --gradient-primary, porque lleva texto
+   blanco encima (ver index.css). La retícula y los destellos van en la capa
+   .fondo--banda. */
 .solution-card {
-    background: var(--gradient-primary);
+    background: var(--gradient-deep);
     color: white;
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-xl), var(--glow-primary);
     transform: scale(1.02);
 }
 

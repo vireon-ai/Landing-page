@@ -53,8 +53,10 @@ const FinalCTA = () => {
 
     return (
         <section id="final-cta" className="final-cta">
+            <div className="fondo fondo--halos" aria-hidden="true" />
             <div className="container">
                 <div className="cta-box">
+                    <div className="fondo fondo--banda" aria-hidden="true" />
                     <div className="cta-content">
                         <div className="urgency-badge">
                             <span className="pulsing-dot"></span>

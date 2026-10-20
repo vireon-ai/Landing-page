@@ -16,12 +16,14 @@
     margin-bottom: 3vh;
 }
 
+/* Vidrio casi opaco sobre los halos, con borde teñido y brillo turquesa. */
 .quiz-card {
-    background: white;
-    border: 1px solid var(--border-color);
+    background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
+    border: 1px solid var(--border-tint);
     border-radius: var(--radius-xl);
     padding: 4vh 4vw;
-    box-shadow: var(--shadow-xl);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-xl), var(--glow-primary);
     position: relative;
     overflow: hidden;
     min-height: 50vh;

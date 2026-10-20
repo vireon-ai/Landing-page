@@ -21,6 +21,7 @@ const ROICalculator = () => {
 
     return (
         <section id="roi" className="roi-section">
+            <div className="fondo fondo--banda" aria-hidden="true" />
             <div className="container roi-container">
                 <div className="roi-content">
                     <h2>¿Cuánto dinero estás perdiendo hoy?</h2>

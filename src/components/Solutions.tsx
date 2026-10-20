@@ -46,9 +46,10 @@ const SOLUCIONES: Solucion[] = [
 const Solutions = () => {
     return (
         <section id="soluciones" className="soluciones" aria-labelledby="soluciones-titulo">
+            <div className="fondo fondo--reticula" aria-hidden="true" />
             <div className="container">
                 <div className="text-center">
-                    <h2 id="soluciones-titulo" className="section-title">Vireon Solutions</h2>
+                    <h2 id="soluciones-titulo" className="section-title">Vireon <span className="texto-degradado">Solutions</span></h2>
                     {/* VALIDAR: copy del brief, tal cual. "listas para incorporarse" y, abajo,
                         "empieces a usarlas" pueden leerse como "disponibles hoy" junto a la
                         etiqueta "Próximamente". Alternativa: "pensadas para incorporarse a tu

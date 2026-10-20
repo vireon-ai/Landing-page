@@ -4,24 +4,25 @@ import './SocialProof.css';
 const SocialProof = () => {
     return (
         <section className="social-proof">
+            <div className="fondo fondo--reticula" aria-hidden="true" />
             <div className="container">
                 <div className="impact-grid">
 
-                    <div className="impact-item">
+                    <div className="impact-item tarjeta-brillo tarjeta-brillo--contorno">
                         <div className="impact-icon-wrapper">
                             <h3>70%</h3>
                         </div>
                         <h4>Mayor eficiencia operacional</h4>
                         <p>Las empresas reportan que la IA ha incrementado su eficiencia operativa.</p>
                     </div>
-                    <div className="impact-item">
+                    <div className="impact-item tarjeta-brillo tarjeta-brillo--contorno">
                         <div className="impact-icon-wrapper">
                             <h3>65%</h3>
                         </div>
                         <h4>Mejores decisiones de negocio</h4>
                         <p>Los líderes afirman que la IA mejora la toma de decisiones mediante análisis de datos.</p>
                     </div>
-                    <div className="impact-item">
+                    <div className="impact-item tarjeta-brillo tarjeta-brillo--contorno">
                         <div className="impact-icon-wrapper">
                             <h3>3.7x</h3>
                         </div>

@@ -31,16 +31,23 @@ const steps = [
 const Methodology = () => {
     return (
         <section id="methodology" className="methodology">
+            <div className="fondo fondo--reticula" aria-hidden="true" />
             <div className="container">
                 <div className="text-center">
-                    <h2 className="section-title">Nuestro Proceso</h2>
+                    <h2 className="section-title">Nuestro <span className="texto-degradado">Proceso</span></h2>
                     <p className="section-subtitle">
                         Un enfoque estructurado para transformar tu negocio.
                     </p>
                 </div>
 
-                <div className="process-grid">
-                    {steps.map((step, index) => (
+                <div className="process-grid stagger-children">
+                    {/* Un solo riel detrás de los iconos, fuera de las tarjetas:
+                        si viviera dentro de cada una, al levantarse la tarjeta
+                        la línea quedaría pintada encima del icono siguiente. */}
+                    <div className="process-rail" aria-hidden="true">
+                        {steps.slice(1).map((step) => <span key={step.number} />)}
+                    </div>
+                    {steps.map((step) => (
                         <div key={step.number} className="process-card">
                             <div className="process-icon-wrapper">
                                 {step.icon}
@@ -48,7 +55,6 @@ const Methodology = () => {
                             </div>
                             <h3 className="process-title">{step.title}</h3>
                             <p className="process-description">{step.description}</p>
-                            {index < steps.length - 1 && <div className="process-connector"></div>}
                         </div>
                     ))}
                 </div>

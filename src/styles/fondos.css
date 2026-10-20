@@ -1,0 +1,193 @@
+/* Capas de fondo y tarjetas con brillo para las secciones de la landing.
+   Mismo lenguaje que la página de Portero: halos de color de marca, puntos y
+   retículas finas que se desvanecen hacia las orillas. Todo en tema claro; las
+   capas son decorativas (aria-hidden) y no se mueven solas.
+
+   Uso: <div className="fondo fondo--halos" aria-hidden="true" /> como primer hijo
+   de la sección. Lo que viene después queda encima solo. */
+
+.fondo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.fondo::before,
+.fondo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+/* Especificidad cero: cualquier regla de la sección que fije su propia
+   posición (p. ej. un fondo absoluto) gana sin pelear. */
+:where(.fondo ~ *) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Halos en tres esquinas y puntos al centro. Para las secciones de entrada y
+   de cierre, donde conviene más color. */
+.fondo--halos::before {
+    background:
+        radial-gradient(38% 48% at 10% 12%, color-mix(in srgb, var(--primary) 20%, transparent), transparent 70%),
+        radial-gradient(34% 44% at 90% 20%, color-mix(in srgb, var(--secondary) 16%, transparent), transparent 70%),
+        radial-gradient(30% 36% at 70% 95%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+}
+
+.fondo--halos::after,
+.fondo--puntos::after {
+    background-image: radial-gradient(color-mix(in srgb, var(--secondary) 28%, transparent) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 15%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 15%, transparent 75%);
+}
+
+/* Puntos con dos halos suaves. El fondo de uso general. */
+.fondo--puntos::before {
+    background:
+        radial-gradient(40% 50% at 88% 25%, color-mix(in srgb, var(--primary) 13%, transparent), transparent 70%),
+        radial-gradient(36% 46% at 8% 85%, color-mix(in srgb, var(--secondary) 11%, transparent), transparent 70%);
+}
+
+/* Retícula de líneas, como papel milimétrico, con un halo arriba al centro. */
+.fondo--reticula::before {
+    background: radial-gradient(50% 40% at 50% 20%, color-mix(in srgb, var(--primary) 11%, transparent), transparent 75%);
+}
+
+.fondo--reticula::after {
+    background-image:
+        linear-gradient(to right, color-mix(in srgb, var(--secondary) 11%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in srgb, var(--secondary) 11%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 80%);
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 80%);
+}
+
+/* Sobre una superficie de color (--gradient-deep) con texto blanco: retícula
+   blanca muy tenue y dos destellos de luz. No baja el contraste del texto
+   porque solo aclara las orillas. */
+.fondo--banda::before {
+    background:
+        radial-gradient(40% 55% at 0% 0%, color-mix(in srgb, var(--primary-light) 40%, transparent), transparent 70%),
+        radial-gradient(35% 45% at 100% 100%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+    opacity: 0.55;
+}
+
+.fondo--banda::after {
+    background-image:
+        linear-gradient(to right, rgb(255 255 255 / 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(255 255 255 / 0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 10%, transparent 85%);
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 10%, transparent 85%);
+}
+
+/* Tarjeta con brillo ---------------------------------------------------------
+   Base: un halo de color en la esquina y brillo turquesa al pasar el cursor.
+   Cada sección elige además UNA variante, para que no todas reaccionen igual:
+
+     --linea     una línea de degradado se dibuja arriba (Servicios)
+     --contorno  todo el borde se enciende en degradado (cifras)
+     --relleno   un tinte de marca llena la tarjeta desde abajo (Por qué Vireon)
+
+   La tarjeta necesita su propio fondo y radio. Recorta lo que sale (overflow),
+   así la línea y el tinte siguen las esquinas redondeadas. */
+
+.tarjeta-brillo {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.tarjeta-brillo::before {
+    content: '';
+    position: absolute;
+    top: -45%;
+    right: -35%;
+    z-index: -1;
+    width: 75%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--primary) 15%, transparent), transparent 70%);
+    pointer-events: none;
+    transition: transform var(--transition-slow);
+}
+
+.tarjeta-brillo:hover {
+    border-color: var(--border-tint);
+    box-shadow: var(--shadow-lg), var(--glow-primary);
+}
+
+.tarjeta-brillo:hover::before {
+    transform: scale(1.25);
+}
+
+.tarjeta-brillo--linea::after,
+.tarjeta-brillo--contorno::after,
+.tarjeta-brillo--relleno::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Línea superior. */
+.tarjeta-brillo--linea::after {
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary) 60%, var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-slow);
+}
+
+.tarjeta-brillo--linea:hover::after,
+.tarjeta-brillo--linea:focus-within::after {
+    transform: scaleX(1);
+}
+
+/* Contorno completo: un borde de degradado de 2px recortado con máscara, que
+   aparece encima del borde gris. */
+.tarjeta-brillo--contorno::after {
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary) 55%, var(--accent));
+    -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.tarjeta-brillo--contorno:hover::after,
+.tarjeta-brillo--contorno:focus-within::after {
+    opacity: 1;
+}
+
+/* Relleno: un tinte claro de marca sube desde abajo y cubre la tarjeta. Es
+   tenue a propósito: el texto oscuro conserva su contraste encima. */
+.tarjeta-brillo--relleno::after {
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top,
+            color-mix(in srgb, var(--primary) 16%, var(--bg-primary)),
+            color-mix(in srgb, var(--secondary) 6%, var(--bg-primary)));
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--transition-slow);
+}
+
+.tarjeta-brillo--relleno:hover::after,
+.tarjeta-brillo--relleno:focus-within::after {
+    transform: scaleY(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tarjeta-brillo::before,
+    .tarjeta-brillo::after {
+        transition: none;
+    }
+}

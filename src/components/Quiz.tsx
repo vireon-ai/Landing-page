@@ -242,6 +242,7 @@ const Quiz = () => {
 
     return (
         <section id="quiz" className="quiz-section">
+            <div className="fondo fondo--halos" aria-hidden="true" />
             <div className="container quiz-container">
                 {!hasStarted ? (
                     <div className="quiz-card text-center">

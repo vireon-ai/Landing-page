@@ -62,10 +62,11 @@ const Services = () => {
 
     return (
         <section id="services" ref={sectionRef} className={`services ${inView ? 'in' : ''}`}>
+            <div className="fondo fondo--puntos" aria-hidden="true" />
             <div className="container">
                 <div className="text-center">
                     <p className="services-eyebrow">Qué construimos</p>
-                    <h2 className="section-title">Así llevamos la IA a tu negocio</h2>
+                    <h2 className="section-title">Así llevamos <span className="texto-degradado">la IA</span> a tu negocio</h2>
                     <p className="section-subtitle">
                         Tres piezas que diseñamos contigo y que corren en tu operación todos los días.
                     </p>
@@ -73,7 +74,7 @@ const Services = () => {
 
                 <div className="services-grid">
                     {/* 1 · Automatización de procesos */}
-                    <article className="svc">
+                    <article className="svc tarjeta-brillo tarjeta-brillo--linea">
                         <div className="svc-demo" aria-hidden="true">
                             <div className="svc-apps">
                                 <span className="svc-chip">Formulario</span>
@@ -95,7 +96,7 @@ const Services = () => {
                     </article>
 
                     {/* 2 · Agentes de IA */}
-                    <article className="svc">
+                    <article className="svc tarjeta-brillo tarjeta-brillo--linea">
                         <div className="svc-demo" aria-hidden="true">
                             <div className="svc-chat">
                                 <div className="svc-bub svc-bub--them">¿Tienen la 27 en negro? ¿Cuándo me llega a Mérida?</div>
@@ -113,7 +114,7 @@ const Services = () => {
                     </article>
 
                     {/* 3 · Dashboards inteligentes */}
-                    <article className="svc">
+                    <article className="svc tarjeta-brillo tarjeta-brillo--linea">
                         <div className="svc-demo" aria-hidden="true">
                             <div className="svc-kpis">
                                 <div className="svc-kpi">

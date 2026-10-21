@@ -32,7 +32,7 @@ revisa en `localhost:5173` y se aprueba antes de pasar a la siguiente.
 |---|---|---|---|
 | 1 | Hero con flujo en vivo | `Hero.tsx` + `LiveFlow.tsx` | ✅ Hecho, en claro |
 | — | *(orden sugerido de aquí en adelante: 6 → 2 → 7 → 8 → 4 → 5 → 3 → 9)* | | |
-| 2 | ¿Qué te está costando? (calculadora arriba) | `ROICalculator.tsx` + orden en `App.tsx` | Pendiente |
+| 2 | ¿Qué te está costando? (calculadora arriba) | `ROICalculator.tsx` + orden en `App.tsx` | Ya va en la posición 2 (reorganización en cuatro actos de `App.tsx`) · falta rediseñar el resultado |
 | 3 | Tres anatomías de proyecto | reemplaza a `SocialProof.tsx` | Pendiente · falta contenido real |
 | 4 | Servicios con mini-demos | `Services.tsx` | Pendiente |
 | 5 | 30 días semana por semana | `Methodology.tsx` | Pendiente |

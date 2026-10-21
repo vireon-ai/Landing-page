@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useId } from 'react';
 import { AlertTriangle, ArrowRight } from 'lucide-react';
 import './ROICalculator.css';
 
@@ -6,6 +6,9 @@ const ROICalculator = () => {
     const [employees, setEmployees] = useState(5);
     const [hoursPerWeek, setHoursPerWeek] = useState(10);
     const [hourlyRate, setHourlyRate] = useState(150);
+    // Cada deslizador amarrado a su etiqueta: sin esto el lector de pantalla
+    // anuncia tres controles sin nombre.
+    const id = useId();
 
     const annualLoss = useMemo(() => {
         return employees * hoursPerWeek * hourlyRate * 52;
@@ -47,9 +50,10 @@ const ROICalculator = () => {
 
                 <div className="roi-calculator-card">
                     <div className="input-group">
-                        <label>Número de Empleados Administrativos</label>
+                        <label htmlFor={`${id}-empleados`}>Número de Empleados Administrativos</label>
                         <div className="range-container">
                             <input
+                                id={`${id}-empleados`}
                                 type="range"
                                 min="1"
                                 max="50"
@@ -61,9 +65,10 @@ const ROICalculator = () => {
                     </div>
 
                     <div className="input-group">
-                        <label>Horas Manuales/Repetitivas por Semana (por persona)</label>
+                        <label htmlFor={`${id}-horas`}>Horas Manuales/Repetitivas por Semana (por persona)</label>
                         <div className="range-container">
                             <input
+                                id={`${id}-horas`}
                                 type="range"
                                 min="1"
                                 max="40"
@@ -75,9 +80,10 @@ const ROICalculator = () => {
                     </div>
 
                     <div className="input-group">
-                        <label>Costo Promedio por Hora ($ MXN)</label>
+                        <label htmlFor={`${id}-costo`}>Costo Promedio por Hora ($ MXN)</label>
                         <div className="range-container">
                             <input
+                                id={`${id}-costo`}
                                 type="range"
                                 min="50"
                                 max="1000"

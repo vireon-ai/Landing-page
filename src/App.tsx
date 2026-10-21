@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import ROICalculator from './components/ROICalculator';
 import SocialProof from './components/SocialProof';
 import ProblemSolution from './components/ProblemSolution';
-import Quiz from './components/Quiz';
-import Services from './components/Services';
 import Solutions from './components/Solutions';
+import Services from './components/Services';
 import Methodology from './components/Methodology';
 import Authority from './components/Authority';
-import ROICalculator from './components/ROICalculator';
+import Quiz from './components/Quiz';
 //import ProofOfConcept from './components/ProofOfConcept';
 import FAQ from './components/FAQ';
 //import Resources from './components/Resources';
@@ -43,19 +43,30 @@ function App() {
   return (
     <div className="app">
       <Navbar />
+      {/* La página cuenta una historia en cuatro actos. Los fondos alternan
+          claro y gris en este orden (salvo FAQ y el cierre, que comparten el
+          gris): si mueves una sección, revisa que no queden dos iguales juntas. */}
       <main>
+        {/* 1 · El problema: la promesa, lo que cuesta no actuar, lo que gana
+            quien sí lo hace y por qué a las PyMEs se les atora. */}
         <Hero />
+        <ROICalculator />
         <SocialProof />
         <ProblemSolution />
-        <Quiz />
-        <Services />
+
+        {/* 2 · La solución: primero lo que ya está hecho para un giro (Portero),
+            luego lo que construimos a la medida y cómo trabajamos. */}
         <Solutions />
+        <Services />
         <Methodology />
+
+        {/* 3 · La confianza. */}
         <Authority />
-        <ROICalculator />
 
+        {/* 4 · La acción: el test para saber por dónde empezar, las dudas y
+            el cierre. */}
+        <Quiz />
         <FAQ />
-
         <FinalCTA />
       </main>
       <Footer />

@@ -50,18 +50,18 @@ const Solutions = () => {
             <div className="container">
                 <div className="text-center">
                     <h2 id="soluciones-titulo" className="section-title">Vireon <span className="texto-degradado">Solutions</span></h2>
-                    {/* VALIDAR: copy del brief, tal cual. "listas para incorporarse" y, abajo,
-                        "empieces a usarlas" pueden leerse como "disponibles hoy" junto a la
-                        etiqueta "Próximamente". Alternativa: "pensadas para incorporarse a tu
-                        operación". También choca con FAQ.tsx ("no en plantillas genéricas") y
-                        ProblemSolution.tsx ("100% Personalizadas"). */}
+                    {/* VALIDAR: copy del brief, con dos cambios para que no se lea como
+                        "disponible hoy" junto a la etiqueta "Próximamente": "listas para
+                        incorporarse" pasó a "pensadas para incorporarse" y se quitó "para que
+                        empieces a usarlas". Sigue chocando con FAQ.tsx ("no en plantillas
+                        genéricas"). */}
                     <p className="soluciones-subtitulo">
-                        Soluciones prediseñadas para giros específicos, listas para incorporarse a tu operación.
+                        Soluciones prediseñadas para giros específicos, pensadas para incorporarse a tu operación.
                     </p>
                     <p className="soluciones-intro">
                         No todo problema necesita un desarrollo desde cero. Nuestras soluciones ya están
                         pensadas para las necesidades de un giro y se configuran con la información y el
-                        estilo de tu empresa, para que empieces a usarlas sin meses de desarrollo.
+                        estilo de tu empresa, sin meses de desarrollo.
                     </p>
                 </div>
 
@@ -106,8 +106,10 @@ const Solutions = () => {
                     ))}
                 </div>
 
+                {/* Puente a la sección que sigue: lo hecho para un giro, y si no es
+                    el tuyo, lo que construimos a la medida. */}
                 <p className="soluciones-pie">
-                    <a href="#final-cta">¿Tienes un caso específico? Escríbenos</a>
+                    <a href="#services">¿Tu giro es otro? Conoce lo que hacemos a la medida</a>
                 </p>
             </div>
         </section>

@@ -59,8 +59,47 @@
     transition: color var(--transition-fast);
 }
 
+/* El turquesa no aguanta texto (2.80:1): al pasar el mouse el texto se
+   oscurece y el turquesa queda en el subrayado. */
 .nav-link:hover {
-    color: var(--primary);
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+}
+
+/* Portero, en pastilla blanca para que se encuentre de un vistazo. El fondo es
+   opaco a propósito: --primary-deep da 4.60:1 sobre blanco, pero 4.40:1 sobre
+   el gris del hero que se ve a través de la barra transparente. */
+.nav-link--portero {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--border-tint);
+    border-radius: var(--radius-full);
+    background: var(--bg-primary);
+    color: var(--primary-deep);
+    font-weight: 600;
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.nav-link--portero:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+    color: var(--primary-deep);
+    text-decoration: none;
+}
+
+.nav-link-punto {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: var(--radius-full);
+    background: var(--primary);
+    flex: 0 0 auto;
 }
 
 .mobile-menu-btn {
@@ -76,11 +115,18 @@
     left: 0;
     width: 100%;
     height: 100vh;
+    height: 100dvh;
+    /* Con el teléfono en horizontal no cabe todo: safe center y el scroll
+       evitan que la primera liga (Portero) quede debajo de la barra y la
+       última cortada. El padding de arriba deja libre la altura de la barra. */
+    padding: 88px var(--spacing-md) var(--spacing-lg);
+    overflow-y: auto;
     background: var(--bg-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    justify-content: safe center;
     gap: 1.25rem;
     transform: translateY(-100%);
     transition: transform var(--transition-normal);
@@ -91,12 +137,24 @@
     transform: translateY(0);
 }
 
+/* En escritorio el menú de hamburguesa no existe. */
+@media (min-width: 1024px) {
+    .mobile-nav {
+        display: none;
+    }
+}
+
 .mobile-nav .nav-link {
     font-size: 1.5rem;
     color: var(--text-primary);
 }
 
-/* Siete enlaces y el logo no caben en una línea abajo de ~1180px: primero se
+.mobile-nav .nav-link--portero {
+    padding: 0.4rem 1.25rem;
+    color: var(--primary-deep);
+}
+
+/* Seis enlaces y el logo no caben en una línea abajo de ~1180px: primero se
    compactan y, abajo de 1024px, pasan al menú de hamburguesa. */
 @media (max-width: 1180px) {
     .nav-links {

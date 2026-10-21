@@ -24,7 +24,7 @@ const ProblemSolution = () => {
                             <li>
                                 <div className="icon-wrapper"><XCircle size={20} color="#ef4444" /></div>
                                 <div>
-                                    <strong>No saben por dónde empezar</strong>
+                                    <strong>Sin un punto de partida claro</strong>
                                     <p className="text-sm text-secondary">Parálisis por análisis ante tantas herramientas nuevas.</p>
                                 </div>
                             </li>
@@ -32,7 +32,7 @@ const ProblemSolution = () => {
                                 <div className="icon-wrapper"><XCircle size={20} color="#ef4444" /></div>
                                 <div>
                                     <strong>Equipos técnicos costosos</strong>
-                                    <p className="text-sm text-secondary">Requiere contratar ingenieros senior ($$$).</p>
+                                    <p className="text-sm text-secondary">Requiere contratar ingenieros senior, que cuestan caro.</p>
                                 </div>
                             </li>
                             <li>
@@ -56,7 +56,7 @@ const ProblemSolution = () => {
                             <li>
                                 <div className="icon-wrapper"><CheckCircle2 size={20} color="white" /></div>
                                 <div>
-                                    <strong>Soluciones 100% Personalizadas</strong>
+                                    <strong>Se ajustan a cómo trabajas</strong>
                                     <p className="text-sm" style={{ opacity: 0.9 }}>Adaptadas a tus procesos actuales, no al revés.</p>
                                 </div>
                             </li>
@@ -71,7 +71,7 @@ const ProblemSolution = () => {
                                 <div className="icon-wrapper"><CheckCircle2 size={20} color="white" /></div>
                                 <div>
                                     <strong>Implementación en 30 días</strong>
-                                    <p className="text-sm" style={{ opacity: 0.9 }}>Resultados rápidos y ROI medible desde el mes 1.</p>
+                                    <p className="text-sm" style={{ opacity: 0.9 }}>Empezamos por un proceso concreto y medimos sus resultados desde el arranque.</p>
                                 </div>
                             </li>
                         </ul>

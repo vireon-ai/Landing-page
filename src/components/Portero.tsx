@@ -749,7 +749,7 @@ const Portero = () => {
                             </p>
                             <p className="portero-etiqueta">
                                 <span className="portero-etiqueta-pulso" aria-hidden="true" />
-                                <span>Desarrolladoras inmobiliarias</span>
+                                <span>Inmobiliarias y desarrolladoras</span>
                                 <span aria-hidden="true">·</span>
                                 <span className="portero-estado">Próximamente</span>
                             </p>

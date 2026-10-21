@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import './Hero.css';
 import DynamicBackground from './DynamicBackground';
 import LiveFlow from './LiveFlow';
@@ -13,10 +13,25 @@ const Hero = () => {
 
             <div className="container hero-content">
                 <div className="hero-copy">
-                    <div className="hero-badge badge badge-primary">
-                        <CheckCircle2 size={14} style={{ marginRight: '0.5rem' }} />
-                        Especialistas en IA y Automatización
-                    </div>
+                    {/* Portero es la solución que más queremos empujar: su anuncio
+                        ocupa la pastilla de arriba del título, lo primero que se lee. */}
+                    <a className="hero-anuncio" href="/soluciones/portero/">
+                        <span className="hero-anuncio-estado">
+                            <span className="hero-anuncio-pulso" aria-hidden="true" />
+                            Próximamente
+                        </span>
+                        {/* Sin este espacio, el lector de pantalla junta "PróximamentePortero". */}
+                        {' '}
+                        <span className="hero-anuncio-texto">
+                            <strong>Portero</strong>: agente de WhatsApp para{' '}
+                            {/* La flecha va pegada a la última palabra: así nunca baja
+                                sola a otro renglón en pantallas angostas. */}
+                            <span className="hero-anuncio-final">
+                                inmobiliarias
+                                <ArrowRight size={16} aria-hidden="true" className="hero-anuncio-flecha" />
+                            </span>
+                        </span>
+                    </a>
 
                     <h1 className="hero-title">
                         Tu operación,

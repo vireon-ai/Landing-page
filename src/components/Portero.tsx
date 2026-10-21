@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import {
     AlertTriangle,
@@ -11,6 +11,7 @@ import {
     CircleCheck,
     Clock,
     FileSpreadsheet,
+    FileText,
     Flame,
     ListChecks,
     MessageCircle,
@@ -507,68 +508,182 @@ const Kicker = ({ children }: { children: string }) => (
     </p>
 );
 
+// Mismo caso ficticio que la conversación de "En acción": Andrea y Carlos.
+const PERFILAMIENTO = [
+    { pregunta: '¿Para vivir o para invertir?', respuesta: 'Para vivir' },
+    { pregunta: '¿Cuántas personas son?', respuesta: '4' },
+    { pregunta: '¿Cómo piensas pagar?', respuesta: 'Infonavit' },
+    { pregunta: '¿Para cuándo?', respuesta: 'Antes de fin de año' },
+];
+
 /**
- * Lo que Portero hace con un prospecto, en tres tarjetas: llega el mensaje, se
- * perfila y se asigna. Es una ilustración: un lector de pantalla oye la
- * descripción del aria-label, no las tarjetas una por una.
+ * Lo que Portero hace con un prospecto, en cinco pasos sobre un riel: recibe,
+ * perfila, califica, recomienda y asigna. El paso de perfilar enseña las
+ * preguntas y las respuestas que va juntando, para que se entienda que el agente
+ * conversa antes de pasar al asesor.
+ *
+ * Es una ilustración: un lector de pantalla oye la descripción del aria-label,
+ * no los pasos uno por uno. La secuencia (una bolita que recorre el riel, la
+ * tarjeta activa resaltada, las respuestas que entran) corre una vez por cada
+ * carga de la página, en cuanto el visual entra en pantalla, y dura unos 11 s;
+ * después queda quieta con el resultado. Si sale de pantalla a medias, se pausa
+ * y sigue al volver.
+ *
+ * Decisión de producto: sin botón de pausa, a petición del equipo, aunque WCAG
+ * 2.2.2 lo pide para movimiento automático de más de 5 s. Lo que la acota: no
+ * se repite, y con movimiento reducido o sin IntersectionObserver se ve el
+ * estado final, quieto.
  */
-const VisualHero = () => (
-    <div
-        className="phero-visual"
-        role="img"
-        aria-label="Ejemplo ilustrativo: llega un mensaje de WhatsApp, Portero perfila al prospecto con prioridad alta y lo asigna a un asesor."
-    >
-        <div className="phero-orbita" />
+const VisualHero = () => {
+    const raiz = useRef<HTMLDivElement>(null);
 
-        <div className="phero-tarjeta phero-tarjeta--mensaje">
-            <span className="phero-tarjeta-icono">
-                <MessageCircle size={18} />
-            </span>
-            <div>
-                <p className="phero-tarjeta-meta">WhatsApp · Nuevo prospecto</p>
-                <p className="phero-burbuja">Hola, vi el anuncio. ¿Cuánto cuestan los departamentos?</p>
-                <p className="phero-escribiendo">
-                    <Bot size={14} />
-                    Portero está respondiendo
-                    <span className="phero-puntos">
-                        <i />
-                        <i />
-                        <i />
+    // Layout y no effect: la clase que esconde los pasos tiene que estar antes
+    // del primer pintado, o se verían un instante y luego desaparecerían. Las
+    // clases se cambian en el DOM, como en PorteroConversacion, para no
+    // re-renderizar el visual.
+    useLayoutEffect(() => {
+        const nodo = raiz.current;
+        const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!nodo || sinMovimiento || !('IntersectionObserver' in window)) return;
+
+        nodo.classList.add('phero--espera');
+        const observador = new IntersectionObserver(
+            ([entrada]) => {
+                if (entrada.isIntersecting && nodo.classList.contains('phero--espera')) {
+                    nodo.classList.replace('phero--espera', 'phero--corre');
+                }
+                nodo.classList.toggle('phero--fuera', !entrada.isIntersecting);
+            },
+            { threshold: 0, rootMargin: '0px 0px -15% 0px' },
+        );
+        observador.observe(nodo);
+        return () => observador.disconnect();
+    }, []);
+
+    return (
+        <div ref={raiz} className="phero-visual">
+            <div className="phero-orbita" aria-hidden="true" />
+
+            <ol
+                className="phero-flujo"
+                role="img"
+                aria-label="Ejemplo ilustrativo del flujo de Portero: recibe el mensaje de WhatsApp, pregunta para qué busca, cuántas personas son, cómo piensa pagar y para cuándo; califica al prospecto con prioridad alta, le recomienda el modelo de 3 recámaras con el brochure y lo asigna a un asesor con el resumen y el perfil."
+            >
+                <li className="phero-paso">
+                    <span className="phero-nodo">
+                        <MessageCircle size={16} />
                     </span>
-                </p>
-            </div>
-        </div>
+                    <span className="phero-tramo" />
+                    <div className="phero-tarjeta">
+                        <p className="phero-paso-cabeza">
+                            <span className="phero-paso-nombre">1 · Recibe</span>
+                            <span className="phero-tarjeta-meta">WhatsApp · 21:42</span>
+                        </p>
+                        <p className="phero-burbuja">Hola, vi el anuncio. ¿Cuánto cuestan los departamentos?</p>
+                        <p className="phero-escribiendo">
+                            <Bot size={14} />
+                            {/* Primero "escribiendo", luego la respuesta; sin animación
+                                solo se ve la segunda. */}
+                            <span className="phero-relevo">
+                                <span className="phero-relevo-antes">
+                                    Portero está escribiendo
+                                    <span className="phero-puntos">
+                                        <i />
+                                        <i />
+                                        <i />
+                                    </span>
+                                </span>
+                                <span className="phero-relevo-despues">Portero respondió en segundos</span>
+                            </span>
+                        </p>
+                    </div>
+                </li>
 
-        <div className="phero-tarjeta phero-tarjeta--perfil">
-            <div className="phero-perfil-cabeza">
-                <p className="phero-tarjeta-meta">Perfil capturado</p>
-                <span className="phero-prioridad">
-                    <Flame size={13} />
-                    Prioridad alta
-                </span>
-            </div>
-            <p className="phero-perfil-nombre">Andrea</p>
-            <ul className="phero-chips">
-                <li>Para vivir</li>
-                <li>3 recámaras</li>
-                <li>Infonavit</li>
-                <li>Antes de fin de año</li>
-            </ul>
-        </div>
+                <li className="phero-paso">
+                    <span className="phero-nodo">
+                        <ListChecks size={16} />
+                    </span>
+                    <span className="phero-tramo" />
+                    <div className="phero-tarjeta">
+                        <p className="phero-paso-cabeza">
+                            <span className="phero-paso-nombre">2 · Perfila</span>
+                            {/* El número lo pinta CSS (cuenta de 0 a 4 con las respuestas). */}
+                            <span className="phero-tarjeta-meta">
+                                <span className="phero-cuenta" /> de {PERFILAMIENTO.length} datos
+                            </span>
+                        </p>
+                        <span className="phero-avance">
+                            <span />
+                        </span>
+                        <ul className="phero-preguntas">
+                            {PERFILAMIENTO.map(({ pregunta, respuesta }, i) => (
+                                <li key={pregunta} style={{ '--i': i } as React.CSSProperties}>
+                                    <span className="phero-pregunta">{pregunta}</span>
+                                    <span className="phero-respuesta">
+                                        <Check size={12} />
+                                        {respuesta}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </li>
 
-        <div className="phero-tarjeta phero-tarjeta--asignado">
-            <span className="phero-tarjeta-icono phero-tarjeta-icono--ok">
-                <UserCheck size={18} />
-            </span>
-            <div>
-                <p className="phero-asignado-titulo">Asignado a Carlos</p>
-                <p className="phero-tarjeta-meta">Con resumen y perfil · rotación automática</p>
-            </div>
-        </div>
+                <li className="phero-paso">
+                    <span className="phero-nodo">
+                        <Flame size={16} />
+                    </span>
+                    <span className="phero-tramo" />
+                    <div className="phero-tarjeta phero-tarjeta--fila">
+                        <span className="phero-paso-nombre">3 · Califica</span>
+                        <span className="phero-prioridad">
+                            <Flame size={13} />
+                            Prioridad alta
+                        </span>
+                        <span className="phero-tarjeta-meta phero-motivo">Pago definido · plazo corto</span>
+                    </div>
+                </li>
 
-        <p className="phero-nota">Ejemplo ilustrativo</p>
-    </div>
-);
+                <li className="phero-paso">
+                    <span className="phero-nodo">
+                        <FileText size={16} />
+                    </span>
+                    <span className="phero-tramo" />
+                    <div className="phero-tarjeta phero-tarjeta--fila">
+                        <span className="phero-paso-nombre">4 · Recomienda</span>
+                        <span className="phero-dato">Modelo de 3 recámaras</span>
+                        <span className="phero-archivo">
+                            <FileText size={12} />
+                            Brochure
+                        </span>
+                    </div>
+                </li>
+
+                <li className="phero-paso phero-paso--final">
+                    <span className="phero-nodo">
+                        <UserCheck size={16} />
+                    </span>
+                    <div className="phero-tarjeta">
+                        <p className="phero-paso-cabeza">
+                            <span className="phero-paso-nombre">5 · Asigna</span>
+                            <span className="phero-tarjeta-meta">Rotación automática</span>
+                        </p>
+                        <p className="phero-asignado-titulo">
+                            Andrea
+                            <span className="phero-flecha">
+                                <ArrowRight size={16} />
+                            </span>
+                            <span className="phero-asesor">Carlos</span>
+                        </p>
+                        <p className="phero-tarjeta-meta">Recibe resumen y perfil antes de escribirle</p>
+                    </div>
+                </li>
+            </ol>
+
+            <p className="phero-nota">Ejemplo ilustrativo</p>
+        </div>
+    );
+};
 
 /**
  * Animación de entrada de los bloques al hacer scroll. Igual que en App.tsx: un

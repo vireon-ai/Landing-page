@@ -375,59 +375,14 @@
     color: var(--text-secondary);
 }
 
-/* Visual del hero: mensaje → perfil → asignación ------------------------- */
+/* Visual del hero: el flujo del agente en cinco pasos sobre un riel ------- */
 
 .phero-visual {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-    padding: 1.5rem 0.5rem 2.25rem;
-    max-width: 460px;
+    padding: 1rem 0.5rem 0.25rem;
+    max-width: 480px;
     width: 100%;
     margin-inline: auto;
-}
-
-/* La línea que une las tres tarjetas, con un pulso que la recorre. */
-.phero-visual::before {
-    content: '';
-    position: absolute;
-    top: 3rem;
-    bottom: 4rem;
-    left: 2.6rem;
-    width: 2px;
-    background: linear-gradient(var(--primary), var(--secondary), var(--accent));
-    opacity: 0.5;
-}
-
-.phero-visual::after {
-    content: '';
-    position: absolute;
-    top: 3rem;
-    left: calc(2.6rem - 4px);
-    width: 10px;
-    height: 10px;
-    border-radius: var(--radius-full);
-    background: var(--primary);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent);
-    animation: phero-recorrido 4.5s ease-in-out 1 both;
-}
-
-@keyframes phero-recorrido {
-    0% {
-        transform: translateY(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    85% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(15rem);
-        opacity: 0;
-    }
 }
 
 .phero-orbita {
@@ -447,75 +402,141 @@
     border: 1px dashed color-mix(in srgb, var(--secondary) 40%, transparent);
 }
 
+.phero-flujo {
+    --nodo: 2.25rem;
+    --nodo-arriba: 0.55rem;
+    --hueco: 0.7rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--hueco);
+}
+
+.phero-paso {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--nodo) minmax(0, 1fr);
+    align-items: start;
+    gap: 0.75rem;
+}
+
+/* El riel va por tramos: cada paso, del centro de su nodo al del siguiente.
+   Así termina justo en el último nodo, mida lo que mida cada tarjeta. */
+.phero-tramo {
+    position: absolute;
+    top: calc(var(--nodo-arriba) + var(--nodo) / 2);
+    bottom: calc(-1 * (var(--hueco) + var(--nodo-arriba) + var(--nodo) / 2));
+    left: calc(var(--nodo) / 2 - 1px);
+    width: 2px;
+    background: var(--portero-borde-tinte);
+}
+
+/* El color que llena el tramo. */
+.phero-tramo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(var(--primary), var(--secondary));
+    transform-origin: top;
+}
+
+.phero-paso:nth-child(4) .phero-tramo::before {
+    background: linear-gradient(var(--secondary), var(--accent));
+}
+
+/* La bolita que lleva al prospecto de un paso al siguiente. */
+.phero-tramo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-full);
+    background: var(--primary);
+    box-shadow:
+        0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent),
+        0 0 14px 2px color-mix(in srgb, var(--primary) 55%, transparent);
+    opacity: 0;
+}
+
+.phero-nodo {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: var(--nodo);
+    height: var(--nodo);
+    margin-top: var(--nodo-arriba);
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+    box-shadow:
+        0 0 0 4px var(--bg-primary),
+        0 8px 18px -8px color-mix(in srgb, var(--secondary) 70%, transparent);
+}
+
+/* Anillo punteado que gira mientras el agente perfila (solo en el paso 2). */
+.phero-nodo::after {
+    content: '';
+    position: absolute;
+    inset: -7px;
+    border-radius: var(--radius-full);
+    border: 2px dashed var(--primary);
+    opacity: 0;
+}
+
+.phero-paso--final .phero-nodo {
+    background: linear-gradient(135deg, var(--primary-deep), var(--primary));
+}
+
 .phero-tarjeta {
     position: relative;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    width: min(100%, 340px);
-    padding: 1rem 1.1rem;
+    padding: 0.8rem 1rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--portero-borde-tinte);
     background: var(--portero-vidrio);
     backdrop-filter: blur(14px);
     box-shadow: var(--shadow-lg), var(--portero-brillo);
-    /* Flota dos veces y queda en reposo (menos de 5 s en total). */
-    animation: phero-flotar 2.4s ease-in-out 2;
 }
 
-.phero-tarjeta--perfil {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-self: flex-end;
-    animation-delay: -0.8s;
-}
-
-.phero-tarjeta--asignado {
+/* Pasos de una línea: nombre, dato y, si cabe, el motivo. */
+.phero-tarjeta--fila {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    width: min(100% - clamp(0rem, 4vw, 1.5rem), 340px);
-    margin-left: clamp(0rem, 4vw, 1.5rem);
-    animation-delay: -1.6s;
+    gap: 0.35rem 0.6rem;
+    padding-block: 0.65rem;
 }
 
-@keyframes phero-flotar {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-7px);
-    }
+.phero-paso-cabeza {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
 }
 
-.phero-tarjeta-icono {
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: var(--radius-md);
-    background: var(--gradient-primary);
-    color: var(--bg-primary);
-    box-shadow: 0 8px 18px -8px color-mix(in srgb, var(--secondary) 70%, transparent);
-}
-
-.phero-tarjeta-icono--ok {
-    background: linear-gradient(135deg, var(--primary-deep), var(--primary));
+.phero-paso-nombre {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
 .phero-tarjeta-meta {
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-secondary);
 }
 
 .phero-burbuja {
-    margin-top: 0.35rem;
-    padding: 0.5rem 0.75rem;
+    margin-top: 0.45rem;
+    padding: 0.45rem 0.7rem;
     border-radius: var(--radius-md);
     border-top-left-radius: var(--radius-sm);
     background: color-mix(in srgb, var(--primary) 14%, var(--bg-primary));
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     line-height: 1.4;
     color: var(--text-primary);
 }
@@ -524,7 +545,7 @@
     display: flex;
     align-items: center;
     gap: 0.35rem;
-    margin-top: 0.5rem;
+    margin-top: 0.45rem;
     font-size: 0.75rem;
     font-weight: 500;
     color: var(--text-secondary);
@@ -532,6 +553,22 @@
 
 .phero-escribiendo svg {
     color: var(--primary-deep);
+}
+
+/* "Escribiendo" y "respondió" ocupan la misma celda y se relevan. */
+.phero-relevo {
+    display: grid;
+}
+
+.phero-relevo > span {
+    grid-area: 1 / 1;
+}
+
+.phero-relevo-antes {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    opacity: 0;
 }
 
 .phero-puntos {
@@ -544,39 +581,84 @@
     height: 4px;
     border-radius: var(--radius-full);
     background: var(--text-secondary);
-    animation: phero-escribe 1.2s ease-in-out 3;
 }
 
-.phero-puntos i:nth-child(2) {
-    animation-delay: 0.15s;
+/* El contador del perfil: un entero animable que pinta CSS. Sin soporte de
+   @property cambia de golpe; sin animación se queda en 4. */
+@property --datos {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 4;
 }
 
-.phero-puntos i:nth-child(3) {
-    animation-delay: 0.3s;
+.phero-cuenta {
+    counter-reset: datos var(--datos);
 }
 
-@keyframes phero-escribe {
-    0%,
-    60%,
-    100% {
-        opacity: 0.3;
-        transform: translateY(0);
-    }
-    30% {
-        opacity: 1;
-        transform: translateY(-2px);
-    }
+.phero-cuenta::before {
+    content: counter(datos);
+    font-variant-numeric: tabular-nums;
 }
 
-.phero-perfil-cabeza {
+/* Barra de avance del perfil. */
+.phero-avance {
+    display: block;
+    height: 4px;
+    margin-top: 0.5rem;
+    border-radius: var(--radius-full);
+    background: var(--bg-tertiary);
+    overflow: hidden;
+}
+
+.phero-avance span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform-origin: left;
+}
+
+.phero-preguntas {
+    list-style: none;
     display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.55rem;
+}
+
+.phero-preguntas li {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
-    width: 100%;
+    gap: 0.2rem 0.5rem;
+    font-size: 0.8125rem;
+}
+
+.phero-pregunta {
+    color: var(--text-secondary);
+}
+
+.phero-respuesta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.1rem 0.55rem 0.1rem 0.4rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--portero-borde-tinte);
+    background: var(--bg-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.phero-respuesta svg {
+    color: var(--primary-deep);
 }
 
 .phero-prioridad {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
@@ -587,43 +669,460 @@
     font-size: 0.75rem;
     font-weight: 700;
     white-space: nowrap;
+    overflow: hidden;
 }
 
-.phero-perfil-nombre {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
+/* Destello que cruza la pastilla al calificar. */
+.phero-prioridad::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        100deg,
+        transparent 30%,
+        color-mix(in srgb, var(--bg-primary) 75%, transparent) 50%,
+        transparent 70%
+    );
+    transform: translateX(-100%);
 }
 
-.phero-chips {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-}
-
-.phero-chips li {
-    padding: 0.2rem 0.6rem;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--portero-borde-tinte);
-    background: var(--bg-primary);
-    font-size: 0.75rem;
+.phero-dato {
+    font-size: 0.8125rem;
     font-weight: 500;
     color: var(--text-primary);
 }
 
+.phero-archivo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.1rem 0.55rem 0.1rem 0.4rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--portero-borde-tinte);
+    background: var(--bg-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.phero-archivo svg {
+    color: var(--secondary);
+}
+
 .phero-asignado-titulo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
     font-weight: 700;
     color: var(--text-primary);
 }
 
+.phero-flecha {
+    display: inline-flex;
+    color: var(--primary-deep);
+}
+
 .phero-nota {
-    position: absolute;
-    right: 0.5rem;
-    bottom: 0.25rem;
+    margin-top: 0.6rem;
+    text-align: right;
     font-size: 0.75rem;
     color: var(--text-secondary);
+}
+
+/* Secuencia del visual ----------------------------------------------------
+   La arranca VisualHero (clase phero--corre) en cuanto el visual entra en
+   pantalla, una vez por cada carga de la página. Todos los tiempos cuentan
+   desde ese momento:
+
+      0.2 s  1 · Recibe       escribe… y responde
+      2.2 s  2 · Perfila      el anillo gira, las respuestas entran, cuenta 0→4
+      6.0 s  3 · Califica     la pastilla aparece y la cruza un destello
+      7.8 s  4 · Recomienda   entra el brochure
+      9.5 s  5 · Asigna       la flecha avanza, aparece el asesor, onda final
+     11.5 s  fin; queda quieto con el resultado
+
+   Entre paso y paso, la bolita recorre el tramo en los 0.6 s previos a que
+   entre el siguiente, y el tramo queda pintado. La tarjeta del paso en curso
+   lleva un halo mientras el agente está en ella.
+
+   Para cambiar la velocidad, mueve los tiempos de esta sección y los
+   porcentajes de phero-cuenta y phero-avanza, que van ligados a las
+   respuestas del paso 2. */
+
+.phero--espera .phero-paso,
+.phero--espera .phero-preguntas li {
+    opacity: 0;
+}
+
+.phero--espera .phero-tramo::before,
+.phero--espera .phero-avance span {
+    transform: scale(0);
+}
+
+.phero--espera .phero-cuenta {
+    --datos: 0;
+}
+
+/* Fuera de pantalla todo se congela donde va y sigue al volver. */
+.phero--fuera .phero-flujo *,
+.phero--fuera .phero-flujo *::before,
+.phero--fuera .phero-flujo *::after {
+    animation-play-state: paused;
+}
+
+.phero--corre .phero-paso {
+    --entra: 0.2s;
+    --dura: 2s;
+    animation: phero-entra 0.5s ease-out var(--entra) both;
+}
+
+.phero--corre .phero-paso:nth-child(2) {
+    --entra: 2.2s;
+    --dura: 3.8s;
+}
+
+.phero--corre .phero-paso:nth-child(3) {
+    --entra: 6s;
+    --dura: 1.8s;
+}
+
+.phero--corre .phero-paso:nth-child(4) {
+    --entra: 7.8s;
+    --dura: 1.7s;
+}
+
+.phero--corre .phero-paso:nth-child(5) {
+    --entra: 9.5s;
+    --dura: 2s;
+}
+
+/* Halo de la tarjeta activa. */
+.phero--corre .phero-tarjeta {
+    animation: phero-activa var(--dura) ease-in-out var(--entra) both;
+}
+
+/* El nodo late al llegar el prospecto. */
+.phero--corre .phero-nodo {
+    animation: phero-pulso 0.9s ease-out var(--entra) both;
+}
+
+/* Bolita y relleno de cada tramo: --sale es el --entra del paso siguiente
+   menos los 0.6 s del recorrido. */
+.phero--corre .phero-tramo::before {
+    animation: phero-llena-y 0.6s ease-in-out var(--sale) both;
+}
+
+.phero--corre .phero-tramo::after {
+    animation: phero-bolita 0.6s ease-in-out var(--sale) both;
+}
+
+.phero--corre .phero-paso:nth-child(1) .phero-tramo {
+    --sale: 1.6s;
+}
+
+.phero--corre .phero-paso:nth-child(2) .phero-tramo {
+    --sale: 5.4s;
+}
+
+.phero--corre .phero-paso:nth-child(3) .phero-tramo {
+    --sale: 7.2s;
+}
+
+.phero--corre .phero-paso:nth-child(4) .phero-tramo {
+    --sale: 8.9s;
+}
+
+/* 1 · Recibe: los puntos saltan y luego aparece la respuesta. */
+.phero--corre .phero-relevo-antes {
+    animation: phero-relevo-sale 1.1s ease 0.2s both;
+}
+
+.phero--corre .phero-relevo-despues {
+    animation: phero-aparece 0.35s ease-out 1.3s both;
+}
+
+.phero--corre .phero-puntos i {
+    animation: phero-escribe 0.5s ease-in-out 0.3s 2;
+}
+
+.phero--corre .phero-puntos i:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.phero--corre .phero-puntos i:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+/* 2 · Perfila: anillo girando, preguntas, respuestas, cuenta y barra. */
+.phero--corre .phero-paso:nth-child(2) .phero-nodo::after {
+    animation: phero-gira 3.8s linear 2.2s both;
+}
+
+.phero--corre .phero-preguntas li {
+    animation: phero-entra 0.35s ease-out both;
+    animation-delay: calc(2.6s + var(--i) * 0.6s);
+}
+
+.phero--corre .phero-respuesta {
+    animation: phero-brota 0.4s ease-out both;
+    animation-delay: calc(2.85s + var(--i) * 0.6s);
+}
+
+.phero--corre .phero-cuenta {
+    animation: phero-cuenta 3s linear 2.2s both;
+}
+
+.phero--corre .phero-avance span {
+    animation: phero-avanza 3s linear 2.2s both;
+}
+
+/* 3 · Califica. */
+.phero--corre .phero-prioridad {
+    animation: phero-brota 0.4s ease-out 6.3s both;
+}
+
+.phero--corre .phero-prioridad::after {
+    animation: phero-destello 0.8s ease-in-out 6.7s both;
+}
+
+/* 4 · Recomienda. */
+.phero--corre .phero-archivo {
+    animation: phero-desliza 0.45s ease-out 8.2s both;
+}
+
+/* 5 · Asigna. */
+.phero--corre .phero-flecha {
+    animation: phero-avanza-flecha 0.6s ease-out 9.8s both;
+}
+
+.phero--corre .phero-asesor {
+    animation: phero-aparece 0.35s ease-out 10s both;
+}
+
+.phero--corre .phero-paso--final .phero-nodo::after {
+    border-style: solid;
+    animation: phero-onda 1s ease-out 10.2s both;
+}
+
+@keyframes phero-entra {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes phero-aparece {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes phero-relevo-sale {
+    0%,
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes phero-escribe {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes phero-activa {
+    0%,
+    100% {
+        border-color: var(--portero-borde-tinte);
+        box-shadow: var(--shadow-lg), var(--portero-brillo);
+    }
+    15%,
+    80% {
+        border-color: var(--primary);
+        box-shadow:
+            var(--shadow-lg),
+            var(--portero-brillo),
+            0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+    }
+}
+
+@keyframes phero-pulso {
+    0% {
+        box-shadow:
+            0 0 0 4px var(--bg-primary),
+            0 0 0 4px color-mix(in srgb, var(--primary) 50%, transparent);
+    }
+    100% {
+        box-shadow:
+            0 0 0 4px var(--bg-primary),
+            0 0 0 16px color-mix(in srgb, var(--primary) 0%, transparent);
+    }
+}
+
+@keyframes phero-llena-y {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes phero-bolita {
+    0% {
+        top: -6px;
+        opacity: 0;
+    }
+    15%,
+    85% {
+        opacity: 1;
+    }
+    100% {
+        top: calc(100% - 6px);
+        opacity: 0;
+    }
+}
+
+@keyframes phero-gira {
+    0% {
+        opacity: 0;
+        transform: rotate(0);
+    }
+    10%,
+    88% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(300deg);
+    }
+}
+
+@keyframes phero-brota {
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* La cuenta y la barra suben cuando entra cada respuesta (a 3.1, 3.7, 4.3 y
+   4.9 s de la vuelta, que dentro de esta animación de 3 s que empieza a los
+   2.2 s son el 30, 50, 70 y 90 %). */
+@keyframes phero-cuenta {
+    0%,
+    29% {
+        --datos: 0;
+    }
+    30%,
+    49% {
+        --datos: 1;
+    }
+    50%,
+    69% {
+        --datos: 2;
+    }
+    70%,
+    89% {
+        --datos: 3;
+    }
+    90%,
+    100% {
+        --datos: 4;
+    }
+}
+
+@keyframes phero-avanza {
+    0%,
+    29% {
+        transform: scaleX(0);
+    }
+    34%,
+    49% {
+        transform: scaleX(0.25);
+    }
+    54%,
+    69% {
+        transform: scaleX(0.5);
+    }
+    74%,
+    89% {
+        transform: scaleX(0.75);
+    }
+    94%,
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes phero-destello {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes phero-desliza {
+    from {
+        opacity: 0;
+        transform: translateX(-12px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes phero-avanza-flecha {
+    0% {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes phero-onda {
+    0% {
+        opacity: 0.9;
+        transform: scale(0.85);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.6);
+    }
 }
 
 /* Botón principal -------------------------------------------------------- */
@@ -1494,13 +1993,16 @@ html:has(.portero-page) {
         align-self: stretch;
     }
 
-    .phero-visual::before,
-    .phero-visual::after {
-        left: 2.2rem;
+    .phero-flujo {
+        --nodo: 2rem;
+    }
+
+    .phero-paso {
+        gap: 0.6rem;
     }
 
     .phero-tarjeta {
-        padding: 0.85rem 0.9rem;
+        padding-inline: 0.85rem;
     }
 }
 
@@ -1519,15 +2021,8 @@ html:has(.portero-page) {
     }
 
     .portero-etiqueta .portero-etiqueta-pulso,
-    .phero-visual::after,
-    .phero-orbita::after,
-    .phero-tarjeta,
-    .phero-puntos i {
+    .phero-orbita::after {
         animation: none;
-    }
-
-    .phero-visual::after {
-        display: none;
     }
 
     .portero-boton.btn-primary,

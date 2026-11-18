@@ -5,7 +5,7 @@ import { enviarConReintentos, guardarPendiente, reintentarPendientes, type Lead 
 import './FinalCTA.css';
 
 // El número de la liga vive en src/config.ts; este es sólo el texto visible.
-const WHATSAPP_VISIBLE = '477 908 6863';
+const WHATSAPP_VISIBLE = '442 613 7768';
 
 const FinalCTA = () => {
     const [formData, setFormData] = useState({

@@ -1,7 +1,7 @@
 # Aviso de Privacidad de Vireon
 
-**Última actualización:** 14 de octubre de 2026
-**Versión:** 1.3
+**Última actualización:** 17 de noviembre de 2026
+**Versión:** 1.4
 **Dirección permanente de este aviso:** https://www.vireonai.com.mx/aviso-de-privacidad/
 
 > Este archivo es la fuente del texto que publica
@@ -22,7 +22,7 @@ Datos de contacto para asuntos de privacidad:
 
 - Correo electrónico: vireonconsultores@gmail.com
 - Sitio web: https://www.vireonai.com.mx
-- WhatsApp oficial: 477 908 6863, 477 720 2176, 442 438 4231
+- WhatsApp oficial: 442 613 7768, 477 720 2176, 442 438 4231
 
 ## 2. Alcance de este aviso
 
@@ -238,4 +238,4 @@ datos personales:
 - **Responsable:** Juan Manuel González Ascencio, persona física con actividad
   empresarial, que opera la marca Vireon
 - **Correo electrónico:** vireonconsultores@gmail.com
-- **WhatsApp:** +52 477 908 6863
+- **WhatsApp:** +52 442 613 7768

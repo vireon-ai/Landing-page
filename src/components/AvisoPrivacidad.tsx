@@ -16,9 +16,9 @@ import './AvisoPrivacidad.css';
  */
 
 const CORREO = 'vireonconsultores@gmail.com';
-const WHATSAPP_DISPLAY = '+52 477 908 6863';
-const WHATSAPP_LINK = 'https://wa.me/524779086863';
-const ACTUALIZADO = '14 de octubre de 2026';
+const WHATSAPP_DISPLAY = '+52 442 613 7768';
+const WHATSAPP_LINK = 'https://wa.me/524426137768';
+const ACTUALIZADO = '17 de noviembre de 2026';
 
 const SECCIONES = [
     { id: 'responsable', titulo: 'Identidad del responsable' },
@@ -62,7 +62,7 @@ const AvisoPrivacidad = () => {
                         <p className="aviso-eyebrow">Documento legal</p>
                         <h1 className="aviso-title">Aviso de Privacidad</h1>
                         <p className="aviso-meta">
-                            Última actualización: {ACTUALIZADO} · Versión 1.3
+                            Última actualización: {ACTUALIZADO} · Versión 1.4
                         </p>
                         <p className="aviso-lead">
                             Este documento explica qué datos personales recaba Vireon a través de su
@@ -104,7 +104,7 @@ const AvisoPrivacidad = () => {
                                     Sitio web:{' '}
                                     <a href="https://www.vireonai.com.mx">www.vireonai.com.mx</a>
                                 </li>
-                                <li>WhatsApp oficial: 477 908 6863, 477 720 2176, 442 438 4231</li>
+                                <li>WhatsApp oficial: 442 613 7768, 477 720 2176, 442 438 4231</li>
                             </ul>
                         </section>
 

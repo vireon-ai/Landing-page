@@ -12,7 +12,7 @@ abierto. Esta lista **no** se publica.
 | §1 | Nombre de la persona física, su actividad empresarial y que Vireon es la marca bajo la que opera | Decisión del responsable (6 de octubre de 2026): el aviso no publica domicilio |
 | §7 | Se quitó el `[FILL: confirmar si existe alguna otra transferencia]` | El párrafo ya declara que no hay otras transferencias. **Confírmalo antes de publicar** |
 | §17, razón social | Juan Manuel González Ascencio, persona física con actividad empresarial | §1 nombra a la persona física, no a una sociedad |
-| §17, WhatsApp | +52 477 908 6863 | Es el número que el sitio usa como oficial (`src/config.ts` en la rama del rediseño) y el primero de los tres de §1 |
+| §17, WhatsApp | +52 442 613 7768 | Es el número que el sitio usa como oficial (`src/config.ts`). En la versión 1.4 (17 de noviembre de 2026) sustituyó al 477 908 6863, también en la lista de §1 |
 | §13 | "no usa cookies ni tecnologías de seguimiento" | El borrador decía "no se usan cookies"; se redactó completo |
 | Versión | 1.0, sin la nota "borrador para revisión legal" | Una página pública no se publica marcada como borrador. **Esto supone que ya pasó revisión** |
 
@@ -43,7 +43,8 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
 **Canal de WhatsApp**
 
 - ¿Cuál de los tres números se da de alta como WhatsApp Business en Meta? §17
-  publica hoy el 477 908 6863.
+  publica hoy el 442 613 7768, que desde la versión 1.4 sustituye al 477 908 6863
+  en §1. Confirmar que los otros dos números de §1 siguen activos.
 - ~~¿Vireon iniciará conversaciones con plantillas hacia gente que no escribió
   primero?~~ Sí, a quien dejó su número en la lista de espera de Portero; §5 se
   ajustó en la versión 1.3. Falta confirmar que la leyenda bajo el campo de

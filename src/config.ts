@@ -1,10 +1,10 @@
 /**
  * Configuración compartida del sitio.
  *
- * Formato internacional sin signos: 52 + 1 + diez dígitos.
- * 521 + 4779086863 (León, Guanajuato).
+ * Formato internacional sin signos: 52 + diez dígitos.
+ * 52 + 4426137768 (Querétaro).
  */
-export const WHATSAPP_NUMERO = '524779086863';
+export const WHATSAPP_NUMERO = '524426137768';
 
 /** Arma la liga de WhatsApp con un mensaje ya escrito. */
 export const whatsappUrl = (mensaje: string): string =>

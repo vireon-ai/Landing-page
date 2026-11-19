@@ -60,6 +60,12 @@ agrega también esa línea.
 `docs/legal/pendientes.md` lista lo que falta confirmar con el responsable. No se
 publica.
 
+Los términos del servicio siguen la misma regla: el texto vive en
+`docs/legal/terminos-del-servicio.md`, se publica desde
+`src/components/TerminosServicio.tsx` en `/terminos-del-servicio/` (entrada
+`terminos-del-servicio/index.html`) y los dos tienen que decir lo mismo, con la
+misma fecha y versión. Meta pide esa URL en el alta como Tech Provider.
+
 ## Sistema de diseño
 
 Usa siempre las variables CSS de `src/styles/index.css`. No metas hexadecimales

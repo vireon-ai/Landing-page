@@ -20,6 +20,8 @@ export default defineConfig({
         // Página de Portero (Vireon Solutions), por la misma razón: una URL real
         // que se puede compartir y abrir directo.
         portero: desdeRaiz('./soluciones/portero/index.html'),
+        // Términos del servicio: Meta pide su URL en el alta como Tech Provider.
+        terminos: desdeRaiz('./terminos-del-servicio/index.html'),
       },
     },
   },

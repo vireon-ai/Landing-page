@@ -1865,6 +1865,12 @@
     color: var(--text-secondary);
 }
 
+.portero-footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs) var(--spacing-lg);
+}
+
 .portero-footer-inner a {
     color: var(--primary-deep);
     font-weight: 500;

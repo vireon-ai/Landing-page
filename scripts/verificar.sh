@@ -94,10 +94,10 @@ if [ "$RAPIDO" -eq 0 ]; then
   paso "Build (lo mismo que corre el deploy)"
   corre "npm run build" npm run build --silent
 
-  if [ -f dist/index.html ] && [ -f dist/aviso-de-privacidad/index.html ]; then
-    ok "dist/ trae las dos páginas: la landing y el aviso"
+  if [ -f dist/index.html ] && [ -f dist/aviso-de-privacidad/index.html ] && [ -f dist/terminos-del-servicio/index.html ]; then
+    ok "dist/ trae la landing, el aviso y los términos del servicio"
   else
-    falla "falta dist/index.html o dist/aviso-de-privacidad/index.html: alguna página no entró al build"
+    falla "falta dist/index.html, dist/aviso-de-privacidad/index.html o dist/terminos-del-servicio/index.html: alguna página no entró al build"
   fi
 
   paso "Presupuesto de peso"
@@ -183,6 +183,25 @@ else
   falla "aviso: fecha o versión distintas — markdown \"$FECHA_MD\" v$VER_MD, componente \"$FECHA_TSX\" v$VER_TSX"
 fi
 
+# Los términos del servicio, igual: markdown y componente dicen lo mismo.
+TMD=docs/legal/terminos-del-servicio.md; TTSX=src/components/TerminosServicio.tsx
+TOCA_TMD=$(printf '%s\n' "$TOCADOS" | grep -cxF "$TMD" || true)
+TOCA_TTSX=$(printf '%s\n' "$TOCADOS" | grep -cxF "$TTSX" || true)
+if [ "$TOCA_TMD" != "$TOCA_TTSX" ]; then
+  falla "los términos cambiaron solo en un lado ($TMD: $TOCA_TMD, $TTSX: $TOCA_TTSX); los dos tienen que decir lo mismo"
+else
+  ok "términos: markdown y componente se tocaron juntos (o ninguno)"
+fi
+TFECHA_MD=$(sed -n 's/^\*\*Última actualización:\*\* *//p' "$TMD" | head -1)
+TFECHA_TSX=$(sed -n "s/^const ACTUALIZADO = '\(.*\)';/\1/p" "$TTSX" | head -1)
+TVER_MD=$(sed -n 's/^\*\*Versión:\*\* *//p' "$TMD" | head -1)
+TVER_TSX=$(sed -n "s/^const VERSION = '\(.*\)';/\1/p" "$TTSX" | head -1)
+if [ -n "$TFECHA_MD" ] && [ "$TFECHA_MD" = "$TFECHA_TSX" ] && [ "$TVER_MD" = "$TVER_TSX" ]; then
+  ok "términos: misma fecha ($TFECHA_MD) y versión ($TVER_MD) en los dos"
+else
+  falla "términos: fecha o versión distintas — markdown \"$TFECHA_MD\" v$TVER_MD, componente \"$TFECHA_TSX\" v$TVER_TSX"
+fi
+
 # Si llega analítica, el aviso ya no puede decir que no hay seguimiento.
 if grep -rqE 'googletagmanager|gtag\(|clarity\.ms|fbq\(|posthog' src index.html 2>/dev/null \
    && grep -q 'no usa cookies ni tecnologías de seguimiento' "$TSX"; then
@@ -228,14 +247,14 @@ else ok "sin credenciales ni archivos .env en el diff"; fi
 # ---------------------------------------------------------------------------
 paso "Auditorías que exige este diff"
 AUDITORES=""
-{ printf '%s\n' "$TOCADOS" | grep -qE '^(src/components/(Quiz|FinalCTA|AvisoPrivacidad)\.tsx|src/config\.ts|src/aviso\.tsx|docs/legal/|index\.html)'; } \
+{ printf '%s\n' "$TOCADOS" | grep -qE '^(src/components/(Quiz|FinalCTA|AvisoPrivacidad|TerminosServicio)\.tsx|src/config\.ts|src/aviso\.tsx|docs/legal/|index\.html)'; } \
   || grep -qE 'fetch\(|localStorage|sessionStorage|gtag|clarity|dataLayer' "$AGREGADAS" \
   && AUDITORES="${AUDITORES}auditor-leads (formularios, envío de datos, analítica o el aviso)"$'\n'
 printf '%s\n' "$TOCADOS" | grep -qE '^src/(components/.*\.(tsx|css)|styles/|App\.(tsx|css)|index\.css)' \
   && AUDITORES="${AUDITORES}auditor-accesibilidad (componentes o estilos)"$'\n'
-printf '%s\n' "$TOCADOS" | grep -qE '^(src/components/.*\.tsx|src/App\.tsx|index\.html|aviso-de-privacidad/index\.html|docs/legal/)' \
+printf '%s\n' "$TOCADOS" | grep -qE '^(src/components/.*\.tsx|src/App\.tsx|index\.html|aviso-de-privacidad/index\.html|terminos-del-servicio/index\.html|docs/legal/)' \
   && AUDITORES="${AUDITORES}auditor-contenido (texto visible)"$'\n'
-printf '%s\n' "$TOCADOS" | grep -qE '^(package(-lock)?\.json|vite\.config\.ts|index\.html|aviso-de-privacidad/index\.html|public/|src/assets/|src/main\.tsx|\.github/workflows/)' \
+printf '%s\n' "$TOCADOS" | grep -qE '^(package(-lock)?\.json|vite\.config\.ts|index\.html|aviso-de-privacidad/index\.html|terminos-del-servicio/index\.html|public/|src/assets/|src/main\.tsx|\.github/workflows/)' \
   && AUDITORES="${AUDITORES}auditor-rendimiento (build, dependencias, assets o metadatos)"$'\n'
 
 if [ -n "$AUDITORES" ]; then

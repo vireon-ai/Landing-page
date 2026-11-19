@@ -982,7 +982,10 @@ const Portero = () => {
             <footer className="portero-footer">
                 <div className="container portero-footer-inner">
                     <p>© {new Date().getFullYear()} Vireon. Todos los derechos reservados.</p>
-                    <a href="/aviso-de-privacidad/">Aviso de Privacidad</a>
+                    <nav className="portero-footer-legal" aria-label="Documentos legales">
+                        <a href="/aviso-de-privacidad/">Aviso de Privacidad</a>
+                        <a href="/terminos-del-servicio/">Términos del Servicio</a>
+                    </nav>
                 </div>
             </footer>
         </div>

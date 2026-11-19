@@ -85,6 +85,19 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
   en plural y del consentimiento para escribir por WhatsApp. Falta que lo revise
   quien lleve lo legal, como el resto de la versión vigente.
 
+**Términos del servicio** (`terminos-del-servicio.md`, versión 1.0, 19 de noviembre de 2026)
+
+- El borrador traía el domicilio completo de la persona física en §1. Se publicó
+  solo «León, Guanajuato, México», porque el aviso de privacidad dejó de publicar
+  domicilio por decisión del responsable (versión 1.2). Si se define un domicilio
+  que sí se pueda hacer público, va en §1 de los términos y en §1 y §17 del aviso.
+- No ha pasado revisión legal. Lo que más conviene que revise un abogado: el tope
+  de responsabilidad de tres meses (§10), la renuncia de fuero a favor de León
+  (§13), que es difícil de sostener frente a un consumidor (PROFECO), y que
+  aceptar los términos «al usar el sitio» (§2) alcance a quien solo navega.
+- §8 dice que Vireon actúa como encargado de los datos de los clientes. Lo ideal
+  es respaldarlo con un contrato de encargo por cliente, como pide la LFPDPPP.
+
 **Operación**
 
 - ¿Se envían boletines de verdad? Si no, se recorta esa parte de §4.

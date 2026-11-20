@@ -85,6 +85,28 @@ También se corrigieron erratas de §7: "provedor", "Hojas de calculo de google"
   en plural y del consentimiento para escribir por WhatsApp. Falta que lo revise
   quien lleve lo legal, como el resto de la versión vigente.
 
+**Versión 1.5 (20 de noviembre de 2026): Vercel y Supabase en §7**
+
+- Se sumaron como encargados porque así se declararon a Meta en "Tratamiento
+  de datos" del alta como Tech Provider. Las funciones se confirmaron en el
+  código de Portero.
+- §7 describe solo lo que hacen para el canal propio de Vireon y aclara que
+  también alojan datos de los clientes de Portero, que se rigen por el aviso de
+  cada cliente (§2).
+- **Perfilamiento.** Portero guarda prospectos y su perfilamiento. Si también
+  perfila a quien escribe al WhatsApp de la propia Vireon, hay que declararlo en
+  §3 (datos) y §4 (finalidad), y revisar las decisiones automatizadas de §11.
+  Hoy el aviso no lo menciona.
+- El bullet de Hojas de cálculo de Google dice "los mensajes": ahora Supabase
+  también guarda mensajes de WhatsApp. Conviene precisar qué guarda cada uno.
+- §6 no dice que algunas respuestas por WhatsApp se generan con IA; solo §7
+  nombra a los proveedores de IA.
+- §15 promete avisar los cambios sustanciales. Decidir si sumar dos encargados
+  cuenta como sustancial.
+- Términos §8: Vireon es encargado de los datos de sus clientes, pero no se
+  autoriza la subcontratación (Meta, Vercel, Supabase, Google, Anthropic) como
+  pide el Reglamento de la LFPDPPP. Falta esa cláusula.
+
 **Términos del servicio** (`terminos-del-servicio.md`, versión 1.0, 19 de noviembre de 2026)
 
 - El borrador traía el domicilio completo de la persona física en §1. Se publicó

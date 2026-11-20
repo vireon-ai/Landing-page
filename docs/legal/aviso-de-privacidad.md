@@ -1,7 +1,7 @@
 # Aviso de Privacidad de Vireon
 
-**Última actualización:** 17 de noviembre de 2026
-**Versión:** 1.4
+**Última actualización:** 20 de noviembre de 2026
+**Versión:** 1.5
 **Dirección permanente de este aviso:** https://www.vireonai.com.mx/aviso-de-privacidad/
 
 > Este archivo es la fuente del texto que publica
@@ -124,10 +124,20 @@ cuenta y bajo su instrucción:
 
 - Meta Platforms, Inc., para la mensajería por WhatsApp
 - Hostinger, para el hospedaje del sitio web y el correo electrónico
+- Vercel Inc., para el hospedaje de Portero, la plataforma con la que Vireon
+  opera su canal de WhatsApp: en sus servidores se reciben, procesan y responden
+  los mensajes
+- Supabase, Inc., para la base de datos y el almacenamiento de archivos de
+  Portero, donde se guardan las conversaciones de WhatsApp y los datos de
+  contacto que usted nos proporciona
 - Hojas de cálculo de Google, para el almacenamiento de los mensajes y de los
   datos que usted nos envía por el sitio
 - Google (Gemini) y Anthropic (Claude), como proveedores de inteligencia
   artificial
+
+Vercel y Supabase también alojan los datos que Vireon trata por cuenta de sus
+clientes en Portero, incluido su portal web. Esos datos se rigen por el aviso de
+privacidad de cada cliente, como indica la sección 2.
 
 Algunos de estos proveedores se ubican fuera de México, por lo que sus datos
 pueden almacenarse o procesarse en el extranjero bajo las condiciones de

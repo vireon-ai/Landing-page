@@ -18,7 +18,7 @@ import './AvisoPrivacidad.css';
 const CORREO = 'vireonconsultores@gmail.com';
 const WHATSAPP_DISPLAY = '+52 442 613 7768';
 const WHATSAPP_LINK = 'https://wa.me/524426137768';
-const ACTUALIZADO = '17 de noviembre de 2026';
+const ACTUALIZADO = '20 de noviembre de 2026';
 
 const SECCIONES = [
     { id: 'responsable', titulo: 'Identidad del responsable' },
@@ -62,7 +62,7 @@ const AvisoPrivacidad = () => {
                         <p className="aviso-eyebrow">Documento legal</p>
                         <h1 className="aviso-title">Aviso de Privacidad</h1>
                         <p className="aviso-meta">
-                            Última actualización: {ACTUALIZADO} · Versión 1.4
+                            Última actualización: {ACTUALIZADO} · Versión 1.5
                         </p>
                         <p className="aviso-lead">
                             Este documento explica qué datos personales recaba Vireon a través de su
@@ -280,6 +280,16 @@ const AvisoPrivacidad = () => {
                                 <li>Meta Platforms, Inc., para la mensajería por WhatsApp</li>
                                 <li>Hostinger, para el hospedaje del sitio web y el correo electrónico</li>
                                 <li>
+                                    Vercel Inc., para el hospedaje de Portero, la plataforma con la que
+                                    Vireon opera su canal de WhatsApp: en sus servidores se reciben,
+                                    procesan y responden los mensajes
+                                </li>
+                                <li>
+                                    Supabase, Inc., para la base de datos y el almacenamiento de archivos de
+                                    Portero, donde se guardan las conversaciones de WhatsApp y los datos de
+                                    contacto que usted nos proporciona
+                                </li>
+                                <li>
                                     Hojas de cálculo de Google, para el almacenamiento de los mensajes y
                                     de los datos que usted nos envía por el sitio
                                 </li>
@@ -288,6 +298,11 @@ const AvisoPrivacidad = () => {
                                     inteligencia artificial
                                 </li>
                             </ul>
+                            <p>
+                                Vercel y Supabase también alojan los datos que Vireon trata por cuenta de
+                                sus clientes en Portero, incluido su portal web. Esos datos se rigen por el
+                                aviso de privacidad de cada cliente, como indica la sección 2.
+                            </p>
                             <p>
                                 Algunos de estos proveedores se ubican fuera de México, por lo que sus
                                 datos pueden almacenarse o procesarse en el extranjero bajo las
